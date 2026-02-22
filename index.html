@@ -11,71 +11,34 @@
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        .main-container {
-            min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: calc(40px + env(safe-area-inset-top)) 30px 60px;
-            box-sizing: border-box; text-align: center;
-        }
+        .main-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: calc(40px + env(safe-area-inset-top)) 30px 60px; box-sizing: border-box; text-align: center; }
 
         .header { margin-bottom: 40px; }
         .header h2 { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); margin-bottom: 15px; text-transform: uppercase; }
         .header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.8rem; font-weight: 700; margin: 0; color: var(--gold); letter-spacing: 0.05em; }
+        .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
+        #regions-count { color: var(--gold); }
 
-        /* 第一階段：抽地點區塊 */
-        .compass-section {
-            width: 100%; max-width: 400px;
-            display: flex; flex-direction: column; align-items: center; gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        #destination-result {
-            font-family: 'Noto Serif TC', serif; font-size: 2.4rem; font-weight: 500; letter-spacing: 0.05em;
-            color: var(--white); height: 3rem; display: flex; align-items: center; justify-content: center;
-            border-bottom: 1px solid rgba(212, 180, 131, 0.3); padding-bottom: 10px; width: 100%;
-            transition: color 0.2s ease;
-        }
+        .compass-section { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 60px; }
+        #destination-result { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; font-weight: 500; letter-spacing: 0.05em; color: var(--white); height: 3rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(212, 180, 131, 0.3); padding-bottom: 10px; width: 100%; transition: color 0.2s ease; }
 
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; transition: all 0.3s ease; width: 100%; max-width: 250px;}
         .btn-main:hover { border-color: var(--gold); background: rgba(212, 180, 131, 0.05); }
         .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* 第二階段：雜誌書架 (初始隱藏) */
-        .magazine-rack {
-            display: none; /* 初始隱藏 */
-            flex-direction: column; gap: 25px;
-            width: 100%; max-width: 400px;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .magazine-rack { display: none; flex-direction: column; gap: 25px; width: 100%; max-width: 400px; animation: fadeInUp 1s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .rack-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.1em; }
-
-        .issue-card {
-            display: block; text-decoration: none; color: var(--white); position: relative;
-            padding: 30px 25px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);
-            transition: all 0.4s ease; text-align: left; overflow: hidden;
-        }
-
-        .issue-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(212, 180, 131, 0.05), transparent);
-            transform: translateX(-100%); transition: transform 0.6s ease;
-        }
-
+        .issue-card { display: block; text-decoration: none; color: var(--white); position: relative; padding: 30px 25px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); transition: all 0.4s ease; text-align: left; overflow: hidden; }
+        .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(212, 180, 131, 0.05), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
         .issue-card:hover { border-color: var(--gold); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
         .issue-card:hover::before { transform: translateX(100%); }
-
         .issue-number { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
         .issue-number::after { content: 'SELECT →'; font-size: 0.5rem; color: var(--grey); transition: color 0.3s; }
         .issue-card:hover .issue-number::after { color: var(--gold); }
-
         .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-bottom: 8px; letter-spacing: 0.05em; }
         .issue-desc { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; line-height: 1.6; font-weight: 300; }
-
         .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; }
     </style>
 </head>
@@ -88,6 +51,7 @@
         <div class="header">
             <h2>PHASE 01</h2>
             <h1>The Compass</h1>
+            <div class="stats"><span id="regions-count">0</span> / 368 REGIONS EXPLORED</div>
         </div>
 
         <div class="compass-section">
@@ -97,13 +61,11 @@
 
         <div class="magazine-rack" id="magazine-rack">
             <div class="rack-title">Choose your issue for this journey.</div>
-            
             <a href="vol01.html" class="issue-card" id="link-vol01">
                 <div class="issue-number">VOL. 01</div>
                 <div class="issue-title">The Travel Issue</div>
                 <div class="issue-desc">啟程與風景：交給未知座標，捕捉光影與浪漫攝影大冒險。</div>
             </a>
-
             <a href="vol02.html" class="issue-card" id="link-vol02">
                 <div class="issue-number">VOL. 02</div>
                 <div class="issue-title">The Intuitive Table</div>
@@ -138,7 +100,15 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
+        // 讀取全域旅行日記
+        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let isRolling = false;
+
+        window.onload = () => {
+            // 計算去過的「不重複鄉鎮」數量
+            const uniquePlaces = new Set(visitedPlaces.map(item => item.name));
+            document.getElementById('regions-count').innerText = uniquePlaces.size;
+        };
 
         function drawDestination() {
             if (isRolling) return;
@@ -148,21 +118,30 @@
             const resultEl = document.getElementById('destination-result');
             const rack = document.getElementById('magazine-rack');
             
+            // 排除已經去過的地方
+            const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
+            
+            if (pool.length === 0) { 
+                resultEl.innerText = "All 368 Explored!"; 
+                isRolling = false;
+                return; 
+            }
+
             btn.disabled = true;
             btn.innerText = "SEEKING...";
-            rack.style.display = "none"; // 如果重新抽，先隱藏書架
+            rack.style.display = "none"; 
             resultEl.style.color = "#888"; 
             
             // 快速洗牌動畫 (1.5秒)
             let rollInterval = setInterval(() => {
-                resultEl.innerText = taiwanData[Math.floor(Math.random() * taiwanData.length)];
+                resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
             }, 80);
 
             setTimeout(() => {
                 clearInterval(rollInterval);
-                resultEl.style.color = "var(--gold)"; // 確定後變成亮金色
+                resultEl.style.color = "var(--gold)";
                 
-                const finalDest = taiwanData[Math.floor(Math.random() * taiwanData.length)];
+                const finalDest = pool[Math.floor(Math.random() * pool.length)];
                 resultEl.innerText = finalDest;
                 
                 // 將抽出的地點存入 URL 參數，傳遞給 Vol.01 和 Vol.02
