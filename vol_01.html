@@ -25,76 +25,80 @@
         }
 
         /* 標題與紀錄統計 */
-        header h2 { font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; }
-        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
-        
+        header h2 { 
+            font-family: 'Playfair Display', serif; font-size: 0.75rem; 
+            letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; 
+            font-weight: 400;
+        }
+        header h1 { 
+            font-family: 'Playfair Display', serif; font-style: italic; 
+            font-size: 2.5rem; font-weight: 700; margin: 0; 
+            letter-spacing: 0.02em;
+        }
         .footprint-stats {
-            margin-top: 18px; font-size: 0.65rem; letter-spacing: 0.25em; 
-            color: var(--grey); text-transform: uppercase; cursor: pointer;
+            margin-top: 18px; font-size: 0.65rem; letter-spacing: 0.2em; 
+            color: var(--grey); text-transform: uppercase;
         }
         #regions-count { color: var(--white); font-weight: 600; margin-left: 5px; }
 
-        /* 中間：中英文交錯排版 */
+        /* 中間顯示區：中文字排版優化 */
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
         
-        /* 目的地結果：英文致中 (視覺重心) */
         #result { 
-            font-family: 'Noto Serif TC', serif; font-size: 2.6rem; 
-            letter-spacing: 0.1em; margin-bottom: 30px; min-height: 4rem; 
-            font-weight: 500; color: var(--white);
-            text-align: center;
+            font-family: 'Noto Serif TC', serif; font-size: 2.8rem; 
+            letter-spacing: 0.1em; margin-bottom: 20px; min-height: 4rem; 
+            font-weight: 500;
+            color: var(--white);
+            /* 防止英文與中文字間距跑掉 */
+            word-break: keep-all; 
         }
 
-        /* 敘事容器：齊左排版 */
-        .story-container {
-            max-width: 280px; margin: 0 auto;
-            border-left: 1px solid var(--gold); padding-left: 20px;
-            text-align: left;
+        .mission-container {
+            max-width: 260px; /* 限制寬度，讓段落不散開 */
+            margin: 0 auto;
+            text-align: left; /* 段落齊左，不再奇怪的致中 */
+            border-left: 1px solid var(--gold); /* 加入一條細線，增加設計感 */
+            padding-left: 15px;
         }
 
-        /* 雙座標標籤 */
-        .location-log {
-            font-family: 'Montserrat', sans-serif; font-size: 0.5rem;
-            letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase;
-            margin-bottom: 20px; line-height: 1.6;
+        .mission-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem; letter-spacing: 0.3em;
+            color: var(--gold); text-transform: uppercase;
+            margin-bottom: 8px; display: block;
         }
 
-        .story-text {
-            font-family: 'Noto Serif TC', serif; font-size: 0.95rem; 
-            color: #eee; line-height: 2.2; opacity: 1; 
-            font-weight: 300; margin-bottom: 25px;
+        .mission-text {
+            font-family: 'Noto Serif TC', serif; font-size: 0.85rem; 
+            color: #ccc; line-height: 2; opacity: 0; transition: 1s ease;
+            font-weight: 300;
+            word-break: break-all;
+            text-align: justify; /* 這裡的對比寬度較窄，對齊後字距不會跑掉太誇張 */
         }
 
-        .nomadic-def {
-            font-family: 'Noto Serif TC', serif; font-size: 0.8rem;
-            line-height: 1.8; color: var(--grey); font-weight: 200;
-            border-top: 1px solid rgba(212, 180, 131, 0.2); padding-top: 15px;
+        /* 按鈕區 */
+        .action-group { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+        .btn-main {
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.3); 
+            color: var(--white);
+            padding: 22px; font-size: 0.75rem; letter-spacing: 0.4em; 
+            text-transform: uppercase; cursor: pointer; border-radius: 0;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        /* 下方操作按鈕：延伸感橫線 */
-        .action-group { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .btn-main:active { background: var(--white); color: var(--black); }
         
-        .seek-btn {
-            font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
-            letter-spacing: 0.4em; text-transform: uppercase;
-            color: var(--white); text-decoration: none;
-            display: inline-flex; align-items: center; gap: 15px;
-            background: none; border: none; cursor: pointer; transition: 0.4s;
-        }
-        .seek-btn::after {
-            content: ''; width: 40px; height: 1px; background: var(--white);
-            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        .seek-btn:hover::after { width: 65px; background: var(--gold); }
-
-        #check-in-section { display: none; width: 100%; }
+        #check-in-section { display: none; }
         .checkin-btn {
-            width: 100%; background: var(--gold); color: var(--black);
-            border: none; padding: 20px; font-size: 0.75rem; letter-spacing: 0.4em;
-            text-transform: uppercase; font-weight: 600; cursor: pointer;
+            border: none; background: var(--gold); color: var(--black);
+            font-weight: 600; margin-top: 10px;
         }
 
-        .back-link { position: fixed; top: calc(25px + env(safe-area-inset-top)); left: 25px; text-decoration: none; color: #777; font-size: 0.65rem; letter-spacing: 0.3em; z-index: 10; }
+        .back-link { 
+            position: fixed; top: calc(25px + env(safe-area-inset-top)); left: 25px;
+            text-decoration: none; color: #777; font-size: 0.65rem; 
+            letter-spacing: 0.3em; z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -105,65 +109,56 @@
         <header>
             <h2>VOLUME 01</h2>
             <h1>The Travel Issue</h1>
-            <div class="footprint-stats" onclick="clearFootprints()">
+            <div class="footprint-stats">
                 Footprints: <span id="regions-count">0</span> Regions
             </div>
         </header>
 
         <div class="display-area">
             <div id="result">The Unknown</div>
-            
-            <div class="story-container">
-                <div class="location-log">
-                    23.98°N 120.68°E / WADE<br>
-                    23.44°N 120.40°E / CLOUDY
-                </div>
-                <div class="story-text">
-                    最遠的旅行，<br>
-                    終點永遠是彼此的側臉。<br>
-                    我們不趕路，<br>
-                    我們只是在風景裡。
-                </div>
-                <div class="nomadic-def">
-                    聽起來像羅曼蒂克（Romantic），<br>
-                    過起來是遊牧生活（Nomadic）。<br>
-                    這就是我們的旅遊日常。
-                </div>
+            <div class="mission-container">
+                <span class="mission-label">Mission</span>
+                <div id="mission" class="mission-text"></div>
             </div>
         </div>
 
         <div class="action-group">
-            <button class="seek-btn" onclick="roll()">Seek Destination</button>
+            <button class="btn-main" onclick="roll()">Seek Destination</button>
             <div id="check-in-section">
-                <button class="checkin-btn" onclick="recordPlace()">Mark as Explored</button>
+                <button class="btn-main checkin-btn" onclick="recordPlace()">Mark as Explored</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 台灣行政區數據 (可根據需求補完)
-        const taiwanData = ["嘉義縣 阿里山鄉", "南投縣 草屯鎮", "嘉義縣 水上鄉", "南投縣 魚池鄉", "彰化縣 鹿港鎮", "嘉義縣 梅山鄉", "南投縣 仁愛鄉", "嘉義縣 番路鄉", "南投縣 埔里鎮"];
-        
+        // ... (保持與上一版相同的台灣行政區數據與 JavaScript 邏輯)
+        const taiwanData = ["嘉義市 東區", "嘉義市 西區", "嘉義縣 水上鄉", "嘉義縣 阿里山鄉", "嘉義縣 梅山鄉", "嘉義縣 大埔鄉", "台南市 安平區", "台南市 中西區", "高雄市 鹽埕區", "高雄市 鼓山區", "屏東縣 恆春鎮"];
+        const missions = ["尋找當地最老的一棵樹並合影", "在當地雜貨店買一樣沒見過的小零食", "找一個能看見地平線的高處發呆十分鐘", "為彼此拍一張帶有當地路標的特寫照片"];
+
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_footprints')) || [];
         let currentResult = "";
         document.getElementById('regions-count').innerText = visitedPlaces.length;
 
         function roll() {
             const resultEl = document.getElementById('result');
+            const missionEl = document.getElementById('mission');
             const checkInSection = document.getElementById('check-in-section');
             const pool = taiwanData.filter(place => !visitedPlaces.includes(place));
             
-            if (pool.length === 0) { resultEl.innerText = "All Borders Crossed."; return; }
+            if (pool.length === 0) { resultEl.innerText = "Borders Finished."; return; }
 
             resultEl.style.opacity = 0;
+            missionEl.style.opacity = 0;
             checkInSection.style.display = "none";
 
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
                 resultEl.innerText = currentResult;
+                missionEl.innerText = missions[Math.floor(Math.random() * missions.length)];
                 resultEl.style.opacity = 1;
+                missionEl.style.opacity = 1;
                 checkInSection.style.display = "block";
-            }, 500);
+            }, 600);
         }
 
         function recordPlace() {
@@ -172,16 +167,7 @@
             localStorage.setItem('nomadic_footprints', JSON.stringify(visitedPlaces));
             document.getElementById('regions-count').innerText = visitedPlaces.length;
             document.getElementById('check-in-section').style.display = "none";
-            alert(`📍 紀錄：${currentResult}`);
-        }
-
-        function clearFootprints() {
-            if (confirm("要清空所有已探索的地點足跡嗎？")) {
-                visitedPlaces = [];
-                localStorage.removeItem('nomadic_footprints');
-                document.getElementById('regions-count').innerText = "0";
-                location.reload();
-            }
+            alert(`📍 ${currentResult} 已寫入紀錄`);
         }
     </script>
 </body>
