@@ -14,36 +14,30 @@
         }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         
-        /* 視覺底層 */
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
-        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; transition: color 1s; }
+        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* 通用佈局 */
         .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: calc(60px + env(safe-area-inset-top)) 25px 80px; box-sizing: border-box; text-align: center; }
-        .page.active { display: flex; animation: fadeIn 0.6s ease forwards; }
+        .page.active { display: flex; animation: fadeIn 0.8s ease forwards; }
 
-        /*首頁樣式*/
         .header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.8rem; margin: 0; color: var(--vol1); letter-spacing: 0.05em; }
         .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
-        .dest-display { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; height: 4rem; display: flex; align-items: center; justify-content: center; margin: 40px 0; }
+        .dest-display { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; height: 4.5rem; display: flex; align-items: center; justify-content: center; margin: 40px 0; }
         .btn-main { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px 40px; font-size: 0.7rem; letter-spacing: 0.4em; cursor: pointer; transition: 0.3s; }
-        .btn-main:hover { border-color: var(--vol1); background: rgba(212,180,131,0.05); }
+        
+        .mission-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 45px 30px; margin: 30px 0; width: 100%; max-width: 450px; text-align: left; }
+        .mission-label { font-size: 0.6rem; letter-spacing: 0.5em; margin-bottom: 25px; display: block; color: var(--active-color); }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.25rem; line-height: 1.8; }
+        .journal-input { width: 100%; max-width: 450px; background: transparent; border: none; border-bottom: 1px solid #222; color: var(--white); padding: 20px 0; font-size: 1.1rem; outline: none; margin-bottom: 40px; font-family: 'Noto Serif TC', serif; }
+        .btn-save { background: var(--active-color); color: var(--black); border: none; padding: 22px; width: 100%; max-width: 450px; font-weight: 600; letter-spacing: 0.4em; cursor: pointer; transition: 0.3s; }
 
-        /* 任務頁樣式 */
-        .mission-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 40px 25px; margin: 30px 0; width: 100%; max-width: 450px; text-align: left; }
-        .mission-label { font-size: 0.6rem; letter-spacing: 0.5em; margin-bottom: 20px; display: block; color: var(--active-color); }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; line-height: 1.8; }
-        .journal-input { width: 100%; max-width: 450px; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); padding: 15px 0; font-size: 1rem; outline: none; margin-bottom: 30px; }
-        .btn-save { background: var(--active-color); color: var(--black); border: none; padding: 20px; width: 100%; max-width: 450px; font-weight: 600; letter-spacing: 0.3em; cursor: pointer; }
-
-        /* 檔案館 */
-        .archive-section { width: 100%; max-width: 450px; margin-top: 60px; text-align: left; border-top: 1px solid #222; padding-top: 30px; }
-        .journal-item { padding: 20px; border-left: 2px solid var(--grey); background: rgba(255,255,255,0.01); margin-bottom: 15px; }
+        .archive-section { width: 100%; max-width: 450px; margin-top: 80px; text-align: left; border-top: 1px solid #1a1a1a; padding-top: 40px; }
+        .journal-item { padding: 25px; border-left: 2px solid var(--grey); background: rgba(255,255,255,0.01); margin-bottom: 20px; transition: 0.3s; }
         .log-vol1 { border-color: var(--vol1); } .log-vol2 { border-color: var(--vol2); }
         .log-vol3 { border-color: var(--vol3); } .log-vol4 { border-color: var(--vol4); }
         .log-vol5 { border-color: var(--vol5); } .log-vol6 { border-color: var(--vol6); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -52,45 +46,45 @@
 
     <div id="home-page" class="page active">
         <div class="header">
-            <h2>ROAD MOVIE</h2>
+            <h2>DESTINY ASSIGNMENT</h2>
             <h1 id="main-title">The Compass</h1>
             <div class="stats"><span id="regions-count">0</span> / 368 EXPLORED</div>
         </div>
         <div class="dest-display" id="dest-result">Where to?</div>
         <button class="btn-main" id="draw-btn" onclick="drawFate()">DRAW MY FATE</button>
         
-        <div class="archive-section" id="archive-view">
-            <div style="font-size: 0.7rem; color: var(--grey); margin-bottom: 20px; letter-spacing: 0.2em;">FOOTPRINTS</div>
+        <div class="archive-section">
+            <div style="font-size: 0.7rem; color: var(--grey); margin-bottom: 30px; letter-spacing: 0.3em;">COLLECTED FOOTPRINTS</div>
             <div id="journal-list"></div>
         </div>
     </div>
 
     <div id="mission-page" class="page">
         <div style="width: 100%; text-align: left; max-width: 450px;">
-            <a href="javascript:void(0)" onclick="showPage('home-page')" style="color: var(--grey); text-decoration: none; font-size: 0.6rem; letter-spacing: 0.2em;">← CANCEL</a>
+            <a href="javascript:void(0)" onclick="showPage('home-page')" style="color: var(--grey); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.2em;">← CANCEL SCENE</a>
         </div>
-        <div style="margin: 40px 0;">
-            <div id="mission-vol-tag" style="font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 10px;">VOL.01</div>
-            <h1 id="mission-loc" style="font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin: 0;">地區名稱</h1>
+        <div style="margin: 50px 0;">
+            <div id="mission-vol-tag" style="font-size: 0.65rem; letter-spacing: 0.4em; margin-bottom: 15px; font-weight: 600;">VOL.01</div>
+            <h1 id="mission-loc" style="font-family: 'Noto Serif TC', serif; font-size: 2.8rem; margin: 0; letter-spacing: 0.05em;">地區名稱</h1>
         </div>
         <div class="mission-card">
             <span class="mission-label" id="mission-theme-label">CHALLENGE</span>
-            <div class="mission-text" id="mission-content">任務加載中...</div>
+            <div class="mission-text" id="mission-content">Seeking challenge...</div>
         </div>
-        <input type="text" class="journal-input" id="journal-input" placeholder="留下一句話紀錄此時此刻...">
-        <button class="btn-save" onclick="saveMission()">MINT FOOTPRINT</button>
+        <input type="text" class="journal-input" id="journal-input" placeholder="留下一句話，紀錄此刻的心動...">
+        <button class="btn-save" id="save-btn" onclick="saveMission()">MINT FOOTPRINT</button>
     </div>
 
     <script>
-        const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
+        const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
         const allMissions = {
-            "VOL.1": ["拍攝一張「垂直」視角的照片", "尋找該地區最古老的標誌", "拍一張兩人影子的合照"], // 這裡放入之前的100個
-            "VOL.2": ["分享一個關於食物的童年回憶", "挑戰盲點料理", "問對方：你吃什麼看起來最幸福？"],
-            "VOL.3": ["重慶森林式奔跑照", "對視 180 秒", "不露臉的情書"],
-            "VOL.4": ["錄下一段環境音", "閉眼聽60秒聲音", "對著耳邊說一個承諾"],
-            "VOL.5": ["摸摸最老的樹", "找一個生鏽招牌", "觸摸老牆質地"],
-            "VOL.6": ["閉眼由對方牽著走100步", "告訴對方你心中的未來", "最深情的擁抱"]
+            "VOL.1": ["拍攝一張「垂直」視角的照片，避開所有地平線。","尋找該地區最古老的標誌或招牌，記錄文字的斑駁。","觀察光影，拍攝一張光亮與黑暗比例為 1:1 的構圖。","紀錄一種屬於這裡的顏色，畫面中只能出現該色系。","對著反射面拍攝一張包含你自己與街道的合照。","尋找一隻當地的動物，在不打擾的情況下拍下牠的身影。","以極低角度拍攝一張當地的地標，模擬螞蟻的視角。","捕捉一張「移動中」的照片，呈現這個地區的流動感。","尋找三個圓形元素，將它們組合成一個畫面。","拍一張路人的背影，標題寫下你猜測他要去哪裡。","尋找一個生鏽的物品，拍攝其細節特寫。","拍一張這裡最醜的建築，但要試著把它拍得很唯美。","尋找地面上的裂縫，拍攝一張如抽象畫般的照片。","捕捉陽光透過樹葉產生的「星芒」光效。","拍一張這個地方最讓你感到「平靜」的角度。","尋找一扇看起來很有故事的窗戶並拍攝它。","拍下一張能代表這裡「氣味」的照片。","捕捉對比強烈的照片：例如新與舊、大與小。","尋找當地的一棵樹，拍出它像是有靈魂的樣子。","拍下你腳下的地面，代表你曾站在此處。","尋找一個三角形的建築結構並拍攝它。","捕捉街道上的「消失點」（透視線收縮處）。","拍一張這裡「最色彩繽紛」的角落。","尋找一個廢棄的物件，拍出它的孤獨感。","拍下這趟旅程中你最喜歡的一個文字標誌。","捕捉一張陽光在水窪或玻璃上的倒影。","拍攝一張「框架構圖」，利用門框或樹枝框住景點。","拍下這裡的「天空線」，觀察建築與天空的交界。","尋找這區色彩最跳脫的一扇門並合照。","紀錄一張展現該區日常節奏的照片（如等待紅綠燈的人）。"],
+            "VOL.2": ["走進一間沒有 Google 評論的小吃店，點老闆推薦的菜。","在菜單上隨機盲點一道你從沒吃過的名字料理。","不依賴手機搜尋，直接詢問路人他們今天午餐吃什麼並跟著去吃。","去當地的傳統市場，買一種你叫不出名字的點心。","用餐時，兩人輪流分享一個關於「食物」的童年崩潰回憶。","問對方：如果這是我們最後一餐，你會想在哪裡吃？","描述對方像哪一種調味料，並說明為什麼。","在等餐時，互相說出三個「對方最近讓你感到溫暖」的瞬間。","分享一個你從未告訴對方的關於「餓肚子」的故事。","點一份當地的招牌菜，但要求老闆加一份他不常加的配料。","尋找一間店名包含你名字其中一個字（或諧音）的餐廳用餐。","去當地的雜貨店買一罐包裝最過時、看起來最有年代感的飲料。","問對方：你覺得我吃什麼東西的時候看起來最幸福？","討論：如果我們要開一間餐廳，店名會叫什麼？主打什麼菜？","這餐不准使用導航，憑直覺走向聞起來最香的方向。","觀察店內其他客人點最多的菜，直接跟老闆說「我要跟隔壁桌一樣」。","買一份熱食，在路邊長椅上趁熱吃完，並觀察路過的行人。","問對方：你覺得我們兩個人的關係，比較像哪一道料理？","分享一個你小時候最討厭、但長大卻變得很愛的食物。","挑戰整頓飯只用非慣用手（左撇子用右手，反之）進食。","找出一種這裡獨有的醬料，並拍下它的商標。","挑戰整頓飯不准說出「好吃」或「讚」這兩個詞。","在餐桌上互相約定一個「下次要在這區嘗試」的店。","分享一個關於你父母煮的菜的記憶。","點一份小吃，並試著用「法式餐廳」的優雅語氣描述它。"],
+            "VOL.3": ["【重慶森林式】找一段人潮背景，拍下兩人手拉手、身體模糊但感覺強烈的瞬間。","【對視 180 秒】在安靜角落對視 3 分鐘不准說話。結束後對對方說出一件他在你眼裡的優點。","【不露臉的情書】拍一張不露臉，但能感受到兩人親密感的細節照（如手牽手、影子）。","【末日超市】去當地雜貨店，選出一樣「末日時想送給對方」的物品並拍下它。","【交換穿搭】互相交換一件外套或帽子，在當地最老舊的建築門口合照。","【局部觀察】拍下對方今天「吃東西時最可愛的局部」，可以是嘴唇或專注的眼神。","【時光旅人】找出這裡最像 30 年前的角落。兩人背對背站立，中間空出距離拍一張照。","【光影追逐】尋找一處夕陽或路燈產生的長影，拍下一張兩人影子擁抱的照片。","【雨夜花】如果是雨天，拍一張打傘的背影；如果是晴天，拍一張逆光中對方的輪廓。","【對講機傳情】兩人分開一段距離，只能看見彼此但聽不到，用手勢傳達「我想你了」。","【側寫師】偷拍一張對方「正在認真做某事」的側臉，不准讓他發現。","【街道漫步】將相機放在地面，錄下兩人走過鏡頭的腳步特寫。","【窗外風景】隔著玻璃拍一張對方的臉，讓玻璃上的反射與表情交織。","【秘密座標】找這區一個最隱密的角落，兩人合力疊一個石堆，只有你們知道在哪。","【眼神交會】在當地最繁忙的馬路兩側，當燈號亮起，在人群中尋找彼此的眼神。"],
+            "VOL.4": ["錄下一段當地的火車或公車到站聲，並形容那種「抵達」的感覺。","閉上眼 60 秒，告訴對方你聽到了哪五種環境聲音。","尋找這區特有的叫賣聲或廣播聲，錄下來作為時代的標本。","對著錄音設備（或對方耳邊）說一句關於未來的承諾。","尋找風吹過樹葉的聲音，並拍下一張產生聲音的那棵樹。","在當地最吵雜的市場，兩人戴上同一副耳機聽完一首歌。","尋找一個公共電話亭，對著話筒說一段給 10 年後自己的話。","錄下這區清晨或深夜特有的靜謐，日誌寫下「安靜的層次」。","找尋一個有噴水池或流水的地方，錄下水流動的頻率。","在不說話的情況下，用眼神交流告訴對方你現在最想做的一件事。","錄下兩人在當地街道行走時，腳步踏在地板上的節奏。","尋找這區「海拔最高」的迴聲。在開闊處大喊一聲彼此的名字。","找一間老舊的柑仔店，錄下開門時那一聲清脆的鈴鐺聲。","描述一種聲音：如果這區是一種樂器，你覺得它聽起來像什麼？","錄下當地寺廟的鐘聲或木魚聲，感受那種心靈的沉澱。"],
+            "VOL.5": ["摸摸看這區最老的一棵樹，形容樹皮的觸感像什麼？","找一個生鏽的招牌，試著讀出上面已經斑駁的電話號碼。","去當地的圖書館或公所，尋找一張這區 20 年前的老照片。","尋找這區海拔最高的一塊石頭，拍下它並觸摸它的溫度。","觀察一間已經倒閉店鋪的櫥窗遺留物，猜測它最後一天的樣子。","找一個路邊被遺棄的椅子，兩個人坐在上面拍一張像家一樣自然的合照。","觸摸一堵老牆，描述它的質地：是像乾裂的皮膚，還是冰冷的盔甲？","尋找一塊生鏽的鐵皮，觀察鏽斑的形狀像哪一個國家的地圖。","在當地的文具店買一隻最傳統的鉛筆，寫下這區的名字。","找尋一個有年份刻痕的地標（如橋梁建築年），與它合影。","詢問對方：如果我們要在這裡埋下時空膠囊，你會放進什麼？","找一間雜貨店，買一樣你小時候看過的童玩或零食。","觀察當地建築的屋頂，找出一種現在已經不常見的建材。","摸摸看當地的泥土（或花槽的土），形容它的顏色與乾濕度。","尋找一個古老的郵筒，想像它曾經傳遞過最感人的一封信內容。"],
+            "VOL.6": ["閉上眼睛，由對方牽著你的手走 100 步。這代表極致的信任。","告訴對方，如果我們要定居在這，你會選哪間房子？為什麼？","在路邊長椅坐下，什麼都不做，發呆 10 分鐘，感受對方的存在。","寫下一件你想跟對方一起在下一個 368 地點做的事。","對著鏡頭，對彼此說出「謝謝你陪我來這裡」。","找尋一個開闊的景點，兩人背對背坐下，感受彼此背部的體溫。","詢問對方：如果我們迷路了，且永遠離不開這區，你會害怕嗎？","在這區找一個安靜的樹下，交換一個持續 10 秒的擁抱。","找出一個讓你聯想到「未來」的建築或風景，並告訴對方理由。", "描述一個對方讓你感到最有「安全感」的瞬間。","在不看手機的情況下，兩個人在巷弄中漫無目的地走 20 分鐘。","問對方：如果我們老了，你還會想跟我一起這樣抽籤旅行嗎？","拍一張「兩人的背影消失在街道盡頭」的照片，象徵同行。","找尋一個有花的地方，摘一朵掉落的花送給對方。","在這區最老的一座橋上，許下一個關於你們兩人的秘密願望。"]
         };
 
         const config = {
@@ -108,11 +102,13 @@
         function updateUI() {
             const unique = new Set(masterJournal.map(j => j.name));
             document.getElementById('regions-count').innerText = unique.size;
+            document.getElementById('completion-rate').innerText = ((unique.size / 368) * 100).toFixed(1) + "%";
+            
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = masterJournal.length === 0 ? "..." : 
+            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; font-size:0.7rem;">No footprints yet.</div>' : 
                 [...masterJournal].reverse().map(log => `
                     <div class="journal-item log-${log.issue.toLowerCase().replace('.','')}">
-                        <div style="font-size:0.5rem; color:${config[log.issue].color}">${log.date} / ${log.issue}</div>
+                        <div style="font-size:0.55rem; color:${config[log.issue].color}; letter-spacing:0.1em; margin-bottom:8px;">${log.date} / ${log.issue}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-note">“ ${log.note} ”</div>
                     </div>
@@ -122,6 +118,7 @@
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
         }
 
         function drawFate() {
@@ -129,20 +126,22 @@
             const resultEl = document.getElementById('dest-result');
             const pool = taiwanData.filter(d => !masterJournal.some(j => j.name === d));
             
+            if (pool.length === 0) { resultEl.innerText = "All 368 Explored!"; return; }
+
             btn.disabled = true;
             let i = 0;
             const timer = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
                 i++;
-                if (i > 15) {
+                if (i > 18) {
                     clearInterval(timer);
                     currentDraw.loc = pool[Math.floor(Math.random() * pool.length)];
                     currentDraw.vol = "VOL." + (Math.floor(Math.random() * 6) + 1);
                     
                     resultEl.innerText = currentDraw.loc;
-                    setTimeout(() => enterMission(), 800);
+                    setTimeout(() => enterMission(), 1000);
                 }
-            }, 80);
+            }, 70);
         }
 
         function enterMission() {
@@ -150,7 +149,9 @@
             const cfg = config[vol];
             
             document.body.style.setProperty('--active-color', cfg.color);
-            document.getElementById('bg-text').style.color = cfg.color + "22";
+            document.getElementById('bg-text').style.color = cfg.color + "11";
+            document.getElementById('bg-text').innerText = cfg.label;
+            
             document.getElementById('mission-vol-tag').innerText = vol + " / " + cfg.label;
             document.getElementById('mission-vol-tag').style.color = cfg.color;
             document.getElementById('mission-loc').innerText = currentDraw.loc;
@@ -164,7 +165,7 @@
         }
 
         function saveMission() {
-            const note = document.getElementById('journal-input').value || "紀錄一段旅程。";
+            const note = document.getElementById('journal-input').value || "一場不可思議的冒險。";
             const mission = document.getElementById('mission-content').innerText;
             const entry = {
                 name: currentDraw.loc,
