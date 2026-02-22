@@ -22,98 +22,65 @@
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E');
         }
 
-        /* --- 第一頁：PREFACE 敘事美學 (齊左排版) --- */
+        /* --- 第一頁：PREFACE (視覺交錯排版) --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
-            justify-content: center; align-items: flex-start; /* 改為齊左佈局 */
+            justify-content: center; align-items: center; /* 整體中心對齊 */
             padding: 0 40px; box-sizing: border-box; position: relative;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('http://googleusercontent.com/image_collection/image_retrieval/1030824389340101924_0') center/cover no-repeat;
         }
 
-        .preface-content { max-width: 320px; animation: fadeIn 2.5s ease; text-align: left; }
+        .preface-content { max-width: 100%; z-index: 2; animation: fadeIn 2.5s ease; }
         
+        /* 英文標題：致中 */
         .preface-content h1 {
             font-family: 'Playfair Display', serif; font-size: 0.75rem;
-            letter-spacing: 0.6em; text-transform: uppercase; color: var(--gold);
-            margin-bottom: 40px; font-weight: 400;
+            letter-spacing: 0.7em; text-transform: uppercase; color: var(--gold);
+            margin-bottom: 50px; font-weight: 400;
+            text-align: center; width: 100%;
         }
 
+        /* 中文敘事：齊左 */
         .preface-text {
             font-family: 'Noto Serif TC', serif; font-size: 0.95rem;
-            line-height: 2.2; color: #ddd; font-weight: 300; letter-spacing: 0.02em;
-            border-left: 1px solid var(--gold); /* 加入垂直導引線 */
+            line-height: 2.3; color: #ddd; font-weight: 300; letter-spacing: 0.02em;
+            text-align: left; /* 強制齊左 */
+            max-width: 290px; margin: 0 auto; /* 置中容器，但內容齊左 */
+            border-left: 1px solid var(--gold);
             padding-left: 20px;
         }
 
+        /* 英文按鈕：致中 */
+        .btn-container { text-align: center; width: 100%; }
         .enter-btn {
-            margin-top: 50px; font-family: 'Montserrat', sans-serif;
+            margin-top: 60px; font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
             background: transparent; border: none; color: var(--white);
-            cursor: pointer; border-bottom: 1px solid var(--white);
-            padding-bottom: 5px; transition: 0.5s; text-decoration: none;
+            cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.4);
+            padding-bottom: 6px; transition: 0.5s; text-decoration: none;
             display: inline-block;
         }
 
-        /* --- 第二頁：ARCHIVES 藝廊 (3x2 Grid) --- */
-        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 100px; }
-        
-        .header {
-            text-align: center; padding: 90px 20px 45px 20px;
-            letter-spacing: 0.4em; font-size: 0.65rem; text-transform: uppercase;
-            color: var(--grey);
-        }
-        .header strong {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
-            color: var(--white); display: block; margin-bottom: 10px;
-            font-weight: 400; font-style: italic;
-        }
+        /* --- 第二頁：ARCHIVES 藝廊書櫃 --- */
+        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 120px; }
+        .header { text-align: center; padding: 100px 20px 45px 20px; letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase; color: var(--grey); }
+        .header strong { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); display: block; margin-bottom: 10px; font-weight: 400; font-style: italic; }
 
-        .gallery {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 15px; padding: 0 15px;
-            max-width: 100%; margin: 0 auto;
-        }
-
-        .card {
-            position: relative; aspect-ratio: 3 / 4.5; overflow: hidden;
-            text-decoration: none; display: flex; flex-direction: column;
-            justify-content: flex-end; padding: 20px 12px; box-sizing: border-box;
-        }
-        .card-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
-            filter: brightness(0.6) grayscale(15%); z-index: 1;
-        }
-        .card::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 2;
-        }
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px; max-width: 100%; margin: 0 auto; }
+        .card { position: relative; aspect-ratio: 3 / 4.5; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px 10px; box-sizing: border-box; }
+        .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1); filter: brightness(0.6) grayscale(15%); z-index: 1; }
+        .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 2; }
         .card-content { position: relative; z-index: 3; text-align: center; }
         .vol { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: #fff; margin-bottom: 6px; }
-        .title { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; margin-bottom: 5px; }
+        .title { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; }
         .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.7rem; color: #777; font-weight: 300; }
 
-        .footer-marquee {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px);
-            padding: 20px 0 calc(20px + env(safe-area-inset-bottom));
-            border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
-        }
-        .marquee-inner {
-            display: inline-block; white-space: nowrap;
-            animation: move 50s linear infinite; font-size: 0.55rem;
-            letter-spacing: 0.3em; color: var(--grey); text-transform: uppercase;
-        }
+        .footer-marquee { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); padding: 20px 0 calc(20px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.05); z-index: 100; }
+        .marquee-inner { display: inline-block; white-space: nowrap; animation: move 50s linear infinite; font-size: 0.5rem; letter-spacing: 0.3em; color: var(--grey); text-transform: uppercase; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        @media (max-width: 650px) {
-            .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .preface-text { font-size: 0.9rem; }
-        }
     </style>
 </head>
 <body>
@@ -122,13 +89,12 @@
 
     <section class="preface-section">
         <div class="preface-content">
-            <h1>Preface — NOMADIC</h1>
-            <p class="preface-text">
-                有人說，最極致的浪漫是在漂泊中找到歸屬。<br><br>
+            <h1>Preface — NOMADIC</h1> <p class="preface-text"> 有人說，最極致的浪漫是在漂泊中找到歸屬。<br><br>
                 NOMADIC，是我們對日常軌跡的溫柔偏離。在 WADE 與 CLOUDY 的車廂力場裡，家不是一個固定的座標，而是兩個人、一輛車，以及導航之外的無限可能。<br><br>
                 我們在光影中顯影，在驚喜中校準頻率，在未知裡標記未來。這份檔案，記錄了所有駛離日常的瞬間。
             </p>
-            <a href="#archives" class="enter-btn">Open The Archives</a>
+            <div class="btn-container">
+                <a href="#archives" class="enter-btn">Open The Archives</a> </div>
         </div>
     </section>
 
