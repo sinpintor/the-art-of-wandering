@@ -8,12 +8,8 @@
     <style>
         :root { 
             --black: #0a0a0a; --white: #ffffff; --grey: #888888;
-            --vol1: #d4b483; /* 金: 攝影 */
-            --vol2: #b83b3b; /* 紅: 飲食 */
-            --vol3: #2d5a4c; /* 綠: 電影 */
-            --vol4: #1a2a3a; /* 藍: 聲音 */
-            --vol5: #8b5a2b; /* 棕: 考古 */
-            --vol6: #e0e0e0; /* 銀: 靈魂 */
+            --vol1: #d4b483; --vol2: #b83b3b; --vol3: #2d5a4c; 
+            --vol4: #1a2a3a; --vol5: #8b5a2b; --vol6: #e0e0e0;
         }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         
@@ -33,23 +29,24 @@
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; width: 100%; max-width: 250px;}
         .btn-main:hover { border-color: var(--vol1); background: rgba(212,180,131,0.05); }
 
-        .magazine-rack { display: none; flex-direction: column; gap: 20px; width: 100%; max-width: 450px; animation: fadeInUp 0.8s ease forwards; margin-top: 20px; }
-        .rack-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--grey); margin-bottom: 10px; letter-spacing: 0.1em; }
-
-        /* 雜誌卡片 */
-        .issue-card { display: block; text-decoration: none; color: var(--white); padding: 25px; border-left: 3px solid var(--grey); background: rgba(255,255,255,0.02); transition: all 0.4s; text-align: left; position: relative; overflow: hidden; }
+        /* 隨機挑選雜誌的區塊 */
+        .magazine-selection { display: none; flex-direction: column; width: 100%; max-width: 450px; margin-top: 20px; text-align: left; }
+        .selection-title { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--grey); text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+        
+        .issue-card { display: block; text-decoration: none; color: var(--white); padding: 25px; border-left: 3px solid var(--grey); background: rgba(255,255,255,0.02); transition: all 0.4s; position: relative; animation: fadeInUp 0.8s ease forwards; }
         .issue-card:hover { transform: translateX(10px); background: rgba(255,255,255,0.05); }
-        .issue-number { font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; font-weight: 600; }
-        .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; margin-bottom: 5px; }
-        .issue-desc { font-size: 0.75rem; color: #777; line-height: 1.5; font-family: 'Noto Serif TC', serif; }
-
+        
         /* 每一期的特定色 */
-        #link-vol01 { border-color: var(--vol1); } #link-vol01 .issue-number { color: var(--vol1); }
-        #link-vol02 { border-color: var(--vol2); } #link-vol02 .issue-number { color: var(--vol2); }
-        #link-vol03 { border-color: var(--vol3); } #link-vol03 .issue-number { color: var(--vol3); }
-        #link-vol04 { border-color: var(--vol4); } #link-vol04 .issue-number { color: var(--vol4); }
-        #link-vol05 { border-color: var(--vol5); } #link-vol05 .issue-number { color: var(--vol5); }
-        #link-vol06 { border-color: var(--vol6); } #link-vol06 .issue-number { color: var(--vol6); }
+        .vol-color-1 { border-color: var(--vol1); color: var(--vol1); }
+        .vol-color-2 { border-color: var(--vol2); color: var(--vol2); }
+        .vol-color-3 { border-color: var(--vol3); color: var(--vol3); }
+        .vol-color-4 { border-color: var(--vol4); color: var(--vol4); }
+        .vol-color-5 { border-color: var(--vol5); color: var(--vol5); }
+        .vol-color-6 { border-color: var(--vol6); color: var(--vol6); }
+
+        .issue-number { font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; font-weight: 600; }
+        .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; margin-bottom: 5px; color: var(--white); }
+        .issue-desc { font-size: 0.75rem; color: #777; line-height: 1.5; font-family: 'Noto Serif TC', serif; }
 
         /* Archive */
         .archive-section { width: 100%; max-width: 450px; margin-top: 100px; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; }
@@ -58,11 +55,7 @@
         .log-vol01 { border-color: var(--vol1); } .log-vol02 { border-color: var(--vol2); }
         .log-vol03 { border-color: var(--vol3); } .log-vol04 { border-color: var(--vol4); }
         .log-vol05 { border-color: var(--vol5); } .log-vol06 { border-color: var(--vol6); }
-        .j-meta { font-size: 0.55rem; color: var(--grey); margin-bottom: 10px; letter-spacing: 0.1em; }
-        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; margin-bottom: 10px; }
-        .j-note { font-size: 0.9rem; color: #bbb; line-height: 1.7; font-style: italic; }
 
-        .btn-clear { background: transparent; border: 1px dashed #333; color: #444; padding: 15px; font-size: 0.6rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; margin-top: 60px; }
         .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -72,54 +65,19 @@
     <div class="bg-text">Compass</div>
     <div class="main-container">
         <div class="header">
-            <h2>ROAD MOVIE PROJECT</h2>
+            <h2>DESTINY ASSIGNMENT</h2>
             <h1>The Compass</h1>
             <div class="stats"><span id="regions-count">0</span> / 368 REGIONS EXPLORED</div>
         </div>
 
         <div class="compass-section">
             <div id="destination-result">Where to?</div>
-            <button class="btn-main" id="draw-btn" onclick="drawDestination()">Draw Destination</button>
+            <button class="btn-main" id="draw-btn" onclick="drawFate()">Draw My Fate</button>
         </div>
 
-        <div class="magazine-rack" id="magazine-rack">
-            <div class="rack-title">Select your narrative.</div>
-            
-            <a href="vol01.html" class="issue-card" id="link-vol01">
-                <div class="issue-number">VOL. 01 / THE LIGHT</div>
-                <div class="issue-title">The Travel Issue</div>
-                <div class="issue-desc">視覺張力：捕捉環境光影，與那些轉瞬即逝的日常。</div>
-            </a>
-            
-            <a href="vol02.html" class="issue-card" id="link-vol02">
-                <div class="issue-number">VOL. 02 / THE TABLE</div>
-                <div class="issue-title">The Intuitive Table</div>
-                <div class="issue-desc">感官連結：味蕾與對話，在食物中探尋彼此的秘密。</div>
-            </a>
-
-            <a href="vol03.html" class="issue-card" id="link-vol03">
-                <div class="issue-number">VOL. 03 / THE SCENE</div>
-                <div class="issue-title">The Cinematic Lens</div>
-                <div class="issue-desc">電影感：將平凡街道拍成劇照，建立兩人的私密結界。</div>
-            </a>
-
-            <a href="vol04.html" class="issue-card" id="link-vol04">
-                <div class="issue-number">VOL. 04 / THE SOUND</div>
-                <div class="issue-title">Sound of Silence</div>
-                <div class="issue-desc">聽覺採集：錄下土地的頻率，與那些不敢大聲說的秘密。</div>
-            </a>
-
-            <a href="vol05.html" class="issue-card" id="link-vol05">
-                <div class="issue-number">VOL. 05 / THE OBJECT</div>
-                <div class="issue-title">The Object Archive</div>
-                <div class="issue-desc">觸覺考古：觸摸時間的質地，尋找被遺忘的城市物件。</div>
-            </a>
-
-            <a href="vol06.html" class="issue-card" id="link-vol06">
-                <div class="issue-number">VOL. 06 / THE SOUL</div>
-                <div class="issue-title">The Eternal Soul</div>
-                <div class="issue-desc">終極漫遊：確認彼此是最終的座標，靈魂的歸屬之地。</div>
-            </a>
+        <div class="magazine-selection" id="magazine-selection">
+            <div class="selection-title">Destiny chose this narrative for you</div>
+            <div id="selected-issue-container"></div>
         </div>
 
         <div class="archive-section">
@@ -128,43 +86,25 @@
                 <span id="completion-rate">0%</span>
             </div>
             <div id="journal-list"></div>
-            <button class="btn-clear" onclick="clearJournal()">ERASE ALL MEMORIES</button>
         </div>
     </div>
 
     <script>
-        // 台灣完整 368 鄉鎮區清單
-        const taiwanData = [
-            "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
-            "新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區",
-            "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
-            "桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區",
-            "新竹縣 竹北市","埋竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉",
-            "新竹市 東區","新竹市 北區","新竹市 香山區",
-            "苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉",
-            "台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區",
-            "彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉",
-            "南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉",
-            "雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉",
-            "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
-            "嘉義市 東區","嘉義市 西區",
-            "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
-            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
-            "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
-            "宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉",
-            "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
-            "台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉",
-            "澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉",
-            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉",
-            "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
+        const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
+
+        const issues = [
+            { id: "VOL.01", title: "The Travel Issue", theme: "LIGHT / 光影浮沉", desc: "視覺張力：捕捉環境光影，與那些轉瞬即逝的日常。", colorClass: "vol-color-1", file: "vol01.html" },
+            { id: "VOL.02", title: "The Intuitive Table", theme: "TABLE / 味蕾對話", desc: "感官連結：味蕾與對話，在食物中探尋彼此的秘密。", colorClass: "vol-color-2", file: "vol02.html" },
+            { id: "VOL.03", title: "The Cinematic Lens", theme: "SCENE / 一期一會", desc: "電影感：將平凡街道拍成劇照，建立兩人的私密結界。", colorClass: "vol-color-3", file: "vol03.html" },
+            { id: "VOL.04", title: "Sound of Silence", theme: "SOUND / 幽谷迴聲", desc: "聽覺採集：錄下土地的頻率，與那些不敢大聲說的秘密。", colorClass: "vol-color-4", file: "vol04.html" },
+            { id: "VOL.05", title: "The Object Archive", theme: "OBJECT / 時間考古", desc: "觸覺考古：觸摸時間的質地，尋找被遺忘的城市物件。", colorClass: "vol-color-5", file: "vol05.html" },
+            { id: "VOL.06", title: "The Eternal Soul", theme: "SOUL / 靈魂歸屬", desc: "終極漫遊：確認彼此是最終的座標，靈魂的歸屬之地。", colorClass: "vol-color-6", file: "vol06.html" }
         ];
 
         let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let isRolling = false;
 
-        window.onload = () => {
-            updateUI();
-        };
+        window.onload = updateUI;
 
         function updateUI() {
             const unique = new Set(masterJournal.map(j => j.name));
@@ -172,62 +112,63 @@
             document.getElementById('completion-rate').innerText = ((unique.size / 368) * 100).toFixed(1) + "%";
             
             const listEl = document.getElementById('journal-list');
-            if (masterJournal.length === 0) {
-                listEl.innerHTML = '<div class="empty-state">No footprints yet.</div>';
-            } else {
-                listEl.innerHTML = [...masterJournal].reverse().map(log => `
+            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#333; font-size:0.7rem;">No records.</div>' : 
+                [...masterJournal].reverse().map(log => `
                     <div class="journal-item log-${log.issue.toLowerCase().replace('.','')}">
                         <div class="j-meta">${log.date} / ${log.issue}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-note">“ ${log.note} ”</div>
                     </div>
                 `).join('');
-            }
         }
 
-        function drawDestination() {
+        function drawFate() {
             if (isRolling) return;
+            isRolling = true;
             const btn = document.getElementById('draw-btn');
             const resultEl = document.getElementById('destination-result');
-            const rack = document.getElementById('magazine-rack');
+            const selection = document.getElementById('magazine-selection');
+            const container = document.getElementById('selected-issue-container');
             
-            // 排除已去過
             const pool = taiwanData.filter(d => !masterJournal.some(j => j.name === d));
             if (pool.length === 0) { resultEl.innerText = "All 368 Explored!"; return; }
 
-            isRolling = true;
             btn.disabled = true;
-            rack.style.display = "none";
+            selection.style.display = "none";
 
+            // 第一階段：滾動地點 (1.2秒)
             let i = 0;
-            const timer = setInterval(() => {
+            const destTimer = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
                 i++;
-                if (i > 20) {
-                    clearInterval(timer);
-                    const final = pool[Math.floor(Math.random() * pool.length)];
-                    resultEl.innerText = final;
-                    const encoded = encodeURIComponent(final);
+                if (i > 15) {
+                    clearInterval(destTimer);
+                    const finalDest = pool[Math.floor(Math.random() * pool.length)];
+                    resultEl.innerText = finalDest;
                     
-                    // 動態生成所有連結
-                    document.querySelectorAll('.issue-card').forEach((card, index) => {
-                        const vol = String(index + 1).padStart(2, '0');
-                        card.href = `vol${vol}.html?loc=${encoded}`;
-                    });
+                    // 第二階段：滾動雜誌 (0.8秒)
+                    container.innerHTML = `<div style="text-align:center; color:#555; font-size:0.8rem; padding:20px;">ASSIGNING ISSUE...</div>`;
+                    selection.style.display = "flex";
 
-                    rack.style.display = "flex";
-                    btn.disabled = false;
-                    btn.innerText = "REDRAW";
-                    isRolling = false;
+                    setTimeout(() => {
+                        const randomIssue = issues[Math.floor(Math.random() * issues.length)];
+                        const encoded = encodeURIComponent(finalDest);
+                        
+                        container.innerHTML = `
+                            <a href="${randomIssue.file}?loc=${encoded}" class="issue-card" style="border-color: var(--${randomIssue.id.toLowerCase().replace('.','')})">
+                                <div class="issue-number ${randomIssue.colorClass}">${randomIssue.id} / ${randomIssue.theme}</div>
+                                <div class="issue-title">${randomIssue.title}</div>
+                                <div class="issue-desc">${randomIssue.desc}</div>
+                                <div style="margin-top:15px; font-size:0.5rem; color:var(--grey); letter-spacing:0.1em; text-align:right;">START MISSION →</div>
+                            </a>
+                        `;
+                        
+                        btn.disabled = false;
+                        btn.innerText = "REDRAW FATE";
+                        isRolling = false;
+                    }, 800);
                 }
-            }, 60);
-        }
-
-        function clearJournal() {
-            if (confirm("Erase all footprints? This cannot be undone.")) {
-                localStorage.removeItem('nomadic_master_journal');
-                location.reload();
-            }
+            }, 80);
         }
     </script>
 </body>
