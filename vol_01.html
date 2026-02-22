@@ -36,16 +36,15 @@
 
         #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
         .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 0.1em; }
-        .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.2; font-weight: 300; letter-spacing: 0.05em; }
-        .story-text span { display: block; margin-bottom: 12px; }
-
+        
+        /* 故事文字修改為段落形式，並調整行距與間距 */
+        .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.2; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 0; }
+        
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.05em; }
         
         .mission-box { display: flex; flex-direction: column; gap: 15px; }
         .mission-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
-        
-        /* 將 TASK 與 CHALLENGE 的視覺比例統一，皆使用 #eee 明亮色 */
         .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; margin-bottom: 15px;}
         .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; }
 
@@ -76,12 +75,9 @@
         <div class="display-area">
             <div id="prologue" class="content-block">
                 <div class="narrative-title">The Romantic Nomadic.</div>
-                <div class="story-text">
-                    <span>有些靈魂註定無法被標記在靜止的座標上。</span>
-                    <span>移動不是為了抵達，而是一種有意識的流浪——將生活的瑣碎揉進公路的風。</span>
-                    <span>聽起來像羅曼蒂克，過起來是遊牧生活。</span>
-                    <span>最遠的旅行，終點永遠是彼此的側臉。</span>
-                </div>
+                <p class="story-text">
+                    有些靈魂註定無法被標記在靜止的座標上，於是我們選擇移動，不為抵達，而是將生活的瑣碎揉進公路的風裡進行一場有意識的流浪；這聽起來像羅曼蒂克，過起來卻是遊牧生活，因為最遠的旅行，終點永遠是彼此的側臉。
+                </p>
             </div>
 
             <div id="map-core" class="content-block">
