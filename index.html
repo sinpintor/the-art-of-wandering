@@ -219,28 +219,46 @@
                 `).join('');
             
             // 雜誌章節專題化
-            const editEl = document.getElementById('editorial-list');
+const editEl = document.getElementById('editorial-list');
             const grouped = {};
             masterJournal.forEach(log => {
                 const city = log.name.split(' ')[0];
                 if(!grouped[city]) grouped[city] = [];
                 grouped[city].push(log);
             });
+
             editEl.innerHTML = Object.keys(grouped).length === 0 ? '<div style="color:#222; padding:40px 0;">專題尚未成冊</div>' :
-                Object.keys(grouped).map(city => `
-                <div class="chapter-block">
-                    <h2 class="chapter-title">${city}</h2>
-                    <div style="display:flex; gap:4px; margin-bottom:20px;">
-                        ${grouped[city].map(l => `<div style="height:4px; flex:1; background:${l.color}"></div>`).join('')}
-                    </div>
-                    ${grouped[city].map(log => `
-                        <div class="shot-item">
-                            <span><span style="width:8px; height:8px; background:${log.color}; display:inline-block; border-radius:50%; margin-right:12px;"></span>${log.name.split(' ')[1]}</span>
-                            <span style="font-size:0.55rem; color:#444;">${log.combo}</span>
+                Object.keys(grouped).map(city => {
+                    const logs = grouped[city];
+                    // 建立色彩光譜
+                    const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color}"></div>`).join('');
+                    
+                    return `
+                    <div class="ed-project-card" style="margin-bottom:80px; width:100%; border-top:1px solid #1a1a1a; padding-top:30px;">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
+                            <h2 style="font-family:'Playfair Display', serif; font-style:italic; font-size:2.8rem; margin:0; line-height:0.8; opacity:0.9;">${city}</h2>
+                            <span style="font-family:'Montserrat'; font-size:0.5rem; letter-spacing:0.3em; color:var(--active-color);">VOL. ${String(logs.length).padStart(2, '0')}</span>
                         </div>
-                    `).join('')}
-                </div>
-            `).join('');
+                        
+                        <div style="width:100%; height:3px; display:flex; margin-bottom:25px; opacity:0.6;">
+                            ${paletteItems}
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 1fr; gap:10px;">
+                            ${logs.map(l => `
+                                <div style="display:flex; justify-content:space-between; font-size:0.7rem; letter-spacing:0.05em; border-bottom:1px solid #0d0d0d; padding-bottom:8px;">
+                                    <span style="color:#fff;">${l.name.split(' ')[1]}</span>
+                                    <span style="color:#444; font-family:'Playfair Display'; font-style:italic;">${l.combo}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="margin-top:20px; font-size:0.45rem; color:#222; letter-spacing:0.4em; text-transform:uppercase;">
+                            Aesthetic Context: ${logs[0].combo.split('＋')[0]} Focused
+                        </div>
+                    </div>
+                    `;
+                }).join('');
         }
 
         function drawFate() {
