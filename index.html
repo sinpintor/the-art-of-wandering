@@ -20,12 +20,12 @@
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E');
         }
 
-        /* --- 第一頁：PREFACE (座標火花版) --- */
+        /* --- 第一頁：PREFACE (公路連結版) --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 0 40px;
             box-sizing: border-box; position: relative;
-            background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('https://images.unsplash.com/photo-1449156003053-c30205280592?q=80&w=2000') center/cover no-repeat;
         }
         .preface-content { max-width: 100%; z-index: 2; animation: fadeIn 2.5s ease; }
@@ -37,14 +37,14 @@
             margin-bottom: 50px; font-weight: 400; text-align: center;
         }
 
-        /* 金句容器：致中容器，內容齊左 */
+        /* 內容容器：致中容器，內容齊左 */
         .quote-container {
             max-width: 280px; margin: 0 auto;
             border-left: 1px solid var(--gold); padding-left: 20px;
             text-align: left;
         }
 
-        /* 雙座標：WADE & CLOUDY 的對話 */
+        /* 雙座標：WADE & CLOUDY 的連結 */
         .location-log {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.5rem; letter-spacing: 0.3em;
@@ -59,26 +59,31 @@
             margin-bottom: 30px;
         }
 
-        /* 名字說明：灰階極細 */
+        /* 名字說明：遊牧生活 */
         .nomadic-def {
             font-family: 'Noto Serif TC', serif; font-size: 0.8rem;
             line-height: 1.8; color: var(--grey); font-weight: 200;
             border-top: 1px solid rgba(212, 180, 131, 0.2); padding-top: 20px;
         }
 
-        /* 英文按鈕致中 */
-        .btn-container { text-align: center; margin-top: 60px; }
+        /* 延伸感連結按鈕：致中顯示 */
+        .btn-container { text-align: center; margin-top: 70px; width: 100%; }
         .enter-btn {
             font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
             letter-spacing: 0.4em; text-transform: uppercase;
-            background: transparent; border: none; color: var(--white);
-            cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.4);
-            padding-bottom: 6px; transition: 0.5s; text-decoration: none;
-            display: inline-block;
+            color: var(--white); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 15px;
+            transition: 0.4s;
         }
+        .enter-btn::after {
+            content: ''; width: 40px; height: 1px; background: var(--white);
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .enter-btn:hover { color: var(--gold); }
+        .enter-btn:hover::after { width: 65px; background: var(--gold); }
 
-        /* --- 第二頁：ARCHIVES 3x2 藝廊 --- */
-        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 150px; }
+        /* --- 第二頁：ARCHIVES 藝廊 --- */
+        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 120px; }
         .header { text-align: center; padding: 100px 20px 45px 20px; letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase; color: var(--grey); }
         .header strong { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); display: block; margin-bottom: 10px; font-weight: 400; font-style: italic; }
 
@@ -110,25 +115,25 @@
             <h1>Preface — NOMADIC</h1> 
             <div class="quote-container">
                 <div class="location-log">
-                    23.98°N 120.68°E / CAOTUN (WADE)<br>
-                    23.44°N 120.40°E / SHUISHANG (CLOUDY)
+                    23.98°N 120.68°E / WADE<br>
+                    23.44°N 120.40°E / CLOUDY
                 </div>
                 
                 <p class="preface-text"> 
-                    最遠的公路，<br>
+                    最遠的旅行，<br>
                     終點永遠是彼此的側臉。<br><br>
                     我們不趕路，<br>
-                    我們只是在風景裡顯影。
+                    我們只是在風景裡。
                 </p>
 
                 <div class="nomadic-def">
                     聽起來像羅曼蒂克（Romantic），<br>
                     過起來是遊牧生活（Nomadic）。<br>
-                    這就是我們的公路日常。
+                    這就是我們的旅遊日常。
                 </div>
             </div>
             <div class="btn-container">
-                <a href="#archives" class="enter-btn">Open The Archives</a>
+                <a href="#archives" class="enter-btn">DISCOVER ARCHIVES</a>
             </div>
         </div>
     </section>
@@ -142,7 +147,7 @@
             </a>
             <a href="vol_02.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
-                <div class="card-content"><div class="vol">Vol. 02</div><div class="title">The Taste Issue</div><div class="subtitle">交付直覺的餐桌對白</div></div>
+                <div class="card-content"><div class="vol">Vol. 02</div><div class="title">The Taste Issue</div><div class="subtitle">交付直覺的餐桌對話</div></div>
             </a>
             <a href="vol_03.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
@@ -154,7 +159,7 @@
             </a>
             <a href="vol_05.html" class="card">
                 <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/7464266497419567654');"></div>
-                <div class="card-content"><div class="vol">Vol. 05</div><div class="title">The Vision Issue</div><div class="subtitle">預演未來的顯化畫報</div></div>
+                <div class="card-content"><div class="vol">Vol. 05</div><div class="title">The Vision Issue</div><div class="subtitle">預演未來的旅遊畫報</div></div>
             </a>
             <a href="vol_06.html" class="card">
                 <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/3399265737145122748');"></div>
