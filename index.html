@@ -195,7 +195,7 @@
             listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; padding:40px 0;">命運紀錄待啟動</div>' :
                 [...masterJournal].reverse().map((log, i, arr) => `
                     <div class="journal-card">
-                        <div class="j-index">#${arr.length - i}</div>
+                        <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
                         <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase;">${log.date} / ${log.combo}</div>
                         <span class="j-district">${log.name}</span>
                         <div class="j-row"><strong>THE HUNTING</strong> ${log.m_action}</div>
