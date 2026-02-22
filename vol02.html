@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>VOL.02 The Intuitive Table — NOMADIC</title>
+    <title>VOL.02 味蕾對話 — NOMADIC</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --red: #b83b3b; --white: #ffffff; --grey: #888888; --dark-grey: #151515; }
+        :root { --black: #0a0a0a; --red: #b83b3b; --white: #ffffff; --grey: #666666; --dark-grey: #151010; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; }
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        .container { max-width: 600px; margin: 0 auto; padding: calc(40px + env(safe-area-inset-top)) 25px 80px; box-sizing: border-box; }
+        .container { max-width: 600px; margin: 0 auto; padding: calc(50px + env(safe-area-inset-top)) 25px 100px; box-sizing: border-box; }
 
         .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; transition: color 0.3s; }
+        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.65rem; letter-spacing: 0.2em; transition: color 0.3s; }
         .nav-back:hover { color: var(--red); }
 
-        .stamp-area { position: relative; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
-        .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--red); font-size: 0.5rem; letter-spacing: 0.1em; padding: 10px; opacity: 0.3; transform: rotate(15deg); transition: all 0.8s ease; }
-        .stamped .digital-stamp { opacity: 1; transform: rotate(-10deg) scale(1.1); border: 2px solid var(--red); box-shadow: 0 0 20px rgba(184, 59, 59, 0.2); }
+        .stamp-area { position: relative; margin-bottom: 50px; text-align: center; }
+        .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--red); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-align: center; color: var(--red); font-size: 0.55rem; letter-spacing: 0.1em; line-height: 1.5; opacity: 0.2; transform: rotate(15deg); transition: all 1s cubic-bezier(0.23, 1, 0.32, 1); }
+        .stamped .digital-stamp { opacity: 1; transform: rotate(-8deg) scale(1.1); border-width: 2px; background: rgba(184, 59, 59, 0.05); box-shadow: 0 0 20px rgba(184, 59, 59, 0.1); }
 
-        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; font-weight: 500; margin: 25px 0 10px; color: var(--white); text-align: center; }
+        .dest-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3rem; font-weight: 400; margin: 25px 0 10px; color: var(--white); text-align: center; letter-spacing: -0.02em; }
 
-        .mission-card { background: var(--dark-grey); border: 1px solid rgba(255,255,255,0.05); padding: 30px; margin-bottom: 30px; }
-        .mission-label { font-size: 0.6rem; color: var(--red); letter-spacing: 0.4em; margin-bottom: 20px; display: block; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: #eee; min-height: 80px; }
+        .mission-card { background: var(--dark-grey); border: 1px solid rgba(184, 59, 59, 0.1); padding: 40px 30px; margin-bottom: 40px; position: relative; }
+        .mission-label { font-size: 0.6rem; color: var(--red); letter-spacing: 0.5em; margin-bottom: 25px; display: block; text-transform: uppercase; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; line-height: 1.8; color: #eeeeee; min-height: 100px; }
 
-        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 15px 0; margin-bottom: 40px; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #332222; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 20px 0; margin-bottom: 50px; font-size: 1.1rem; outline: none; }
         .journal-input:focus { border-color: var(--red); }
 
-        .btn-log { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; transition: all 0.3s; }
-        .btn-log:hover { background: var(--white); color: var(--black); }
+        .btn-log { background: var(--red); border: none; color: var(--white); padding: 22px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; width: 100%; transition: all 0.3s; }
+        .btn-log:hover { filter: brightness(1.2); letter-spacing: 0.5em; }
 
-        .logged-info { display: none; text-align: center; font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em; line-height: 2; }
-        .logged-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--white); font-style: italic; margin-bottom: 30px; }
+        .logged-view { display: none; text-align: center; animation: fadeIn 1.2s ease forwards; }
+        .logged-note { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; color: var(--red); font-style: italic; margin-bottom: 40px; line-height: 1.8; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -44,149 +46,143 @@
     <div class="container">
         <div class="nav-header">
             <a href="index.html" class="nav-back">← CLOSE ISSUE</a>
-            <div style="font-size: 0.6rem; color: var(--red); letter-spacing: 0.2em;">VOL. 02 / TABLE</div>
+            <div style="font-size: 0.6rem; color: var(--red); letter-spacing: 0.3em;">VOL. 02 / TABLE</div>
         </div>
 
         <div class="stamp-area" id="stamp-container">
-            <div class="digital-stamp" id="stamp-date">NOT TASTED</div>
-            <h1 class="dest-name" id="display-loc">...</h1>
+            <div class="digital-stamp" id="stamp-text">NOT<br>TASTED</div>
+            <h1 class="dest-name" id="display-loc">Seeking...</h1>
         </div>
 
         <div class="mission-card">
-            <span class="mission-label">CULINARY MISSION</span>
-            <div class="mission-text" id="mission-content">Generating challenge...</div>
+            <span class="mission-label">味蕾對話 CHALLENGE</span>
+            <div class="mission-text" id="mission-content">Fetching flavors...</div>
         </div>
 
         <div id="action-area">
             <input type="text" class="journal-input" id="journal-text" placeholder="紀錄這頓飯的味道，或是某段特別的對話...">
-            <button class="btn-log" onclick="saveJourney()">MINT JOURNEY LOG (留下足跡)</button>
+            <button class="btn-log" onclick="saveJourney()">MINT FLAVOR LOG (留下足跡)</button>
         </div>
 
-        <div class="logged-info" id="logged-view">
+        <div class="logged-view" id="logged-view">
             <div class="logged-note" id="saved-journal"></div>
-            <p style="border-top: 1px solid #222; padding-top: 20px;">
-                味覺與記憶已寫入你的探險日誌。<br>請返回總部查看進度。
+            <p style="border-top: 1px solid #332222; padding-top: 30px; font-size: 0.65rem; color: #665555; letter-spacing: 0.2em; line-height: 2;">
+                味覺記憶已鎖定。<br>
+                TASTE LOGGED IN ARCHIVE.
             </p>
         </div>
     </div>
 
     <script>
-const missions = [
-    // === 直覺與味覺冒險 (25種) ===
-    "走進一間沒有 Google 評論或評分低於 3.5 顆星的小吃店，點老闆推薦的菜。",
-    "在菜單上隨機盲點一道你從沒吃過、或看不懂名字的料理。",
-    "不依賴手機搜尋，直接詢問路人他們今天午餐吃什麼，並跟著去吃。",
-    "去當地的傳統市場，買一種你叫不出名字的食材或點心。",
-    "尋找這區最隱密的小巷，去吃第一間出現在你眼前的餐廳。",
-    "在便利商店買三種不同口味的御飯糰，閉上眼盲選一個作為當下的點心。",
-    "點一份當地的招牌菜，但要求老闆「加一份他不常加的配料」。",
-    "尋找一間店名包含你名字其中一個字（或諧音）的餐廳用餐。",
-    "去當地的雜貨店買一罐包裝最過時、看起來最有年代感的飲料。",
-    "點餐時，請店員幫你決定這頓飯的主食。",
-    "今天這餐不准使用地圖導航，憑直覺走向聞起來最香的方向。",
-    "找一間有吧台的店，坐在離廚師最近的位置觀看料理過程。",
-    "買一份當地的甜點，並試著分析出裡面包含哪五種原料。",
-    "嘗試一種你平時最討厭的食材，看看當地的做法是否能讓你改觀。",
-    "尋找一間裝潢最奇特（或最簡陋）的店，進去喝一碗湯。",
-    "去當地最老的柑仔店，買一種現在很少見的小零食。",
-    "觀察店內其他客人點最多的菜，直接跟老闆說「我要跟隔壁桌一樣的」。",
-    "買一份熱食，在路邊長椅上趁熱吃完，並觀察路過的行人。",
-    "點餐時，挑戰自己不看價錢，只看菜名直覺決定。",
-    "尋找這區歷史最悠久的冰店或飲料店，點一份最傳統的口味。",
-    "在當地的麵包店買一個「剛出爐」的產品，無論它是什麼。",
-    "挑戰整頓飯只用非慣用手（左撇子用右手，反之）進食。",
-    "去買一份當地的炸物，並要求老闆幫你撒上「最辣」的粉。",
-    "找一間有販賣部的地方（如農會），買一項當地的特產農產品。",
-    "在用餐前，先繞著那間餐廳走一圈，觀察它的後門或外牆故事。",
-
-    // === 情侶深度對話 (30種) ===
-    "用餐時，兩人輪流分享一個關於「食物」的童年崩潰回憶。",
-    "問對方：『如果這是我們最後一餐，你會想在哪裡吃？』",
-    "描述對方像哪一種調味料，並說明為什麼。",
-    "在等餐時，互相說出三個「對方最近讓你感到溫暖」的瞬間。",
-    "分享一個你從未告訴對方的、關於「餓肚子」或「深夜食堂」的故事。",
-    "問對方：『如果這輩子只能再吃一種食物，你會選什麼？』",
-    "輪流模仿對方吃東西時的怪癖，猜對的人可以吃掉對方一口菜。",
-    "討論：『如果我們要開一間餐廳，店名會叫什麼？主打什麼菜？』",
-    "分享一個你曾經因為食物而想起的一個人（不是對方）。",
-    "問對方：『你覺得我吃什麼東西的時候看起來最幸福？』",
-    "討論一個你們未來想要一起去挑戰的「怪異料理」清單。",
-    "在用餐過程中，不准使用手機，眼球只能看著對方或食物。",
-    "問對方：『你覺得我們兩個人的關係，比較像哪一道料理？』",
-    "分享你最想學會的一道菜，原因是想做給誰吃？",
-    "問對方：『如果我有機會當大廚，你覺得我會是什麼風格？』",
-    "討論：『如果錢不是問題，你最想帶我去哪間餐廳慶生？』",
-    "分享一個你在旅行中吃過最難忘、但卻最平價的食物。",
-    "互相猜測對方今天「最想加的一種調味料」是什麼。",
-    "討論：『如果你變成一種水果，你覺得自己會是什麼？』",
-    "分享一個你小時候最討厭、但長大卻變得很愛的食物。",
-    "問對方：『你覺得我身上有沒有哪種食物的氣味？』",
-    "討論：『如果我們要為對方研發一瓶香水，味道會是什麼食材？』",
-    "分享一個你因為「吃」而受過的傷或糗事。",
-    "問對方：『你覺得我們第一次一起吃飯的氣氛如何？』",
-    "在餐桌上互相約定一個「下次要在這區嘗試」的店。",
-    "分享一個關於你父母煮的菜的記憶。",
-    "問對方：『如果你是美食評論家，你會給今天的餐點幾顆星？』",
-    "討論：『如果我們可以邀請一位死去的名人共進晚餐，會是誰？』",
-    "互相分享一個關於「酒」或「醉後」的荒謬故事。",
-    "在結帳前，看著對方的眼睛，真誠地說一聲「謝謝你陪我吃飯」。",
-
-    // === 搞怪與任務型 (25種) ===
-    "在等餐時，用衛生紙摺一個動物送給對方或老闆。",
-    "挑戰整頓飯不用牙齒碰觸到餐具（完全用嘴唇與舌頭）。",
-    "幫你的餐點取一個超長且浮誇的皇室頭銜，並大聲唸出來。",
-    "在不被發現的情況下，用餐具輕敲出一首兒歌的旋律。",
-    "觀察隔壁桌的客人，在心裡幫他們編造一個背景故事。",
-    "用食物（如豆芽、配菜）在盤子上拼出一個對方的名字縮寫。",
-    "挑戰在喝飲料時，完全不發出任何聲音（包括放下杯子）。",
-    "跟店員要一份報紙或廣告單，從中剪下一個字貼在杯子上。",
-    "點一份小吃，並試著用「法式餐廳」的優雅語氣來描述它。",
-    "在吃第一口菜之前，對著食物做一個祈禱或敬禮動作。",
-    "假裝自己是外國評論員，用奇怪的腔調講述這份食物的口感。",
-    "挑戰一口氣說出十個這區的小吃，中間不能換氣。",
-    "在餐廳門口跟菜單看板合照，並擺出「我是老闆」的姿勢。",
-    "找出一種你從沒看過的飲料包裝顏色，並買下它。",
-    "將你的筷子架在杯子邊緣，挑戰維持平衡 10 秒鐘。",
-    "用紙巾寫下一句鼓勵的話，偷偷留在桌角給下一個客人（或店員）。",
-    "挑戰用最慢的速度吃完一顆貢丸（或等值食物），需時 2 分鐘。",
-    "在吃飯前，拍下一張食物的「遺照」，並跟它說再見。",
-    "觀察店內的時鐘，每當分針動一格，就必須喝一口水。",
-    "點餐後，跟對方玩「數字猜拳」，輸的人要負責去拿餐具/醬料。",
-    "挑戰整頓飯不准說出「好吃」或「讚」這兩個詞。",
-    "在結帳時，對著老闆露出一個你最自信的微笑。",
-    "挑戰用英文（或方言）向店員表達感謝。",
-    "找出一種這裡獨有的醬料（如台中辣椒醬），並拍下它的商標。",
-    "幫今天吃的這間餐廳編一個「都市傳說」。",
-
-    // === 視覺與環境 (20種) ===
-    "拍下一張食物蒸氣散發的瞬間（煙霧感）。",
-    "尋找餐廳裡最舊的一件物品，並拍下它的細節。",
-    "拍一張餐桌上「杯盤狼藉」的樣子，呈現一種豐盛感。",
-    "捕捉光線灑在飲料杯上的折射光影。",
-    "紀錄餐廳內部的招牌文字，找出最有美感的字型。",
-    "拍攝一張你與食物的「對峙」照（大眼瞪小眼）。",
-    "尋找店內最有特色的餐具（如印有老花紋的盤子）。",
-    "拍下這頓飯中「顏色最鮮艷」的部分。",
-    "在用餐結束後，將餐具擺放得極其整齊並拍照紀錄。",
-    "拍下一張這間店「最有人情味」的角落。",
-    "捕捉一張對方正在大口咬下食物的醜照（或萌照）。",
-    "拍攝一張醬料瓶在桌上排隊的照片。",
-    "找尋店內的一個老舊標語，並將其與你的餐點拍在一起。",
-    "拍下結帳後的發票或收據，作為當地的「存在證明」。",
-    "尋找店門口隨意擺放的植物，拍出它的生命力。",
-    "捕捉隔壁桌空位的光影，表現出一種安靜的氛圍。",
-    "拍下一張這餐飯中「你最不喜歡」的那口菜（紀錄真實）。",
-    "紀錄這間店的門牌號碼，並與招牌合影。",
-    "捕捉一張你握住水杯的手，背景是當地的街景。",
-    "最後，拍一張這間餐廳遠景的照片，紀念這次的相遇。"
-];
+        const missions = [
+            "走進一間沒有 Google 評論的小吃店，點老闆推薦的菜。",
+            "在菜單上隨機盲點一道你從沒吃過的名字料理。",
+            "不依賴手機搜尋，直接詢問路人他們今天午餐吃什麼並跟著去吃。",
+            "去當地的傳統市場，買一種你叫不出名字的點心。",
+            "用餐時，兩人輪流分享一個關於「食物」的童年崩潰回憶。",
+            "問對方：如果這是我們最後一餐，你會想在哪裡吃？",
+            "描述對方像哪一種調味料，並說明為什麼。",
+            "在等餐時，互相說出三個「對方最近讓你感到溫暖」的瞬間。",
+            "分享一個你從未告訴對方的關於「餓肚子」的故事。",
+            "點一份當地的招牌菜，但要求老闆加一份他不常加的配料。",
+            "尋找一間店名包含你名字其中一個字（或諧音）的餐廳用餐。",
+            "去當地的雜貨店買一罐包裝最過時、看起來最有年代感的飲料。",
+            "問對方：你覺得我吃什麼東西的時候看起來最幸福？",
+            "討論：如果我們要開一間餐廳，店名會叫什麼？主打什麼菜？",
+            "這餐不准使用導航，憑直覺走向聞起來最香的方向。",
+            "觀察店內其他客人點最多的菜，直接跟老闆說「我要跟隔壁桌一樣」。",
+            "買一份熱食，在路邊長椅上趁熱吃完，並觀察路過的行人。",
+            "問對方：你覺得我們兩個人的關係，比較像哪一道料理？",
+            "分享一個你小時候最討厭、但長大卻變得很愛的食物。",
+            "挑戰整頓飯只用非慣用手（左撇子用右手，反之）進食。",
+            "找出一種這裡獨有的醬料，並拍下它的商標。",
+            "挑戰整頓飯不准說出「好吃」或「讚」這兩個詞。",
+            "在餐桌上互相約定一個「下次要在這區嘗試」的店。",
+            "分享一個關於你父母煮的菜的記憶。",
+            "點一份小吃，並試著用「法式餐廳」的優雅語氣描述它。",
+            "在吃飯前，拍下一張食物的「遺照」，並跟它說再見。",
+            "問對方：如果你變成一種水果，你覺得自己會是什麼？",
+            "這頓飯不准使用手機，眼球只能看著對方或食物。",
+            "去買一份當地的炸物，並要求老闆幫你撒上「最辣」的粉。",
+            "找一間有販賣部的地方，買一項當地的特產農產品。",
+            "這頓飯兩人各出一半的錢，買一個當地的點心分著吃。",
+            "挑戰一口氣說出十個這區的小吃，中間不能換氣。",
+            "在結帳時，對著老闆露出一個你最自信的微笑。",
+            "幫今天吃的這間餐廳編一個「都市傳說」。",
+            "紀錄這餐飯中「你最不喜歡」的那口菜（紀錄真實）。",
+            "問對方：你覺得我身上有沒有哪種食物的氣味？",
+            "討論：如果我們要為對方研發一瓶香水，味道會是什麼食材？",
+            "找一間有吧台的店，坐在離廚師最近的位置觀看料理過程。",
+            "買一份當地的甜點，並試著分析出裡面包含哪五種原料。",
+            "嘗試一種你平時最討厭的食材，看看當地的做法是否讓你改觀。",
+            "點餐時，請店員幫你決定這頓飯的主食。",
+            "尋找一間裝潢最簡陋的店，進去喝一碗湯。",
+            "去買一份當地的招牌，並在路邊跟它合照。",
+            "挑戰在喝飲料時，完全不發出任何聲音。",
+            "用紙巾寫下一句鼓勵的話，偷偷留在桌角給下一個客人。",
+            "觀察店內的時鐘，每當分針動一格，就必須喝一口水。",
+            "點餐後，跟對方玩「數字猜拳」，輸的人負責去拿餐具。",
+            "找出一種你從沒看過的飲料包裝顏色並買下它。",
+            "問對方：如果你是美食評論家，你會給今天的餐點幾顆星？",
+            "討論：如果我們可以邀請一位死去的名人共進晚餐，會是誰？",
+            "去當地最老的冰店，點一份最傳統的口味。",
+            "挑戰整頓飯不用牙齒碰觸到餐具。",
+            "幫你的餐點取一個超長且浮誇的皇室頭銜並唸出來。",
+            "分享一個你因為「吃」而受過的傷或糗事。",
+            "在不被發現的情況下，用餐具輕敲出一首兒歌的旋律。",
+            "觀察隔壁桌客人，在心裡幫他們編造一個背景故事。",
+            "用食物在盤子上拼出一個對方的名字縮寫。",
+            "問對方：你覺得我們第一次一起吃飯的氣氛如何？",
+            "挑戰用最慢的速度吃完一顆貢丸，需時 2 分鐘。",
+            "問對方：如果你退休了想開什麼樣的餐車？",
+            "分享一個你在旅行中吃過最難忘、但卻最平價的食物。",
+            "互相猜測對方今天「最想加的一種調味料」是什麼。",
+            "在結帳前，對著對方的眼睛說聲「謝謝你陪我吃飯」。",
+            "買一份當地的特產，在車上（或回程）兩人一人一口吃完。",
+            "找一間店名有「老字號」或「第一家」的店用餐。",
+            "這頓飯挑戰點三樣「你完全不知道是什麼」的小菜。",
+            "問對方：你覺得哪一種食物最能代表「家」的味道？",
+            "討論：如果你可以在這區長住，你最想天天吃哪一攤？",
+            "找出這區「最辣」或「最甜」的食物挑戰它。",
+            "觀察店家的菜單，找出一個錯字或特別的取名並拍照。",
+            "挑戰全程用方言跟店員點餐（如果可以）。",
+            "去買一份當地的傳統糕餅，並詢問老闆它的由來。",
+            "問對方：你覺得我吃飽跟餓肚子的時候情緒差多少？",
+            "分享一個你曾經因為食物而想起的一個人。",
+            "挑戰在路邊吃完一份食物，完全不弄髒雙手。",
+            "找一間有販售「古早味紅茶」的地方買一杯喝。",
+            "在用餐結束後，將餐具擺放得極其整齊並拍照。",
+            "捕捉一張對方正在大口咬下食物的瞬間。",
+            "尋找店內最有特色的餐具（如老花紋盤子）。",
+            "問對方：如果你是一道菜，你覺得自己是主食還是甜點？",
+            "討論：你覺得哪一種味道最能代表「初戀」？",
+            "挑戰在 5 分鐘內找出這區最強的隱藏版甜點。",
+            "去買一罐當地的手工醬油或抹醬帶回家。",
+            "拍下一張這間店「最有人情味」的角落。",
+            "挑戰這頓飯不加任何額外醬料（吃原味）。",
+            "問對方：你最希望我學會煮哪一道菜給你吃？",
+            "討論：如果這區要辦美食節，你覺得冠軍會是誰？",
+            "找一間有賣「當季限定」料理的店用餐。",
+            "觀察店門口的風景，形容這間店的「性格」。",
+            "挑戰在吃完飯後，兩人一起散步 10 分鐘消化。",
+            "問對方：你覺得我的吻嚐起來像哪種甜點？",
+            "分享一個關於你在國外吃過最驚悚的食物故事。",
+            "挑戰整頓飯只討論「未來」而不討論「過去」。",
+            "找出這區的一個地標，並在旁邊吃完一樣小東西。",
+            "去當地的廟口尋找第一攤吸引你目光的食物。",
+            "挑戰不看評論，只看店門口的生意狀況決定進哪間店。",
+            "問對方：如果我們可以為今天的這餐寫一首歌，歌名會是什麼？",
+            "紀錄這區的一個門牌，並與你的餐後空盤合影。",
+            "在離開前，買一份食物送給在路邊辛苦工作的陌生人。",
+            "最後，對著這間餐廳的招牌揮手告別。"
+        ];
 
         const urlParams = new URLSearchParams(window.location.search);
-        const locationName = urlParams.get('loc') || "未知的餐桌";
+        const locationName = urlParams.get('loc') || "未知座標";
         document.getElementById('display-loc').innerText = locationName;
         
         let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
-        const existingRecord = masterJournal.find(v => v.name === locationName);
+        const existingRecord = masterJournal.find(v => v.name === locationName && v.issue === "VOL.02");
 
         if (existingRecord) {
             renderLoggedState(existingRecord);
@@ -196,7 +192,7 @@ const missions = [
         }
 
         function saveJourney() {
-            const note = document.getElementById('journal-text').value || "味道被留在舌尖，無需多言。";
+            const note = document.getElementById('journal-text').value || "味蕾的對話，是我們最誠實的時刻。";
             const mission = document.getElementById('mission-content').innerText;
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
@@ -206,7 +202,7 @@ const missions = [
                 date: dateStr,
                 note: note,
                 mission: mission,
-                issue: "VOL.02" // 標記為 VOL.02
+                issue: "VOL.02"
             };
 
             masterJournal.push(newRecord);
@@ -216,9 +212,8 @@ const missions = [
 
         function renderLoggedState(record) {
             document.getElementById('stamp-container').classList.add('stamped');
-            document.getElementById('stamp-date').innerHTML = `TASTED<br>${record.date}`;
+            document.getElementById('stamp-text').innerHTML = `TASTED<br>${record.date}`;
             document.getElementById('mission-content').innerText = record.mission;
-            
             document.getElementById('action-area').style.display = 'none';
             document.getElementById('logged-view').style.display = 'block';
             document.getElementById('saved-journal').innerText = `“ ${record.note} ”`;
