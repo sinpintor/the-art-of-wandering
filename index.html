@@ -6,34 +6,129 @@
     <title>NOMADIC — The Archives</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
-        /* ... 此處沿用上一版的 CSS 樣式 ... */
         :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
+
+        /* 隱藏捲軸但保持滑動 */
         ::-webkit-scrollbar { display: none; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Montserrat', 'Noto Serif TC', sans-serif; background-color: var(--black); color: var(--white); scroll-behavior: smooth; }
-        .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
-        .preface-section { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; text-align: center; position: relative; background-image: url('http://googleusercontent.com/image_collection/image_retrieval/1030824389340101924_0'); background-size: cover; background-position: center; }
-        .preface-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); z-index: 1; }
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
+            background-color: var(--black); color: var(--white);
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        /* 底片質感噪點層 */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 9999;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
+        }
+
+        /* --- 第一頁：PREFACE 故事扉頁 --- */
+        .preface-section {
+            height: 100vh; width: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 40px;
+            box-sizing: border-box; text-align: center; position: relative;
+            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/1030824389340101924_0');
+            background-size: cover; background-position: center;
+        }
+
+        /* 電影感深色遮罩 */
+        .preface-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
         .preface-content { max-width: 600px; z-index: 2; animation: fadeIn 3s ease; }
-        .preface-content h1 { font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.7em; text-transform: uppercase; color: var(--grey); margin-bottom: 50px; font-weight: 300; }
-        .preface-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 2.3; color: #eee; font-weight: 200; letter-spacing: 0.05em; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .enter-archives-btn { margin-top: 60px; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; background: transparent; border: none; color: var(--white); cursor: pointer; border-bottom: 1px solid var(--white); padding-bottom: 8px; transition: 0.5s; text-decoration: none; display: inline-block; }
+        .preface-content h1 {
+            font-family: 'Playfair Display', serif; font-size: 0.75rem;
+            letter-spacing: 0.7em; text-transform: uppercase; color: var(--grey);
+            margin-bottom: 50px; font-weight: 300;
+        }
+        .preface-text {
+            font-family: 'Noto Serif TC', serif; font-size: 0.95rem;
+            line-height: 2.3; color: #eee; font-weight: 200; letter-spacing: 0.05em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .enter-btn {
+            margin-top: 60px; font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+            background: transparent; border: none; color: var(--white);
+            cursor: pointer; border-bottom: 1px solid var(--white);
+            padding-bottom: 8px; transition: 0.5s; text-decoration: none;
+            display: inline-block;
+        }
+        .enter-btn:hover { color: var(--grey); border-color: var(--grey); transform: translateY(-3px); }
+
+        /* --- 第二頁：THE ARCHIVES 藝廊書櫃 --- */
         .archives-section { min-height: 100vh; width: 100%; background-color: var(--black); position: relative; z-index: 5; }
-        .header { text-align: center; padding: 100px 20px 50px 20px; letter-spacing: 0.5em; font-size: 0.65rem; text-transform: uppercase; font-weight: 200; color: var(--grey); }
-        .header strong { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--white); display: block; margin-bottom: 12px; font-weight: 400; letter-spacing: 0.1em; font-style: italic; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 25px 150px 25px; max-width: 900px; margin: 0 auto; }
-        .card { position: relative; aspect-ratio: 3 / 4.2; overflow: hidden; text-decoration: none; color: var(--white); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; box-sizing: border-box; }
-        .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1), filter 1s ease; z-index: 1; filter: brightness(0.5) grayscale(20%); }
+
+        .header {
+            text-align: center; padding: 100px 20px 50px 20px;
+            letter-spacing: 0.5em; font-size: 0.65rem; text-transform: uppercase;
+            font-weight: 200; color: var(--grey);
+        }
+        .header strong {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            color: var(--white); display: block; margin-bottom: 12px;
+            font-weight: 400; letter-spacing: 0.1em; font-style: italic;
+        }
+
+        /* 3x2 藝廊網格 */
+        .gallery {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 25px; padding: 0 25px 150px 25px;
+            max-width: 900px; margin: 0 auto;
+        }
+
+        .card {
+            position: relative; aspect-ratio: 3 / 4.2; overflow: hidden;
+            text-decoration: none; color: var(--white);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 25px; box-sizing: border-box;
+        }
+        .card-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1), filter 1s ease;
+            z-index: 1; filter: brightness(0.5) grayscale(20%);
+        }
         .card:hover .card-bg { transform: scale(1.08); filter: brightness(0.7) grayscale(0%); }
-        .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); z-index: 2; }
+        .card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 65%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); z-index: 2;
+        }
         .card-content { position: relative; z-index: 3; text-align: center; transition: transform 0.6s ease; }
+        .card:hover .card-content { transform: translateY(-8px); }
+
         .vol { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; margin-bottom: 10px; }
         .title { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; font-weight: 300; }
         .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; font-weight: 200; letter-spacing: 0.15em; }
-        .footer-marquee { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100; }
-        .marquee-inner { display: inline-block; white-space: nowrap; animation: move 50s linear infinite; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--grey); text-transform: uppercase; }
+
+        /* 底部跑馬燈 */
+        .footer-marquee {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
+            padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
+        }
+        .marquee-inner {
+            display: inline-block; white-space: nowrap;
+            animation: move 50s linear infinite; font-size: 0.6rem;
+            letter-spacing: 0.4em; color: var(--grey); text-transform: uppercase;
+        }
+
+        /* 動畫效果 */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @media (max-width: 650px) { .gallery { grid-template-columns: 1fr; gap: 30px; } .card { max-width: 320px; margin: 0 auto; } .header strong { font-size: 1.8rem; } .preface-text { font-size: 0.9rem; padding: 0 10px; line-height: 2.1; } }
+
+        @media (max-width: 650px) {
+            .gallery { grid-template-columns: 1fr; gap: 30px; }
+            .card { max-width: 320px; margin: 0 auto; }
+            .header strong { font-size: 1.8rem; }
+            .preface-text { font-size: 0.9rem; padding: 0 10px; line-height: 2.1; }
+        }
     </style>
 </head>
 <body>
@@ -48,7 +143,7 @@
                 NOMADIC，是我們對生活的溫柔反擊。在 WADE 與 CLOUDY 的宇宙裡，家不是一個固定的座標，而是兩個人、一輛車，以及導航之外的無限可能。<br><br>
                 我們遊牧於光影之間，在驚喜中校準頻率，在未知裡顯化未來。這份檔案，記錄了所有駛離日常的瞬間。
             </p>
-            <a href="#archives" class="enter-archives-btn">Open The Archives</a>
+            <a href="#archives" class="enter-btn">Open The Archives</a>
         </div>
     </section>
 
@@ -59,12 +154,65 @@
         </div>
 
         <div class="gallery">
-            </div>
+            <a href="vol_01.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 01</div>
+                    <div class="title">The Travel Issue</div>
+                    <div class="subtitle">駛向未知的副駕視角</div>
+                </div>
+            </a>
+
+            <a href="vol_02.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 02</div>
+                    <div class="title">The Taste Issue</div>
+                    <div class="subtitle">交付直覺的餐桌對白</div>
+                </div>
+            </a>
+
+            <a href="vol_03.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 03</div>
+                    <div class="title">The Void Issue</div>
+                    <div class="subtitle">遠離喧囂的靜謐留白</div>
+                </div>
+            </a>
+
+            <a href="vol_04.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 04</div>
+                    <div class="title">The Sound Issue</div>
+                    <div class="subtitle">共振靈魂的頻率紀錄</div>
+                </div>
+            </a>
+
+            <a href="vol_05.html" class="card">
+                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/15095997544125871261_0');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 05</div>
+                    <div class="title">The Vision Issue</div>
+                    <div class="subtitle">預演未來的顯化畫報</div>
+                </div>
+            </a>
+
+            <a href="vol_06.html" class="card">
+                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2948395688518118017_0');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 06</div>
+                    <div class="title">The Night Issue</div>
+                    <div class="subtitle">沉溺光影的午夜逃亡</div>
+                </div>
+            </a>
+        </div>
     </section>
 
     <div class="footer-marquee">
         <div class="marquee-inner">
-            NOMADIC : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ NOMADIC : THE ART OF US ✦
+            NOMADIC : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ NOMADIC : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦
         </div>
     </div>
 
