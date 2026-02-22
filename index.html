@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>NOMADIC — The Compass</title>
+    <title>NOMADIC — The Compass 368</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
         :root { 
             --black: #0a0a0a; --white: #ffffff; --grey: #888888;
-            --vol1: #d4b483; --vol2: #b83b3b; --vol3: #2d5a4c; 
-            --vol4: #1a2a3a; --vol5: #8b5a2b; --vol6: #e0e0e0;
+            --vol1: #d4b483; /* 金: 攝影 */
+            --vol2: #b83b3b; /* 紅: 飲食 */
+            --vol3: #2d5a4c; /* 綠: 電影 */
+            --vol4: #1a2a3a; /* 藍: 聲音 */
+            --vol5: #8b5a2b; /* 棕: 考古 */
+            --vol6: #e0e0e0; /* 銀: 靈魂 */
         }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         
@@ -21,58 +25,51 @@
         .header h2 { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); margin-bottom: 15px; text-transform: uppercase; }
         .header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.8rem; font-weight: 700; margin: 0; color: var(--vol1); letter-spacing: 0.05em; }
         .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
-        #regions-count { color: var(--vol1); }
+        #regions-count { color: var(--vol1); font-weight: 600; }
 
         .compass-section { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 60px; }
-        #destination-result { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; font-weight: 500; letter-spacing: 0.05em; color: var(--white); height: 3.5rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); width: 100%; }
+        #destination-result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; letter-spacing: 0.05em; color: var(--white); height: 4rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; }
 
-        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; width: 100%; max-width: 250px; }
-        .btn-main:hover { border-color: var(--vol1); background: rgba(212, 180, 131, 0.05); }
+        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; width: 100%; max-width: 250px;}
+        .btn-main:hover { border-color: var(--vol1); background: rgba(212,180,131,0.05); }
 
-        .magazine-rack { display: none; flex-direction: column; gap: 20px; width: 100%; max-width: 450px; animation: fadeInUp 1s ease forwards; margin-top: 20px; }
-        .rack-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--grey); margin-bottom: 10px; }
-        
-        /* 雜誌卡片通用樣式 */
-        .issue-card { display: block; text-decoration: none; color: var(--white); padding: 25px; border-left: 3px solid var(--grey); background: rgba(255,255,255,0.02); transition: all 0.4s ease; text-align: left; }
+        .magazine-rack { display: none; flex-direction: column; gap: 20px; width: 100%; max-width: 450px; animation: fadeInUp 0.8s ease forwards; margin-top: 20px; }
+        .rack-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--grey); margin-bottom: 10px; letter-spacing: 0.1em; }
+
+        /* 雜誌卡片 */
+        .issue-card { display: block; text-decoration: none; color: var(--white); padding: 25px; border-left: 3px solid var(--grey); background: rgba(255,255,255,0.02); transition: all 0.4s; text-align: left; position: relative; overflow: hidden; }
         .issue-card:hover { transform: translateX(10px); background: rgba(255,255,255,0.05); }
         .issue-number { font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; font-weight: 600; }
         .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; margin-bottom: 5px; }
-        .issue-desc { font-size: 0.75rem; color: #777; line-height: 1.5; }
+        .issue-desc { font-size: 0.75rem; color: #777; line-height: 1.5; font-family: 'Noto Serif TC', serif; }
 
-        /* 每一期的色標 */
-        #link-vol01 { border-color: var(--vol1); }
-        #link-vol02 { border-color: var(--vol2); }
-        #link-vol03 { border-color: var(--vol3); }
-        #link-vol04 { border-color: var(--vol4); }
-        #link-vol05 { border-color: var(--vol5); }
-        #link-vol06 { border-color: var(--vol6); }
+        /* 每一期的特定色 */
+        #link-vol01 { border-color: var(--vol1); } #link-vol01 .issue-number { color: var(--vol1); }
+        #link-vol02 { border-color: var(--vol2); } #link-vol02 .issue-number { color: var(--vol2); }
+        #link-vol03 { border-color: var(--vol3); } #link-vol03 .issue-number { color: var(--vol3); }
+        #link-vol04 { border-color: var(--vol4); } #link-vol04 .issue-number { color: var(--vol4); }
+        #link-vol05 { border-color: var(--vol5); } #link-vol05 .issue-number { color: var(--vol5); }
+        #link-vol06 { border-color: var(--vol6); } #link-vol06 .issue-number { color: var(--vol6); }
 
-        /* Archive Section */
-        .archive-section { width: 100%; max-width: 450px; margin-top: 80px; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; }
+        /* Archive */
+        .archive-section { width: 100%; max-width: 450px; margin-top: 100px; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; }
         .archive-title { font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--grey); margin-bottom: 30px; display: flex; justify-content: space-between; }
-        .journal-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
-        
-        .journal-item { padding: 25px; background: rgba(255,255,255,0.01); border-left: 2px solid var(--grey); }
-        .log-vol01 { border-color: var(--vol1); }
-        .log-vol02 { border-color: var(--vol2); }
-        .log-vol03 { border-color: var(--vol3); }
-        .log-vol04 { border-color: var(--vol4); }
-        .log-vol05 { border-color: var(--vol5); }
-        .log-vol06 { border-color: var(--vol6); }
-
-        .j-meta { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--grey); margin-bottom: 12px; }
+        .journal-item { padding: 25px; background: rgba(255,255,255,0.01); border-left: 2px solid var(--grey); margin-bottom: 20px; }
+        .log-vol01 { border-color: var(--vol1); } .log-vol02 { border-color: var(--vol2); }
+        .log-vol03 { border-color: var(--vol3); } .log-vol04 { border-color: var(--vol4); }
+        .log-vol05 { border-color: var(--vol5); } .log-vol06 { border-color: var(--vol6); }
+        .j-meta { font-size: 0.55rem; color: var(--grey); margin-bottom: 10px; letter-spacing: 0.1em; }
         .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; margin-bottom: 10px; }
-        .j-note { font-size: 0.9rem; color: #bbb; line-height: 1.7; font-style: italic; margin-bottom: 15px; }
-        .j-mission { font-size: 0.6rem; color: #555; padding-top: 10px; border-top: 1px solid #222; }
+        .j-note { font-size: 0.9rem; color: #bbb; line-height: 1.7; font-style: italic; }
 
         .btn-clear { background: transparent; border: 1px dashed #333; color: #444; padding: 15px; font-size: 0.6rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; margin-top: 60px; }
-        .btn-clear:hover { color: var(--vol2); border-color: var(--vol2); }
-
+        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="noise"></div>
+    <div class="bg-text">Compass</div>
     <div class="main-container">
         <div class="header">
             <h2>ROAD MOVIE PROJECT</h2>
@@ -81,7 +78,7 @@
         </div>
 
         <div class="compass-section">
-            <div id="destination-result">Seeking...</div>
+            <div id="destination-result">Where to?</div>
             <button class="btn-main" id="draw-btn" onclick="drawDestination()">Draw Destination</button>
         </div>
 
@@ -112,25 +109,37 @@
                 <div class="issue-desc">聽覺採集：錄下土地的頻率，與那些不敢大聲說的秘密。</div>
             </a>
 
-            </div>
+            <a href="vol05.html" class="issue-card" id="link-vol05">
+                <div class="issue-number">VOL. 05 / THE OBJECT</div>
+                <div class="issue-title">The Object Archive</div>
+                <div class="issue-desc">觸覺考古：觸摸時間的質地，尋找被遺忘的城市物件。</div>
+            </a>
+
+            <a href="vol06.html" class="issue-card" id="link-vol06">
+                <div class="issue-number">VOL. 06 / THE SOUL</div>
+                <div class="issue-title">The Eternal Soul</div>
+                <div class="issue-desc">終極漫遊：確認彼此是最終的座標，靈魂的歸屬之地。</div>
+            </a>
+        </div>
 
         <div class="archive-section">
             <div class="archive-title">
                 <span>FOOTPRINTS ARCHIVE</span>
                 <span id="completion-rate">0%</span>
             </div>
-            <div id="journal-list" class="journal-grid"></div>
+            <div id="journal-list"></div>
             <button class="btn-clear" onclick="clearJournal()">ERASE ALL MEMORIES</button>
         </div>
     </div>
 
     <script>
+        // 台灣完整 368 鄉鎮區清單
         const taiwanData = [
             "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
             "新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區",
             "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區",
-            "新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉",
+            "新竹縣 竹北市","埋竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉",
             "新竹市 東區","新竹市 北區","新竹市 香山區",
             "苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉",
             "台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區",
@@ -146,82 +155,78 @@
             "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
             "台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉",
             "澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉",
-            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣烈嶼鄉","金門縣 烏坵鄉",
+            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉",
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
+        let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let isRolling = false;
 
         window.onload = () => {
-            updateStats();
-            renderJournal();
+            updateUI();
         };
 
-        function updateStats() {
-            const uniquePlaces = new Set(visitedPlaces.map(item => item.name));
-            document.getElementById('regions-count').innerText = uniquePlaces.size;
-            const percent = ((uniquePlaces.size / 368) * 100).toFixed(1);
-            document.getElementById('completion-rate').innerText = `${percent}%`;
-        }
-
-        function renderJournal() {
+        function updateUI() {
+            const unique = new Set(masterJournal.map(j => j.name));
+            document.getElementById('regions-count').innerText = unique.size;
+            document.getElementById('completion-rate').innerText = ((unique.size / 368) * 100).toFixed(1) + "%";
+            
             const listEl = document.getElementById('journal-list');
-            if (visitedPlaces.length === 0) {
-                listEl.innerHTML = '<div style="color:#333; font-size:0.7rem;">無紀錄。開啟旅程。</div>';
-                return;
+            if (masterJournal.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No footprints yet.</div>';
+            } else {
+                listEl.innerHTML = [...masterJournal].reverse().map(log => `
+                    <div class="journal-item log-${log.issue.toLowerCase().replace('.','')}">
+                        <div class="j-meta">${log.date} / ${log.issue}</div>
+                        <div class="j-name">${log.name}</div>
+                        <div class="j-note">“ ${log.note} ”</div>
+                    </div>
+                `).join('');
             }
-            const sortedLogs = [...visitedPlaces].reverse();
-            listEl.innerHTML = sortedLogs.map(log => `
-                <div class="journal-item log-${log.issue.toLowerCase().replace('.','')}">
-                    <div class="j-meta">${log.date} / ${log.issue}</div>
-                    <div class="j-name">${log.name}</div>
-                    <div class="j-note">“ ${log.note} ”</div>
-                    <div class="j-mission">${log.mission}</div>
-                </div>
-            `).join('');
         }
 
         function drawDestination() {
             if (isRolling) return;
-            isRolling = true;
             const btn = document.getElementById('draw-btn');
             const resultEl = document.getElementById('destination-result');
             const rack = document.getElementById('magazine-rack');
-            const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
-            if (pool.length === 0) { resultEl.innerText = "EXPLORED ALL."; return; }
+            // 排除已去過
+            const pool = taiwanData.filter(d => !masterJournal.some(j => j.name === d));
+            if (pool.length === 0) { resultEl.innerText = "All 368 Explored!"; return; }
 
+            isRolling = true;
             btn.disabled = true;
             rack.style.display = "none";
-            
-            let rollInterval = setInterval(() => {
+
+            let i = 0;
+            const timer = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
-            }, 80);
+                i++;
+                if (i > 20) {
+                    clearInterval(timer);
+                    const final = pool[Math.floor(Math.random() * pool.length)];
+                    resultEl.innerText = final;
+                    const encoded = encodeURIComponent(final);
+                    
+                    // 動態生成所有連結
+                    document.querySelectorAll('.issue-card').forEach((card, index) => {
+                        const vol = String(index + 1).padStart(2, '0');
+                        card.href = `vol${vol}.html?loc=${encoded}`;
+                    });
 
-            setTimeout(() => {
-                clearInterval(rollInterval);
-                const finalDest = pool[Math.floor(Math.random() * pool.length)];
-                resultEl.innerText = finalDest;
-                const encoded = encodeURIComponent(finalDest);
-                
-                // 批量更新所有連結
-                document.querySelectorAll('.issue-card').forEach((card, index) => {
-                    const vol = String(index + 1).padStart(2, '0');
-                    card.href = `vol${vol}.html?loc=${encoded}`;
-                });
-
-                rack.style.display = "flex";
-                btn.disabled = false;
-                btn.innerText = "REDRAW";
-                isRolling = false;
-            }, 1200);
+                    rack.style.display = "flex";
+                    btn.disabled = false;
+                    btn.innerText = "REDRAW";
+                    isRolling = false;
+                }
+            }, 60);
         }
 
         function clearJournal() {
-            if (confirm("清空所有回憶？此操作不可逆。")) {
+            if (confirm("Erase all footprints? This cannot be undone.")) {
                 localStorage.removeItem('nomadic_master_journal');
-                window.location.reload();
+                location.reload();
             }
         }
     </script>
