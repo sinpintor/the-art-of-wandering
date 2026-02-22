@@ -4,76 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>NOMADIC — Vol. 01</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --gold: #c5a368; --white: #fdfdfd; --grey: #888888; }
+        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #bbbbbb; }
         
-        /* iPhone 適配：防止橡皮筋回彈效應 */
         body, html { 
             margin: 0; padding: 0; background: var(--black); color: var(--white);
             font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
             height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased;
         }
 
-        /* 噪點層 */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 999;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E');
-        }
-
-        /* 背景與佈局：iPhone 16/13 的螢幕長度設計 */
+        /* 強化背景遮罩 */
         .main-container {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: space-between; align-items: center;
-            padding: calc(60px + env(safe-area-inset-top)) 40px calc(60px + env(safe-area-inset-bottom));
+            padding: calc(70px + env(safe-area-inset-top)) 40px calc(60px + env(safe-area-inset-bottom));
             box-sizing: border-box; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            /* 增加背景黑度，確保文字跳脫 */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
                         url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000') center/cover no-repeat;
             position: relative; z-index: 2;
         }
 
-        /* 標題與紀錄統計 */
-        header h2 { font-family: 'Playfair Display', serif; font-size: 0.7rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; font-weight: 300; }
-        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.3rem; font-weight: 700; margin: 0; letter-spacing: 0.05em; }
-        .footprint-stats {
-            margin-top: 15px; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--grey);
-            text-transform: uppercase;
+        /* 標題區：強化權重與字距 */
+        header h2 { 
+            font-family: 'Playfair Display', serif; font-size: 0.75rem; 
+            letter-spacing: 0.6em; color: var(--gold); margin-bottom: 15px; 
+            font-weight: 400; text-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
-        #regions-count { color: var(--white); font-weight: 400; margin-left: 5px; }
+        header h1 { 
+            font-family: 'Playfair Display', serif; font-style: italic; 
+            font-size: 2.4rem; font-weight: 700; margin: 0; 
+            letter-spacing: 0.03em; text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+        .footprint-stats {
+            margin-top: 20px; font-size: 0.65rem; letter-spacing: 0.3em; 
+            color: var(--grey); text-transform: uppercase;
+        }
+        #regions-count { color: var(--white); font-weight: 600; margin-left: 8px; }
 
-        /* 中間：目的地顯影區 */
+        /* 中間顯示區：極致清晰的地點 */
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
         #result { 
-            font-family: 'Noto Serif TC', serif; font-size: 2.4rem; letter-spacing: 0.15em;
-            margin-bottom: 10px; min-height: 3.5rem; opacity: 1; transition: opacity 0.8s ease;
-            font-weight: 200;
+            font-family: 'Noto Serif TC', serif; font-size: 2.6rem; 
+            letter-spacing: 0.1em; margin-bottom: 15px; min-height: 4rem; 
+            opacity: 1; transition: opacity 0.8s ease;
+            font-weight: 600; /* 加粗 */
+            color: var(--white);
+            text-shadow: 0 0 20px rgba(0,0,0,1); /* 強力陰影，確保在淺色區域也看得到 */
         }
         .mission-text {
-            font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #777;
-            max-width: 280px; margin: 0 auto; line-height: 1.8; opacity: 0; transition: 1s ease;
+            font-family: 'Noto Serif TC', serif; font-size: 0.85rem; 
+            color: #ccc; max-width: 300px; margin: 0 auto; 
+            line-height: 2; opacity: 0; transition: 1s ease;
+            font-weight: 400;
         }
 
-        /* 下方：操作群組 */
+        /* 按鈕區：增加邊框對比 */
         .action-group { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-        
         .btn-main {
-            background: none; border: 1px solid rgba(255,255,255,0.25); color: var(--white);
-            padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
-            cursor: pointer; transition: all 0.4s; border-radius: 0;
-            -webkit-tap-highlight-color: transparent;
+            background: rgba(255,255,255,0.05); 
+            border: 1.5px solid rgba(255,255,255,0.4); 
+            color: var(--white);
+            padding: 22px; font-size: 0.75rem; letter-spacing: 0.4em; 
+            text-transform: uppercase; cursor: pointer; border-radius: 0;
+            -webkit-tap-highlight-color: transparent; font-weight: 400;
         }
-        .btn-main:active { background: var(--white); color: var(--black); border-color: var(--white); }
+        .btn-main:active { background: var(--white); color: var(--black); }
         
-        #checkin-btn {
-            border: none; background: rgba(197, 163, 104, 0.12); color: var(--gold);
-            display: none; /* 抽籤後才出現 */
-            animation: fadeIn 0.8s ease forwards;
+        #check-in-section { display: none; animation: fadeIn 0.8s ease forwards; }
+        .checkin-btn {
+            border: none; background: var(--gold); color: var(--black);
+            font-weight: 600; margin-top: 10px;
         }
 
         .back-link { 
             position: fixed; top: calc(20px + env(safe-area-inset-top)); left: 25px;
-            text-decoration: none; color: #555; font-size: 0.6rem; letter-spacing: 0.3em; z-index: 10;
+            text-decoration: none; color: #999; font-size: 0.65rem; 
+            letter-spacing: 0.3em; z-index: 10; font-weight: 400;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -81,12 +89,11 @@
 </head>
 <body>
 
-    <div class="noise"></div>
-    <a href="index.html" class="back-link">← ARCHIVES</a>
-
     <div class="main-container">
+        <a href="index.html" class="back-link">← ARCHIVES</a>
+
         <header>
-            <h2>VOL. 01</h2>
+            <h2>VOLUME 01</h2>
             <h1>The Travel Issue</h1>
             <div class="footprint-stats">
                 Footprints: <span id="regions-count">0</span> Regions
@@ -100,72 +107,50 @@
 
         <div class="action-group">
             <button class="btn-main" onclick="roll()">Seek Destination</button>
-            <button id="checkin-btn" class="btn-main" onclick="recordPlace()">Mark as Explored</button>
+            <div id="check-in-section">
+                <button class="btn-main checkin-btn" onclick="recordPlace()">Mark as Explored</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // 台灣行政區數據 (範例縮減版，可自行補全完整清單)
-        const taiwanData = [
-            "嘉義市 東區", "嘉義市 西區", "嘉義縣 水上鄉", "嘉義縣 阿里山鄉", 
-            "嘉義縣 梅山鄉", "嘉義縣 大埔鄉", "台南市 安平區", "台南市 中西區",
-            "高雄市 鹽埕區", "高雄市 鼓山區", "屏東縣 恆春鎮"
-        ];
-
-        // 隨機任務
-        const missions = [
-            "尋找當地最老的一棵樹並合影",
-            "在當地雜貨店買一樣沒見過的小零食",
-            "找一個能看見地平線的高處發呆",
-            "為彼此拍一張帶有當地路標的特寫照片",
-            "在當地的市場買一袋當季水果"
-        ];
+        const taiwanData = ["嘉義市 東區", "嘉義市 西區", "嘉義縣 水上鄉", "嘉義縣 阿里山鄉", "嘉義縣 梅山鄉", "嘉義縣 大埔鄉", "台南市 安平區", "台南市 中西區", "高雄市 鹽埕區", "高雄市 鼓山區", "屏東縣 恆春鎮"];
+        const missions = ["尋找當地最老的一棵樹並合影", "在當地雜貨店買一樣沒見過的小零食", "找一個能看見地平線的高處發呆", "為彼此拍一張帶有當地路標的特寫照片"];
 
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_footprints')) || [];
         let currentResult = "";
 
-        // 初始化顯示
         document.getElementById('regions-count').innerText = visitedPlaces.length;
 
         function roll() {
             const resultEl = document.getElementById('result');
             const missionEl = document.getElementById('mission');
-            const checkinBtn = document.getElementById('checkin-btn');
+            const checkInSection = document.getElementById('check-in-section');
 
-            // 排除已去過的地點
             const pool = taiwanData.filter(place => !visitedPlaces.includes(place));
+            if (pool.length === 0) { resultEl.innerText = "Borders Finished."; return; }
 
-            if (pool.length === 0) {
-                resultEl.innerText = "Borders Finished.";
-                return;
-            }
-
-            // 動態效果
             resultEl.style.opacity = 0;
             missionEl.style.opacity = 0;
-            checkinBtn.style.display = "none";
+            checkInSection.style.display = "none";
 
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
                 resultEl.innerText = currentResult;
                 missionEl.innerText = missions[Math.floor(Math.random() * missions.length)];
-                
                 resultEl.style.opacity = 1;
                 missionEl.style.opacity = 1;
-                checkinBtn.style.display = "block";
+                checkInSection.style.display = "block";
             }, 600);
         }
 
         function recordPlace() {
             if (!currentResult || visitedPlaces.includes(currentResult)) return;
-
             visitedPlaces.push(currentResult);
             localStorage.setItem('nomadic_footprints', JSON.stringify(visitedPlaces));
-            
             document.getElementById('regions-count').innerText = visitedPlaces.length;
-            document.getElementById('checkin-btn').style.display = "none";
-            
-            alert(`📍 ${currentResult} 已寫入足跡歷史`);
+            document.getElementById('check-in-section').style.display = "none";
+            alert(`📍 ${currentResult} 已寫入紀錄`);
         }
     </script>
 </body>
