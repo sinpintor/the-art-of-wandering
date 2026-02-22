@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WADE & CLOUDY - The Taste Issue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #888888; --light-grey: #f4f4f4; --vogue-red: #8b0000; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Montserrat', 'Noto Serif TC', sans-serif; background-color: var(--black); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* COVER */
+        #index-page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.4), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; color: var(--white); z-index: 10; transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform 1.2s cubic-bezier(0.65, 0, 0.35, 1); padding: 40px; box-sizing: border-box; }
+        .index-container { max-width: 650px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .index-issue { font-size: 0.7rem; letter-spacing: 0.4em; color: #d1d1d1; text-transform: uppercase; margin-bottom: 3vh; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; width: 100%; text-align: center; }
+        .index-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; margin: 0; letter-spacing: 0.08em; text-align: center; line-height: 1.1; text-transform: uppercase; }
+        .index-subtitle { font-size: 0.85rem; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 15px; margin-bottom: 50px; color: #b0b0b0; text-align: center; }
+        .editor-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 2; text-align: justify; color: #e0e0e0; margin-bottom: 50px; padding: 0 20px; font-weight: 300; }
+        .editor-note strong { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); display: block; margin-bottom: 15px; font-weight: 600; }
+        .enter-btn { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); border: 1px solid var(--white); padding: 18px 45px; cursor: pointer; transition: all 0.5s ease; color: var(--white); }
+        .enter-btn:hover { background: var(--white); color: var(--black); }
+
+        /* GENERATOR */
+        #generator-page { position: absolute; top: 0; left: 0; width: 100%; min-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--white); color: var(--black); z-index: 5; opacity: 0; pointer-events: none; padding: 40px 20px; box-sizing: border-box; transition: opacity 1.2s ease-in-out; }
+        .magazine-layout { width: 100%; max-width: 520px; }
+        .nav-back { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; color: var(--grey); margin-bottom: 30px; display: inline-block; transition: color 0.3s; text-decoration: none; }
+        .nav-back:hover { color: var(--black); }
+        .gen-masthead { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; text-align: center; letter-spacing: 0.1em; margin: 0; text-transform: uppercase; }
+        .control-panel { text-align: center; margin: 30px 0; font-size: 0.85em; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase;}
+        .destination-area { text-align: center; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .result-box { font-family: 'Noto Serif TC', serif; font-size: 2.2em; font-weight: 400; letter-spacing: 0.05em; color: var(--vogue-red); line-height: 1.4; transition: color 0.3s; }
+        .duration-badge { font-size: 0.8em; letter-spacing: 0.15em; color: var(--black); margin-top: 20px; font-weight: 600; display: none; border-top: 1px solid #eaeaea; padding-top: 15px; line-height: 1.6;}
+        .mission-box { font-family: 'Noto Serif TC', serif; font-size: 0.95em; color: #222; padding: 25px 0 15px 0; margin-top: 10px; display: none; text-align: justify; line-height: 1.9; border-top: 1px solid var(--black); font-weight: 300; }
+        .mission-title { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8em; letter-spacing: 0.2em; margin-bottom: 10px; color: var(--black); text-transform: uppercase; }
+        .editorial-details { display: none; flex-direction: column; gap: 15px; background: var(--light-grey); padding: 20px; margin-bottom: 30px; border-left: 3px solid var(--black); }
+        .detail-item { font-size: 0.85em; line-height: 1.6; color: #333; }
+        .detail-item strong { font-family: 'Playfair Display', serif; font-size: 1.1em; font-style: italic; display: block; margin-bottom: 5px; color: var(--black); }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .action-btn { font-family: 'Montserrat', sans-serif; font-size: 0.75em; padding: 18px; cursor: pointer; border: 1px solid var(--black); transition: all 0.4s ease; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; text-decoration: none; width: 100%; box-sizing: border-box; display: block; font-weight: 500;}
+        .draw-btn { background-color: var(--black); color: var(--white); }
+        .draw-btn:hover { background-color: transparent; color: var(--black); }
+        .dispatch-btn { background-color: transparent; color: var(--black); display: none; }
+        .dispatch-btn:hover { background-color: var(--light-grey); }
+        .hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+        .loader { display: none; font-size: 0.8em; letter-spacing: 0.2em; color: var(--vogue-red); text-align: center; margin-top: 10px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div id="index-page">
+        <div class="index-container">
+            <div class="index-issue">Vol. 02 — The Taste Issue</div>
+            <h1 class="index-title">WADE & CLOUDY</h1>
+            <div class="index-subtitle">Surrender Your Craving</div>
+            <div class="editor-note">
+                <strong>Editor's Note —</strong>
+                在無數個「等一下吃什麼」的日常對話裡，我們往往消耗了太多選擇的力氣。真正的奢華，有時是閉上雙眼，將味蕾的決定權交給宇宙。<br><br>
+                這是一場專屬 WADE 與 CLOUDY 的味覺盲測。放下對菜單的控制欲，讓吸引力法則為今晚的餐桌指路；帶上相機，在咀嚼與微醺之間，捕捉彼此最放鬆、沒有防備的模樣。<br><br>
+                拉開椅子，入座吧。今晚的菜單，由直覺買單。
+            </div>
+            <button class="enter-btn" onclick="enterZine()">Turn The Page</button>
+        </div>
+    </div>
+
+    <div id="generator-page">
+        <div class="magazine-layout">
+            <a href="index.html" class="nav-back">← Back to Archives</a>
+            <h2 class="gen-masthead">The Flavor</h2>
+            
+            <div class="control-panel">
+                Manifesting Tonight's Vibe...
+            </div>
+
+            <div class="destination-area">
+                <div class="result-box" id="result">Waiting for Cravings</div>
+                <div class="duration-badge" id="duration-badge"></div>
+            </div>
+
+            <div class="mission-box" id="mission-box"></div>
+
+            <div class="editorial-details" id="editorial-details">
+                <div class="detail-item" id="oracle-card"></div>
+                <div class="detail-item" id="lens-vibe"></div>
+            </div>
+
+            <div class="btn-group">
+                <button class="action-btn draw-btn" onclick="startRolling()">Reveal The Taste</button>
+                <button class="action-btn dispatch-btn" id="dispatch-btn" onclick="dispatchJourney()">Dispatch to LINE & Vault</button>
+                <div class="loader" id="loader">Manifesting and synchronizing...</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function enterZine() {
+        document.getElementById('index-page').classList.add('hidden');
+        setTimeout(() => { document.getElementById('generator-page').style.opacity = '1'; document.getElementById('generator-page').style.pointerEvents = 'auto'; }, 1000);
+    }
+
+    const flavorProfiles = [
+        "Smoky Soul Food<br>帶有煙燻與炭火香氣的靈魂食物",
+        "Midnight Comfort<br>藏在巷弄裡的深夜碳水安慰",
+        "Elegant Bites<br>需要花時間慢慢咀嚼的精緻感",
+        "Street Chaos<br>會讓雙手沾滿醬汁的街頭小吃",
+        "Spicy Awakening<br>喚醒感官的辛香與熱氣",
+        "Ocean's Whisper<br>帶有海風鹹味的純粹鮮甜"
+    ];
+
+    const blindOrders = [
+        "Rule / 閉上眼，隨機點菜單上的第二項與第五項。",
+        "Rule / 點一道你們從來沒吃過，甚至唸不出名字的料理。",
+        "Rule / 讓老闆或服務生為你們決定今晚的主食。",
+        "Rule / 今晚不點主餐，只用前菜、小點與甜點填滿胃口。",
+        "Rule / 尋找菜單上最奇怪的組合，並勇敢地給它一次機會。"
+    ];
+
+    const encounters = [
+        "在等待餐點的空檔，放下手機。安靜地觀察對方的眼睛，直到第一道菜上桌。",
+        "點一杯你們平時絕對不會點的飲品或酒水，然後互相交換喝一口。",
+        "為彼此紀錄下品嚐第一口食物時，最真實、沒有防備的表情。",
+        "這頓飯的最後十分鐘，我們只談論夢想、顯化與未來，不談論日常瑣事。"
+    ];
+
+    const oracleCards = [
+        { name: "The Bouquet (花束)", text: "美好的事物正在發酵。這頓餐點將為你們帶來意想不到的愉悅與視覺饗宴。" },
+        { name: "The Fish (魚)", text: "豐盛與流動。今晚的選擇將完美填補你們身體與靈魂的渴望，享受富足感吧。" },
+        { name: "The Sun (太陽)", text: "充滿活力的能量。這份味覺體驗將為你們一掃近日的疲憊，帶來靈魂的溫暖。" },
+        { name: "The Letter (信件)", text: "留意餐桌上的細節或店家的佈置，宇宙正透過某句標語或菜單上的文字給你們提示。" }
+    ];
+
+    const photoVibes = [
+        "利用餐廳的低光源，開啟 Dazz Cam 的濾鏡，捕捉餐具與玻璃杯邊緣的曖昧反光。",
+        "不要拍食物的全貌。試著用特寫鏡頭，記錄下 WADE 拿起酒杯或刀叉時的手部線條。",
+        "尋找店內最有趣的光影角落，拍一張帶有王家衛電影氛圍的失焦人像。",
+        "開啟閃光燈，用最直接、生猛的底片視角，拍下盤子裡食物被消滅一半的真實模樣。"
+    ];
+
+    let currentJourney = {}; 
+
+    function startRolling() {
+        const destBox = document.getElementById('result');
+        const badge = document.getElementById('duration-badge');
+        const missionBox = document.getElementById('mission-box');
+        const editorialDetails = document.getElementById('editorial-details');
+        const dispatchBtn = document.getElementById('dispatch-btn');
+        const btn = document.querySelector('.draw-btn');
+
+        badge.style.display = "none"; missionBox.style.display = "none"; 
+        editorialDetails.style.display = "none"; dispatchBtn.style.display = "none";
+        btn.disabled = true; destBox.style.color = "#ccc";
+
+        let counter = 0;
+        
+        let rollInterval = setInterval(() => {
+            const randomFlavor = flavorProfiles[Math.floor(Math.random() * flavorProfiles.length)];
+            destBox.innerHTML = randomFlavor.split("<br>")[0];
+            counter++;
+
+            if (counter > 20) {
+                clearInterval(rollInterval);
+                finishDraw();
+            }
+        }, 65);
+    }
+
+    function finishDraw() {
+        const finalFlavor = flavorProfiles[Math.floor(Math.random() * flavorProfiles.length)];
+        const finalRule = blindOrders[Math.floor(Math.random() * blindOrders.length)];
+        const mission = encounters[Math.floor(Math.random() * encounters.length)];
+        const card = oracleCards[Math.floor(Math.random() * oracleCards.length)];
+        const vibe = photoVibes[Math.floor(Math.random() * photoVibes.length)];
+
+        document.getElementById('result').style.color = "var(--vogue-red)"; 
+        document.getElementById('result').innerHTML = finalFlavor; 
+        
+        document.getElementById('duration-badge').style.display = "block";
+        document.getElementById('duration-badge').innerHTML = `<strong>The Blind Order / 點餐規則：</strong><br>${finalRule}`;
+
+        document.getElementById('mission-box').innerHTML = `<div class="mission-title">Table Mission</div>${mission}`;
+        document.getElementById('mission-box').style.display = "block";
+
+        document.getElementById('oracle-card').innerHTML = `<strong>The Oracle Draw / 宇宙顯化牌卡：${card.name}</strong>${card.text}`;
+        document.getElementById('lens-vibe').innerHTML = `<strong>The Lens Vibe / 編輯台光影提示：</strong>${vibe}`;
+        document.getElementById('editorial-details').style.display = "flex";
+
+        document.getElementById('dispatch-btn').style.display = "block";
+        document.querySelector('.draw-btn').disabled = false;
+        document.querySelector('.draw-btn').innerText = "Re-Roll Cravings";
+
+        currentJourney = {
+            date: new Date().toLocaleDateString('zh-TW'),
+            flavor: finalFlavor.replace("<br>", " - "),
+            rule: finalRule,
+            mission: mission,
+            cardName: card.name,
+            vibe: vibe
+        };
+    }
+
+    function dispatchJourney() {
+        const btn = document.getElementById('dispatch-btn');
+        const loader = document.getElementById('loader');
+        const WEBHOOK_URL = "YOUR_GAS_WEBHOOK_URL_HERE"; 
+        
+        btn.style.display = "none";
+        loader.style.display = "block";
+
+        if(WEBHOOK_URL === "YOUR_GAS_WEBHOOK_URL_HERE") {
+            setTimeout(() => {
+                loader.innerText = "✓ Dispatched to LINE & Saved to Vault.";
+                loader.style.color = "#8b0000";
+            }, 1500);
+            return;
+        }
+
+        fetch(WEBHOOK_URL, { method: "POST", body: JSON.stringify(currentJourney) })
+        .then(response => response.json())
+        .then(data => { loader.innerText = "✓ Dispatched to LINE & Saved to Vault."; loader.style.color = "#8b0000"; })
+        .catch(error => { loader.innerText = "✕ Sync failed. But the taste remains."; });
+    }
+</script>
+
+</body>
+</html>
