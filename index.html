@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>NOMADIC 368 — THE FINAL ORACLE</title>
+    <title>NOMADIC 368 — THERMAL STYLE</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
         :root { --black: #0a0a0a; --white: #ffffff; --grey: #888888; --active-color: #d4b483; }
-        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; scroll-behavior: smooth; }
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
         .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 20vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; text-transform: uppercase; transition: 1.5s ease; white-space: nowrap; }
 
@@ -20,12 +20,11 @@
 
         .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 800; margin-bottom: 30px; color: var(--active-color); letter-spacing: 0.15em; }
         
-        /* 季節切換 */
-        .season-selector { display: flex; gap: 15px; margin-bottom: 25px; }
-        .season-btn { background: transparent; border: 1px solid #333; color: var(--grey); padding: 8px 18px; font-size: 0.55rem; letter-spacing: 0.2em; cursor: pointer; }
-        .season-btn.active { border-color: var(--active-color); color: var(--active-color); }
+        /* 氣溫切換器 */
+        .temp-selector { display: flex; gap: 10px; margin-bottom: 25px; }
+        .temp-btn { background: transparent; border: 1px solid #333; color: var(--grey); padding: 10px 15px; font-size: 0.55rem; letter-spacing: 0.1em; cursor: pointer; transition: 0.3s; }
+        .temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(212, 180, 131, 0.05); }
 
-        /* 核心展示 */
         .display-stage { width: 100%; max-width: 500px; padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 30px; }
         .loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.1rem; font-weight: 600; margin-bottom: 20px; white-space: nowrap; overflow: hidden; letter-spacing: 0.05em; }
         .combo-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
@@ -34,16 +33,14 @@
         .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 18px 50px; font-size: 0.65rem; letter-spacing: 0.6em; text-transform: uppercase; cursor: pointer; transition: 0.5s; }
         .btn-vogue:hover { background: var(--white); color: var(--black); }
 
-        /* 任務面板 */
         .mission-panel { display: none; width: 100%; max-width: 440px; text-align: left; margin-top: 50px; }
         .mission-item { margin-bottom: 30px; }
         .m-header { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--grey); display: block; margin-bottom: 10px; border-bottom: 1px solid #1a1a1a; padding-bottom: 5px; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.9; color: #eee; }
 
-        /* 檔案館：地圖燈網 */
-        .map-section { width: 100%; max-width: 380px; margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
-        .light-grid { display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px; padding: 25px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); }
-        .dot { width: 5px; height: 5px; background: #151515; border-radius: 50%; transition: 1s; }
+        /* 檔案館燈網 */
+        .light-grid { display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px; padding: 25px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; }
+        .dot { width: 5px; height: 5px; background: #151515; border-radius: 50%; }
         .dot.active { transform: scale(1.3); box-shadow: 0 0 10px var(--active-color); }
 
         .journal-list { width: 100%; max-width: 440px; text-align: left; }
@@ -60,7 +57,7 @@
 </head>
 <body>
     <div class="noise"></div>
-    <div class="bg-text" id="bg-text">NOMADIC</div>
+    <div class="bg-text" id="bg-text">CLIMATE</div>
 
     <nav>
         <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">Oracle</div>
@@ -68,23 +65,24 @@
     </nav>
 
     <div id="oracle" class="page active">
-        <h1 class="vogue-title">NOMADIC ORACLE</h1>
+        <h1 class="vogue-title">THERMAL ORACLE</h1>
         
-        <div class="season-selector">
-            <button class="season-btn active" id="btn-SS" onclick="setSeason('SS')">S/S Collection</button>
-            <button class="season-btn" id="btn-AW" onclick="setSeason('AW')">A/W Collection</button>
+        <div class="temp-selector">
+            <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">寒冷 15°C↓</button>
+            <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">舒適 15-25°C</button>
+            <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">炎熱 25°C↑</button>
         </div>
 
         <div class="display-stage">
             <div class="loc-display" id="loc-result">尚未入鏡</div>
             <div class="combo-tags" id="combo-display" style="visibility: hidden;">
-                <span class="tag-pill" id="tag-1">CARD_1</span>
-                <span class="tag-pill" id="tag-2">CARD_2</span>
-                <span class="tag-pill" id="tag-season" style="color:var(--white); border-color:var(--white);">SEASON</span>
+                <span class="tag-pill" id="tag-1">CARD 1</span>
+                <span class="tag-pill" id="tag-2">CARD 2</span>
+                <span class="tag-pill" id="tag-temp" style="color:var(--white); border-color:var(--white);">TEMP</span>
             </div>
         </div>
         
-        <button class="btn-vogue" id="draw-btn" onclick="drawFate()">啟動聯覺抽籤</button>
+        <button class="btn-vogue" onclick="drawFate()">啟動聯覺抽籤</button>
 
         <div id="mission-panel" class="mission-panel">
             <div class="mission-item">
@@ -99,25 +97,21 @@
                 <span class="m-header">THE OUTFIT 穿搭挑戰</span>
                 <div class="m-content" id="m-style" style="color:var(--active-color);">...</div>
             </div>
-            <button class="btn-vogue" style="width:100%; background:var(--active-color); color:black; border:none; margin-top:10px;" onclick="manualSave()">封存此瞬間並點亮地圖</button>
+            <button class="btn-vogue" style="width:100%; background:var(--active-color); color:black; border:none;" onclick="manualSave()">封存並點亮地圖</button>
         </div>
     </div>
 
     <div id="archive" class="page">
         <h1 class="vogue-title">COLLECTION</h1>
-        <div class="map-section">
-            <div style="font-size:0.5rem; letter-spacing:0.5em; color:var(--grey); margin-bottom:15px;">368 COORDINATES PROGRESS: <span id="regions-count">0</span></div>
-            <div class="light-grid" id="light-grid"></div>
-        </div>
+        <div class="light-grid" id="light-grid"></div>
         <div class="journal-list" id="journal-list"></div>
-        <button onclick="clearData()" style="background:transparent; border:none; color:#222; font-size:0.5rem; letter-spacing:0.3em; margin-top:100px; text-decoration:underline; cursor:pointer;">ERASE ALL MEMORIES</button>
     </div>
 
     <script>
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
         const subjects = {
-            1: { n: "騎士", loc: "舊車站或轉運站", color: "#4a90e2" },
+            1: { n: "騎士", loc: "舊火車站或交通樞紐", color: "#4a90e2" },
             2: { n: "幸運草", loc: "隱密公園或草坡", color: "#6fcf97" },
             3: { n: "船", loc: "漁港碼頭或大橋", color: "#2d9cdb" },
             4: { n: "房子", loc: "古厝或傳統老街", color: "#8b5a2b" },
@@ -156,24 +150,25 @@
         };
 
         const traits = {
-            1: "流動的", 2: "驚喜的", 3: "渴望的", 4: "厚實的", 5: "生長的", 6: "迷幻的", 7: "曲折的", 8: "終結的", 9: "盛放的", 10: "銳利的", 11: "重複的", 12: "喧鬧的", 13: "原始的", 14: "專業的", 15: "強大的", 16: "閃耀的", 17: "新穎的", 18: "溫暖的", 19: "崇高的", 20: "大眾的", 21: "阻礙的", 22: "抉擇的", 23: "細碎的", 24: "情感的", 25: "永恆的", 26: "未知的", 27: "私密的", 28: "結構的", 29: "直覺的", 30: "純粹的", 31: "燦爛的", 32: "詩意的", 33: "解答的", 34: "奢華的", 35: "恆定的", 36: "宿命的"
+            1: "流動的", 2: "驚喜的", 3: "渴望的", 4: "厚實的", 5: "生長的", 6: "迷幻的", 7: "曲折的", 8: "終結的", 9: "盛放的", 10: "銳利的", 11: "重複的", 12: "喧鬧的", 13: "原始的", 14: "專業的", 15: "強大的", 16: "閃耀的", 17: "新穎的", 18: "溫暖的", 19: "崇高的", 20: "大眾的", 21: "阻礙的", 22: "抉擇的", 23: "細碎的", 24: "情感的", 25: "永恆的", 26: "未知的", 27: "私密的", 28: "結構的", 29: "直覺的", 30: "純粹的", 31: "燦爛的", 32: "詩意的", 33: "解答的", 34: "豐饒的", 35: "恆定的", 36: "宿命的"
         };
 
-        const outfits = {
-            "SS": ["亞麻西裝套裝", "絲緞細肩帶長裙", "極簡白色廓形襯衫", "印花絲質連身裙", "俐落短版背心搭配西裝短褲"],
-            "AW": ["經典羊毛長版大衣", "高領羊絨衫與皮裙", "挺括燈芯絨套裝", "深色絲絨禮服", "復古格紋羊毛外套"]
+        const outfitsByTemp = {
+            "COLD": ["經典羊毛長版大衣配羊絨圍巾", "層次感豐富的高領衫與皮革長裙", "挺括燈芯絨套裝配短靴", "結構感針織斗篷與窄管褲", "羊羔毛一體式外套與直筒長褲"],
+            "MILD": ["西裝套裝配復古墨鏡", "輕薄風衣外套搭配針織衫", "成套丹寧裝扮配珍珠飾品", "法式波卡圓點洋裝配髮帶", "廓形襯衫搭配高腰西裝褲"],
+            "HOT": ["絲緞細肩帶長裙", "露背式涼感綢緞禮服", "亞麻無袖連身褲配金屬頸鍊", "鏤空編織罩衫配棉質寬褲", "不對稱剪裁白色棉質洋裝"]
         };
 
-        let currentSeason = 'SS';
-        let masterJournal = JSON.parse(localStorage.getItem('nomadic_final_v2026')) || [];
+        let currentTemp = 'MILD';
+        let masterJournal = JSON.parse(localStorage.getItem('nomadic_thermal_v1')) || [];
         let currentRecord = null;
 
         window.onload = () => { initLights(); renderArchive(); };
 
-        function setSeason(s) {
-            currentSeason = s;
-            document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`btn-${s}`).classList.add('active');
+        function setTemp(t) {
+            currentTemp = t;
+            document.querySelectorAll('.temp-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${t}`).classList.add('active');
         }
 
         function showPage(pId) {
@@ -198,24 +193,22 @@
         function renderArchive() {
             const saved = masterJournal.map(j => ({ idx: taiwanData.indexOf(j.name), color: j.color }));
             document.getElementById('regions-count').innerText = new Set(saved.map(s => s.idx)).size;
-            
-            document.querySelectorAll('.dot').forEach(d => { d.classList.remove('active'); d.style.background = '#151515'; d.style.boxShadow = 'none'; });
+            document.querySelectorAll('.dot').forEach(d => { d.classList.remove('active'); d.style.background = '#151515'; });
 
             saved.forEach(item => {
                 const dot = document.getElementById(`map-dot-${item.idx}`);
                 if(dot) {
                     dot.classList.add('active');
                     dot.style.background = item.color;
-                    dot.style.boxShadow = `0 0 8px ${item.color}`;
                     dot.style.setProperty('--active-color', item.color);
                 }
             });
 
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; text-align:center; padding:40px 0;">命運尚未啟動</div>' :
+            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; text-align:center; padding:40px 0;">AWAITING EXPLORATION</div>' :
                 [...masterJournal].reverse().map(log => `
                     <div class="journal-item">
-                        <div class="j-meta">${log.date} / ${log.season} / ${log.combo}</div>
+                        <div class="j-meta">${log.date} / ${log.tempLabel} / ${log.combo}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-color-line" style="--active-color:${log.color}"></div>
                         <div class="j-row"><strong>HUNTING</strong> ${log.m_action}</div>
@@ -243,20 +236,20 @@
                     let id2 = Math.floor(Math.random() * 36) + 1;
                     while(id1 === id2) id2 = Math.floor(Math.random() * 36) + 1;
                     
-                    const stylePool = outfits[currentSeason];
-                    const finalStyle = stylePool[Math.floor(Math.random() * stylePool.length)];
+                    const pool = outfitsByTemp[currentTemp];
+                    const finalStyle = pool[Math.floor(Math.random() * pool.length)];
                     const s = subjects[id1];
                     const trait = traits[id2];
 
                     locEl.innerText = finalLoc;
                     document.getElementById('tag-1').innerText = s.n;
                     document.getElementById('tag-2').innerText = subjects[id2].n;
-                    document.getElementById('tag-season').innerText = currentSeason;
+                    document.getElementById('tag-temp').innerText = document.getElementById(`btn-${currentTemp}`).innerText.split(' ')[0];
                     comboEl.style.visibility = 'visible';
                     
-                    const m_a = `前往這區的${s.loc}，獵捕一個具備「${trait}」特徵的定格。`;
-                    const m_f = `尋找這區體現${id1 > 18 ? '層次感' : '本味'}的老店，品嚐一份驚喜料理。`;
-                    const m_s = `請換上妳最自信的「${finalStyle}」，完成 VOGUE 定格影像。`;
+                    const m_a = `前往${s.loc}，獵捕一個具備「${trait}」特徵的定格畫面。`;
+                    const m_f = `尋找體現${id1 > 18 ? '層次感' : '本味'}的店舖，獵捕一份在地驚喜。`;
+                    const m_s = `請換上妳最自信的「${finalStyle}」，完成定格影像。`;
 
                     document.getElementById('m-action').innerText = m_a;
                     document.getElementById('m-food').innerText = m_f;
@@ -269,7 +262,8 @@
                     panel.style.display = 'block';
                     currentRecord = { 
                         name: finalLoc, combo: `${s.n}＋${subjects[id2].n}`, 
-                        m_action: m_a, m_food: m_f, m_style: m_s, color: s.color, season: currentSeason
+                        m_action: m_a, m_food: m_f, m_style: m_s, color: s.color, 
+                        tempLabel: currentTemp 
                     };
                 }
             }, 60);
@@ -278,12 +272,12 @@
         function manualSave() {
             if (!currentRecord) return;
             masterJournal.push({ ...currentRecord, date: new Date().toLocaleDateString() });
-            localStorage.setItem('nomadic_final_v2026', JSON.stringify(masterJournal));
-            alert("此瞬間已封存。");
+            localStorage.setItem('nomadic_thermal_v1', JSON.stringify(masterJournal));
+            alert("此瞬間已封存並點亮地圖。");
             renderArchive();
         }
 
-        function clearData() { if(confirm("確定刪除所有？")) { localStorage.removeItem('nomadic_final_v2026'); location.reload(); } }
+        function clearData() { if(confirm("ERASE ALL?")) { localStorage.removeItem('nomadic_thermal_v1'); location.reload(); } }
     </script>
 </body>
 </html>
