@@ -6,12 +6,12 @@
     <title>NOMADIC — The Compass</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; }
+        :root { --black: #0a0a0a; --gold: #d4b483; --red: #b83b3b; --white: #ffffff; --grey: #888888; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        .main-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: calc(40px + env(safe-area-inset-top)) 30px 60px; box-sizing: border-box; text-align: center; }
+        .main-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: calc(60px + env(safe-area-inset-top)) 30px 80px; box-sizing: border-box; text-align: center; }
 
         .header { margin-bottom: 40px; }
         .header h2 { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); margin-bottom: 15px; text-transform: uppercase; }
@@ -31,14 +31,38 @@
 
         .rack-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.1em; }
         .issue-card { display: block; text-decoration: none; color: var(--white); position: relative; padding: 30px 25px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); transition: all 0.4s ease; text-align: left; overflow: hidden; }
-        .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(212, 180, 131, 0.05), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
-        .issue-card:hover { border-color: var(--gold); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+        .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: translateX(-100%); transition: transform 0.6s ease; }
+        .issue-card#link-vol01::before { background: linear-gradient(45deg, transparent, rgba(212, 180, 131, 0.08), transparent); }
+        .issue-card#link-vol02::before { background: linear-gradient(45deg, transparent, rgba(184, 59, 59, 0.08), transparent); }
+        
+        .issue-card:hover { transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+        .issue-card#link-vol01:hover { border-color: var(--gold); }
+        .issue-card#link-vol02:hover { border-color: var(--red); }
         .issue-card:hover::before { transform: translateX(100%); }
-        .issue-number { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .issue-number { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .vol01-color { color: var(--gold); }
+        .vol02-color { color: var(--red); }
         .issue-number::after { content: 'SELECT →'; font-size: 0.5rem; color: var(--grey); transition: color 0.3s; }
-        .issue-card:hover .issue-number::after { color: var(--gold); }
+        
         .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-bottom: 8px; letter-spacing: 0.05em; }
         .issue-desc { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; line-height: 1.6; font-weight: 300; }
+
+        /* Archive Section */
+        .archive-section { width: 100%; max-width: 400px; margin-top: 80px; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; }
+        .archive-title { font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--grey); margin-bottom: 30px; display: flex; justify-content: space-between; }
+        .journal-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .journal-item { background: rgba(255,255,255,0.02); padding: 20px; position: relative; border-left: 2px solid var(--grey); }
+        .journal-item.vol01-log { border-left-color: var(--gold); }
+        .journal-item.vol02-log { border-left-color: var(--red); }
+        .j-meta { font-size: 0.55rem; letter-spacing: 0.2em; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .vol01-log .j-meta { color: var(--gold); }
+        .vol02-log .j-meta { color: var(--red); }
+        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin-bottom: 8px; color: var(--white); }
+        .j-note { font-size: 0.85rem; color: #aaa; line-height: 1.6; font-style: italic; }
+        .j-mission { font-size: 0.55rem; color: #555; margin-top: 15px; letter-spacing: 0.1em; border-top: 1px solid #222; padding-top: 10px;}
+        .empty-state { color: #444; font-size: 0.7rem; letter-spacing: 0.1em; text-align: center; padding: 40px 0; }
+        
         .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; }
     </style>
 </head>
@@ -61,16 +85,27 @@
 
         <div class="magazine-rack" id="magazine-rack">
             <div class="rack-title">Choose your issue for this journey.</div>
+            
             <a href="vol01.html" class="issue-card" id="link-vol01">
-                <div class="issue-number">VOL. 01</div>
+                <div class="issue-number vol01-color">VOL. 01</div>
                 <div class="issue-title">The Travel Issue</div>
                 <div class="issue-desc">啟程與風景：交給未知座標，捕捉光影與浪漫攝影大冒險。</div>
             </a>
+            
             <a href="vol02.html" class="issue-card" id="link-vol02">
-                <div class="issue-number">VOL. 02</div>
+                <div class="issue-number vol02-color">VOL. 02</div>
                 <div class="issue-title">The Intuitive Table</div>
                 <div class="issue-desc">食慾與對話：把味蕾交給命運，用食物串起靈魂的深度拷問。</div>
             </a>
+        </div>
+
+        <div class="archive-section">
+            <div class="archive-title">
+                <span>COLLECTED FOOTPRINTS</span>
+                <span id="completion-rate">0%</span>
+            </div>
+            <div id="journal-list" class="journal-grid">
+                </div>
         </div>
     </div>
 
@@ -100,15 +135,46 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // 讀取全域旅行日記
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let isRolling = false;
 
         window.onload = () => {
-            // 計算去過的「不重複鄉鎮」數量
             const uniquePlaces = new Set(visitedPlaces.map(item => item.name));
             document.getElementById('regions-count').innerText = uniquePlaces.size;
+            
+            const percent = ((uniquePlaces.size / 368) * 100).toFixed(1);
+            document.getElementById('completion-rate').innerText = `${percent}%`;
+
+            renderJournal();
         };
+
+        function renderJournal() {
+            const listEl = document.getElementById('journal-list');
+            if (visitedPlaces.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">尚無探索紀錄。抽籤並完成任務，留下你的第一枚足跡。</div>';
+                return;
+            }
+
+            const sortedLogs = [...visitedPlaces].reverse(); // 最新紀錄排前面
+
+            listEl.innerHTML = sortedLogs.map(log => {
+                const isVol01 = log.issue === "VOL.01";
+                const logClass = isVol01 ? "vol01-log" : "vol02-log";
+                const issueTag = isVol01 ? "VOL.01 — TRAVEL" : "VOL.02 — TABLE";
+                
+                return `
+                <div class="journal-item ${logClass}">
+                    <div class="j-meta">
+                        <span>${log.date} / ${issueTag}</span>
+                        <span style="color:#555">STAMPED</span>
+                    </div>
+                    <div class="j-name">${log.name}</div>
+                    <div class="j-note">“ ${log.note} ”</div>
+                    <div class="j-mission">MISSION: ${log.mission}</div>
+                </div>
+                `;
+            }).join('');
+        }
 
         function drawDestination() {
             if (isRolling) return;
@@ -118,7 +184,7 @@
             const resultEl = document.getElementById('destination-result');
             const rack = document.getElementById('magazine-rack');
             
-            // 排除已經去過的地方
+            // 排除已經完成存檔的地方
             const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
             if (pool.length === 0) { 
@@ -132,24 +198,22 @@
             rack.style.display = "none"; 
             resultEl.style.color = "#888"; 
             
-            // 快速洗牌動畫 (1.5秒)
             let rollInterval = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
             }, 80);
 
             setTimeout(() => {
                 clearInterval(rollInterval);
-                resultEl.style.color = "var(--gold)";
+                resultEl.style.color = "var(--white)";
                 
                 const finalDest = pool[Math.floor(Math.random() * pool.length)];
                 resultEl.innerText = finalDest;
                 
-                // 將抽出的地點存入 URL 參數，傳遞給 Vol.01 和 Vol.02
+                // 產生 URL 參數
                 const encodedDest = encodeURIComponent(finalDest);
                 document.getElementById('link-vol01').href = `vol01.html?loc=${encodedDest}`;
                 document.getElementById('link-vol02').href = `vol02.html?loc=${encodedDest}`;
                 
-                // 顯示第二階段書架
                 rack.style.display = "flex";
                 
                 btn.innerText = "REDRAW (重抽)";
