@@ -20,32 +20,44 @@
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E');
         }
 
-        /* --- 第一頁：PREFACE (視覺交錯) --- */
+        /* --- 第一頁：PREFACE (兩人署名排版) --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 0 40px;
             box-sizing: border-box; position: relative;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), 
                         url('http://googleusercontent.com/image_collection/image_retrieval/1030824389340101924_0') center/cover no-repeat;
         }
         .preface-content { max-width: 100%; z-index: 2; animation: fadeIn 2.5s ease; }
         
-        /* 英文致中 */
+        /* 英文標題致中 */
         .preface-content h1 {
             font-family: 'Playfair Display', serif; font-size: 0.75rem;
             letter-spacing: 0.7em; text-transform: uppercase; color: var(--gold);
             margin-bottom: 60px; font-weight: 400; text-align: center;
         }
 
-        /* 中文金句齊左 + 導引線 */
-        .preface-text {
-            font-family: 'Noto Serif TC', serif; font-size: 1.05rem;
-            line-height: 2.2; color: #eee; font-weight: 300; letter-spacing: 0.05em;
-            text-align: left; max-width: 240px; margin: 0 auto;
+        /* 金句容器 */
+        .quote-container {
+            max-width: 260px; margin: 0 auto;
             border-left: 1px solid var(--gold); padding-left: 20px;
+            text-align: left;
         }
 
-        /* 英文按鈕致中 */
+        /* 兩人署名：作為金句的導引 */
+        .signature {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem; letter-spacing: 0.5em;
+            color: var(--gold); text-transform: uppercase;
+            margin-bottom: 25px; display: block; font-weight: 400;
+        }
+
+        /* 中文金句 */
+        .preface-text {
+            font-family: 'Noto Serif TC', serif; font-size: 1.05rem;
+            line-height: 2.3; color: #eee; font-weight: 300; letter-spacing: 0.05em;
+        }
+
         .btn-container { text-align: center; margin-top: 70px; }
         .enter-btn {
             font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
@@ -55,12 +67,12 @@
             padding-bottom: 6px; transition: 0.5s; text-decoration: none;
         }
 
-        /* --- 第二頁：ARCHIVES --- */
+        /* --- 第二頁：ARCHIVES 藝廊 --- */
         .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 150px; }
         .header { text-align: center; padding: 100px 20px 45px 20px; letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase; color: var(--grey); }
         .header strong { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); display: block; margin-bottom: 10px; font-weight: 400; font-style: italic; }
 
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px; max-width: 100%; margin: 0 auto; }
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px; }
         .card { position: relative; aspect-ratio: 3 / 4.5; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px 10px; box-sizing: border-box; }
         .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1); filter: brightness(0.6) grayscale(15%); z-index: 1; }
         .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); z-index: 2; }
@@ -86,12 +98,15 @@
     <section class="preface-section">
         <div class="preface-content">
             <h1>Preface — NOMADIC</h1> 
-            <p class="preface-text"> 
-                最遠的公路，<br>
-                終點永遠是彼此的側臉。<br><br>
-                我們不趕路，<br>
-                我們只是在風景裡顯影。
-            </p>
+            <div class="quote-container">
+                <span class="signature">WADE & CLOUDY</span>
+                <p class="preface-text"> 
+                    最遠的公路，<br>
+                    終點永遠是彼此的側臉。<br><br>
+                    我們不趕路，<br>
+                    我們只是在風景裡顯影。
+                </p>
+            </div>
             <div class="btn-container">
                 <a href="#archives" class="enter-btn">Open The Archives</a>
             </div>
