@@ -13,43 +13,38 @@
 
         .container { max-width: 600px; margin: 0 auto; padding: calc(40px + env(safe-area-inset-top)) 25px 80px; box-sizing: border-box; }
 
-        /* Header */
         .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; }
+        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; transition: color 0.3s; }
+        .nav-back:hover { color: var(--gold); }
 
-        /* Stamp Design */
         .stamp-area { position: relative; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
         .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--gold); font-size: 0.5rem; letter-spacing: 0.1em; padding: 10px; opacity: 0.3; transform: rotate(-15deg); transition: all 0.8s ease; }
         .stamped .digital-stamp { opacity: 1; transform: rotate(10deg) scale(1.1); border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(212, 180, 131, 0.2); }
 
-        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; font-weight: 500; margin: 20px 0; color: var(--white); text-align: center; }
+        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; font-weight: 500; margin: 25px 0 10px; color: var(--white); text-align: center; }
 
-        /* Random Missions */
         .mission-card { background: var(--dark-grey); border: 1px solid rgba(255,255,255,0.05); padding: 30px; margin-bottom: 30px; }
         .mission-label { font-size: 0.6rem; color: var(--gold); letter-spacing: 0.4em; margin-bottom: 20px; display: block; }
         .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: #eee; min-height: 80px; }
 
-        /* Journal Input */
         .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 15px 0; margin-bottom: 40px; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
         .journal-input:focus { border-color: var(--gold); }
 
-        /* Action Button */
         .btn-log { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; transition: all 0.3s; }
         .btn-log:hover { background: var(--white); color: var(--black); }
-        .btn-log.disabled { display: none; }
 
-        /* Logged View */
         .logged-info { display: none; text-align: center; font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em; line-height: 2; }
+        .logged-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--white); font-style: italic; margin-bottom: 30px; }
     </style>
 </head>
 <body>
 
     <div class="noise"></div>
 
-    <div class="container" id="main-content">
+    <div class="container">
         <div class="nav-header">
             <a href="index.html" class="nav-back">← CLOSE ISSUE</a>
-            <div style="font-size: 0.6rem; color: var(--gold);">VOL. 01 / TRAVEL</div>
+            <div style="font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em;">VOL. 01 / TRAVEL</div>
         </div>
 
         <div class="stamp-area" id="stamp-container">
@@ -59,7 +54,7 @@
 
         <div class="mission-card">
             <span class="mission-label">RANDOM MISSION</span>
-            <div class="mission-text" id="mission-content">Generatig challenge...</div>
+            <div class="mission-text" id="mission-content">Generating challenge...</div>
         </div>
 
         <div id="action-area">
@@ -68,10 +63,9 @@
         </div>
 
         <div class="logged-info" id="logged-view">
-            <p id="saved-journal"></p>
-            <p style="margin-top: 30px; border-top: 1px solid #222; padding-top: 20px;">
-                此足跡已永久寫入你的探險日誌。<br>
-                探索度已更新。
+            <div class="logged-note" id="saved-journal"></div>
+            <p style="border-top: 1px solid #222; padding-top: 20px;">
+                此足跡已永久寫入你的探險日誌。<br>請返回總部查看進度。
             </p>
         </div>
     </div>
@@ -83,32 +77,29 @@
             "在當地便利商店買一瓶沒喝過的飲料，以此為背景拍攝街道。",
             "觀察光影，拍攝一張光亮與黑暗比例為 1:1 的構圖。",
             "紀錄一種屬於這裡的顏色，畫面中只能出現該色系。",
-            "對著反射面（鏡子、櫥窗）拍攝一張包含你自己與街道的合照。"
+            "對著反射面（鏡子、櫥窗）拍攝一張包含你自己與街道的合照。",
+            "尋找一隻當地的動物（貓、狗、鳥），在不打擾的情況下拍下牠的身影。"
         ];
 
         const urlParams = new URLSearchParams(window.location.search);
-        const locationName = urlParams.get('loc') || "未知座標";
-        
-        // 初始化頁面
+        const locationName = urlParams.get('loc') || "未知的幻境";
         document.getElementById('display-loc').innerText = locationName;
         
-        // 檢查是否已去過
         let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         const existingRecord = masterJournal.find(v => v.name === locationName);
 
         if (existingRecord) {
             renderLoggedState(existingRecord);
         } else {
-            // 隨機選一個任務（當次有效）
             const randomMission = missions[Math.floor(Math.random() * missions.length)];
             document.getElementById('mission-content').innerText = randomMission;
         }
 
         function saveJourney() {
-            const note = document.getElementById('journal-text').value || "未留下文字。";
+            const note = document.getElementById('journal-text').value || "無語的瞬間，也是一種紀錄。";
             const mission = document.getElementById('mission-content').innerText;
             const now = new Date();
-            const dateStr = `${now.getFullYear()}.${now.getMonth()+1}.${now.getDate()}`;
+            const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
 
             const newRecord = {
                 name: locationName,
@@ -120,12 +111,10 @@
 
             masterJournal.push(newRecord);
             localStorage.setItem('nomadic_master_journal', JSON.stringify(masterJournal));
-            
             renderLoggedState(newRecord);
         }
 
         function renderLoggedState(record) {
-            // 切換視覺狀態
             document.getElementById('stamp-container').classList.add('stamped');
             document.getElementById('stamp-date').innerHTML = `ARRIVED<br>${record.date}`;
             document.getElementById('mission-content').innerText = record.mission;
