@@ -53,7 +53,7 @@
 
         .archive-section { width: 100%; max-width: 500px; margin-top: 80px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
         .journal-item { margin-bottom: 35px; border-left: 1px solid var(--gold); padding-left: 20px; }
-        .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; }
+        .journal-date { font-size: 0.6rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0; font-weight: 500; }
         .journal-mission { font-size: 0.8rem; color: #aaa; font-weight: 300; line-height: 1.6; }
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
@@ -134,7 +134,6 @@
 
         // ==========================================
         // 題庫區 1：TASKS (浪漫的觀察 / 紀錄細節)
-        // 隨時可以在陣列最後加上逗號，繼續補充你的 500 個 Task！
         // ==========================================
         const tasks = [
             "拍下對方在車窗玻璃上的倒影，背景是移動的風景。",
@@ -171,7 +170,6 @@
 
         // ==========================================
         // 題庫區 2：CHALLENGES (搞怪的互動 / 雙人大冒險)
-        // 隨時可以在陣列最後加上逗號，繼續補充你的 500 個 Challenge！
         // ==========================================
         const challenges = [
             "拍一張兩人在公路旁影子正在接吻的照片。",
@@ -274,7 +272,14 @@
         }
 
         function recordPlace() {
-            const newRecord = { name: currentResult, mission: currentLogEntry, date: new Date().toLocaleDateString('en-GB').replace(/\//g, '.') };
+            // 生成 YYYY.MM.DD 格式的日期
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            const formattedDate = `${yyyy}.${mm}.${dd}`;
+
+            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate };
             visitedPlaces.unshift(newRecord);
             localStorage.setItem('nomadic_full_data', JSON.stringify(visitedPlaces));
             location.reload();
