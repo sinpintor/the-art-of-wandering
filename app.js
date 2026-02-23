@@ -133,6 +133,10 @@ function initLights() {
             stamp.className = 'stamp';
             stamp.id = `map-stamp-${loc.index}`;
             stamp.innerText = loc.district;
+            
+            // 新增：把行政區的字數存入 HTML 標籤，讓 CSS 可以抓取做排版平衡
+            stamp.setAttribute('data-len', loc.district.length); 
+            
             board.appendChild(stamp);
         });
 
@@ -142,7 +146,7 @@ function initLights() {
 }
 
 function renderView() {
-    // 1. 徽章牆狀態重置與點亮
+    // 1. 徽章牆狀態重置
     document.querySelectorAll('.stamp').forEach(s => { 
         s.classList.remove('active'); 
         s.style.background = 'transparent';
@@ -153,23 +157,44 @@ function renderView() {
         s.style.transform = 'scale(1)';
     });
     
+    // 準備計算進度：不重複的地點數量
+    const totalStamps = taiwanData.length; // 總數 368
+    const collectedIndices = new Set();
+    
+    // 點亮徽章並記錄不重複進度
     cloudData.forEach(j => {
         if (!j.name) return; 
         const cleanName = j.name.replace(/\s+/g, '');
         const idx = taiwanData.findIndex(loc => loc.replace(/\s+/g, '') === cleanName);
         
-        const stamp = document.getElementById(`map-stamp-${idx}`);
-        if (stamp) { 
-            stamp.classList.add('active'); 
-            const stampColor = j.color || '#FFD700'; 
-            stamp.style.background = stampColor; 
-            stamp.style.color = '#000'; 
-            stamp.style.fontWeight = '700';
-            stamp.style.borderColor = 'transparent';
-            stamp.style.boxShadow = `0 0 12px ${stampColor}, 0 0 25px ${stampColor}`;
-            stamp.style.transform = 'scale(1.05)';
+        if (idx !== -1) {
+            collectedIndices.add(idx); // 加入已探索的 Set
+            
+            const stamp = document.getElementById(`map-stamp-${idx}`);
+            if (stamp) { 
+                stamp.classList.add('active'); 
+                const stampColor = j.color || '#FFD700'; 
+                stamp.style.background = stampColor; 
+                stamp.style.color = '#000'; 
+                stamp.style.fontWeight = '700';
+                stamp.style.borderColor = 'transparent';
+                stamp.style.boxShadow = `0 0 12px ${stampColor}, 0 0 25px ${stampColor}`;
+                stamp.style.transform = 'scale(1.05)';
+            }
         }
     });
+
+    // 更新進度條 UI
+    const uniqueCount = collectedIndices.size;
+    const percent = totalStamps > 0 ? ((uniqueCount / totalStamps) * 100).toFixed(1) : 0;
+    
+    const fillEl = document.getElementById('progress-bar-fill');
+    const textCountEl = document.getElementById('progress-text-count');
+    const percentEl = document.getElementById('progress-percent');
+    
+    if (fillEl) fillEl.style.width = `${percent}%`;
+    if (textCountEl) textCountEl.innerText = `${uniqueCount} / ${totalStamps}`;
+    if (percentEl) percentEl.innerText = `${percent}%`;
 
     // 2. 渲染獨立的 Timeline 日誌
     const listEl = document.getElementById('journal-list');
