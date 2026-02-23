@@ -78,7 +78,6 @@
             padding: 25px; box-sizing: border-box; z-index: -1; 
         }
         
-        /* 將 baseFrequency 調高至 1.5，創造極細緻的高質感噪點 */
         .poster-noise-layer { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.12"/%3E%3C/svg%3E'); 
@@ -94,9 +93,9 @@
         }
         
         .poster-header { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.25em; color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 15px; text-transform: uppercase; }
+        .poster-vol { font-family: 'Montserrat'; font-weight: 600; color: var(--active-color); }
         .poster-brand { font-weight: 800; color: #fff; letter-spacing: 0.2em; }
         
-        /* 版面一分為二：上方置中，下方置左 */
         .poster-body { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; margin-top: 10px; }
         
         .poster-top-section { display: flex; flex-direction: column; align-items: center; width: 100%; }
@@ -111,12 +110,12 @@
         .poster-mission { width: 100%; text-align: left; }
         .pm-item { margin-bottom: 35px; display: flex; flex-direction: column; }
         
-        /* 還原專屬英文標題，並將色塊寬度統一為 95px 完美包覆 */
+        /* 中文標籤最佳化：字體大小微調、寬度設為 80px */
         .pm-title { 
-            display: inline-block; width: 95px; text-align: center; 
-            font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.15em; 
+            display: inline-block; width: 80px; text-align: center; 
+            font-family: 'Noto Serif TC', sans-serif; font-size: 11px; letter-spacing: 0.1em; 
             color: #000; background: var(--active-color); padding: 4px 0; margin-bottom: 12px; 
-            font-weight: 700; text-transform: uppercase; border-radius: 2px;
+            font-weight: 700; border-radius: 2px;
         }
         .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.7; color: #fafafa; font-weight: 300; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
         
@@ -140,7 +139,7 @@
         <div class="poster-noise-layer"></div>
         <div class="poster-frame">
             <div class="poster-header">
-                <span class="poster-vol">VOL. 19</span>
+                <span class="poster-vol" id="poster-vol">#001</span>
                 <span class="poster-brand">Route19</span>
             </div>
             <div class="poster-body">
@@ -156,15 +155,15 @@
                 
                 <div class="poster-mission">
                     <div class="pm-item">
-                        <span class="pm-title">The Hunting</span>
+                        <span class="pm-title">地點靈感</span>
                         <div class="pm-desc" id="poster-action"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title">The Taste</span>
+                        <span class="pm-title">味蕾提案</span>
                         <div class="pm-desc" id="poster-food"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title">The Styling</span>
+                        <span class="pm-title">穿搭建議</span>
                         <div class="pm-desc" id="poster-style"></div>
                     </div>
                 </div>
@@ -254,9 +253,9 @@
             <div class="about-section">
                 <h2 class="about-title">Changelog</h2>
                 <div class="changelog-item">
-                    <span class="cl-version">v2.1.0</span>
+                    <span class="cl-version">v2.1.5</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">IG 聯覺海報終極進化：導入頂部置中、底部置左的 Editorial 排版。優化底片噪點顆粒至最高精緻度。</span>
+                    <span class="cl-desc">海報標題中文化與動態編號：標籤改為「地點/味蕾/穿搭」並優化等寬比例。左上角實裝動態 #001 藏品序號系統。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v2.0.0</span>
@@ -266,7 +265,7 @@
                 <div class="changelog-item">
                     <span class="cl-version">v1.1.0</span>
                     <span class="cl-date">2026.02</span>
-                    <span class="cl-desc">視覺風格轉向溫和白話文，並實裝 html2canvas 海報一鍵封存機能。</span>
+                    <span class="cl-desc">實裝 html2canvas 海報一鍵封存機能。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v1.0.0</span>
@@ -487,6 +486,17 @@
                 alert("請先抽取今日靈感。");
                 return;
             }
+
+            // 動態計算海報專屬編號 (Auto-Increment ID)
+            const savedData = JSON.parse(localStorage.getItem(storageKey)) || [];
+            // 判斷目前這筆資料是否已經被儲存過了
+            let isSaved = savedData.length > 0 && 
+                          savedData[savedData.length - 1].date === currentRecord.date && 
+                          savedData[savedData.length - 1].combo === currentRecord.combo;
+            
+            // 如果已經存過，顯示原本的長度；如果還沒存，顯示長度+1預先給予序號
+            let displayIndex = isSaved ? savedData.length : savedData.length + 1;
+            document.getElementById('poster-vol').innerText = `#${String(displayIndex).padStart(3, '0')}`;
 
             document.getElementById('poster-card-1').innerText = currentRecord.card1;
             document.getElementById('poster-card-2').innerText = currentRecord.card2;
