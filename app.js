@@ -111,7 +111,7 @@ const outfits = {
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzPZeJ8BZAXOMakvaL64QnlQf5sfrqsA8qsUnbO3DS2mKPPVbhxObKqiL3LBiYXaPoP/exec";
 let cloudData = [];
-let currentChannel = localStorage.getItem('route19_current_channel') || 'Wade&Cloudy';
+let currentChannel = localStorage.getItem('route19_current_channel') || 'FM 19.0 漫遊波段';
 let currentTemp = 'MILD';
 let currentRecord = null;
 
