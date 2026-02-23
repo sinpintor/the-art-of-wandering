@@ -6,47 +6,56 @@
 }
 body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
+/* 背景雜訊增加底片質感 */
 .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.06"/%3E%3C/svg%3E'); }
 
+/* 頂部導覽列 */
 nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 24px; padding: 30px 10px; box-sizing: border-box; z-index: 1000; background: linear-gradient(to bottom, rgba(12,12,12,0.9) 50%, transparent); }
 .nav-link { font-size: 0.55rem; letter-spacing: 0.25em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.4s ease; opacity: 0.5; padding: 6px 0; }
 .nav-link.active { color: var(--white); border-bottom: 1px solid var(--white); opacity: 1; }
 
+/* 頁面通用排版 */
 .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 100px 25px 120px; box-sizing: border-box; }
 .page.active { display: flex; animation: fadeIn 0.8s ease forwards; }
 .content-wrapper { width: 100%; max-width: 420px; display: flex; flex-direction: column; }
 
+/* 標題與引言 */
 .page-title-box { text-align: center; width: 100%; margin-bottom: 40px; }
 .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 18px; }
 .page-desc { font-size: 0.75rem; color: #999; line-height: 2; text-align: justify; font-weight: 300; letter-spacing: 0.08em; border-left: 1px solid #333; padding-left: 18px; margin-bottom: 20px; }
 
+/* 電台頻道設定 */
 .channel-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.015); border: 1px solid #1f1f1f; padding: 14px 18px; margin-bottom: 35px; font-size: 0.65rem; color: #999; letter-spacing: 0.1em; border-radius: 1px;}
 .channel-name { font-family: 'Montserrat'; font-weight: 500; color: var(--white); margin-left: 6px; letter-spacing: 0.15em; }
 .btn-switch-channel { background: none; border: 1px solid #444; color: #ccc; font-size: 0.5rem; padding: 6px 12px; cursor: pointer; transition: 0.3s; border-radius: 1px; letter-spacing: 0.1em;}
 .btn-switch-channel:hover { border-color: var(--active-color); color: var(--active-color); }
 
+/* 氣溫按鈕 */
 .temp-selector { display: flex; gap: 10px; margin-bottom: 35px; width: 100%; }
 .temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 14px 8px; font-size: 0.42rem; letter-spacing: 0.1em; cursor: pointer; flex: 1; border-radius: 1px; transition: all 0.4s ease; font-weight: 300; }
 .temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(255, 255, 255, 0.02); }
 
+/* 抽取結果舞台區 */
 .display-stage { width: 100%; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 55px 0; margin-bottom: 45px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 600; color: var(--white); letter-spacing: 0.12em; margin-bottom: 25px; transition: color 0.4s ease;}
 .tag-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .tag-pill { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; color: var(--active-color); border: 1px solid var(--active-color); padding: 5px 16px; background: rgba(0,0,0,0.6); letter-spacing: 0.1em;}
 
+/* 通用按鈕樣式 */
 .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--white); padding: 18px 0; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; width: 100%; margin-bottom: 15px; border-radius: 1px;}
 .btn-vogue:hover { background: var(--white); color: var(--black); border-color: var(--white); }
 .btn-primary { background: var(--active-color); color: var(--black); font-weight: 600; border: 1px solid var(--active-color); }
 .btn-primary:hover { opacity: 0.85; background: var(--active-color); color: var(--black); }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* 任務面板 */
 .mission-panel { display: none; width: 100%; margin-top: 35px; text-align: left; }
 .mission-item { margin-bottom: 45px; }
 .m-header { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--grey); display: block; margin-bottom: 14px; border-bottom: 1px solid #1f1f1f; padding-bottom: 10px; }
 .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 12px; font-family: 'Montserrat'; font-size: 0.8rem;}
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; line-height: 2; color: #e0e0e0; font-weight: 300; text-align: justify; letter-spacing: 0.05em;}
 
-/* ================= 進度條樣式 ================= */
+/* ================= 藏品：進度條樣式 ================= */
 .progress-container { width: 100%; margin-bottom: 45px; }
 .progress-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
 .progress-text { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; font-weight: 500; color: var(--white); letter-spacing: 0.15em; }
@@ -55,7 +64,7 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .progress-bar-bg { width: 100%; height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; overflow: hidden; }
 .progress-bar-fill { height: 100%; background: var(--active-color); width: 0%; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* ================= 相冊地標章 ================= */
+/* ================= 藏品：地標章 ================= */
 .stamp-group { width: 100%; margin-bottom: 40px; }
 .stamp-county-title { 
     font-family: 'Noto Serif TC', serif; font-size: 1rem; font-weight: 600; 
@@ -75,10 +84,12 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .stamp[data-len="3"] { letter-spacing: 0.15em; padding-left: calc(12px + 0.15em); }
 .stamp[data-len="4"] { letter-spacing: 0.02em; padding-left: calc(12px + 0.02em); }
 
-/* ================= Timeline 日誌樣式 ================= */
+/* ================= 日誌：Timeline 樣式 ================= */
 .journal-list { width: 100%; display: flex; flex-direction: column; gap: 45px; text-align: left; }
-.journal-card { width: 100%; border-left: 1px solid #222; padding-left: 25px; position: relative; }
-.j-index { position: absolute; left: -16px; top: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.65rem; color: var(--active-color); background: var(--black); padding: 4px 0; }
+/* 修改處：加上 padding-top 將內容下推，讓 VOL.001 有獨立的呼吸空間 */
+.journal-card { width: 100%; border-left: 1px solid #222; padding-left: 25px; padding-top: 20px; position: relative; }
+/* 修改處：將 top 微調至 -5px，完美錯開日期位置 */
+.j-index { position: absolute; left: -16px; top: -5px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.65rem; color: var(--active-color); background: var(--black); padding: 4px 0; }
 .j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 8px 0 25px; display: block; letter-spacing: 0.1em;}
 .j-row-info { margin-bottom: 18px; font-size: 0.9rem; color: #bbb; line-height: 1.8; font-weight: 300; letter-spacing: 0.05em;}
 .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.15em; margin-bottom: 6px; text-transform: uppercase; font-weight: 500; }
@@ -94,7 +105,7 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .cl-date { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: #666; margin-bottom: 10px; letter-spacing: 0.1em; }
 .cl-desc { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #ccc; line-height: 1.8; font-weight: 300; letter-spacing: 0.05em;}
 
-/* IG 海報 (隱藏在背景生成) */
+/* ================= IG 海報 (隱藏在背景生成) ================= */
 .ig-poster { position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; background: radial-gradient(circle at 50% 50%, #151515 0%, #050505 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; box-sizing: border-box; z-index: -1; }
 .poster-noise-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.12"/%3E%3C/svg%3E'); z-index: 0; pointer-events: none; }
 .poster-frame { position: relative; width: 100%; height: 100%; border: 1px solid rgba(255,255,255,0.08); padding: 45px 35px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; z-index: 1; }
@@ -115,7 +126,54 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-left: 10px; }
 .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.8; color: #e6e6e6; font-weight: 300; padding-left: 20px; }
 .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
-.poster-ig { color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.1em; } /* 新增的 IG 帳號樣式 */
+.poster-ig { color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.1em; } 
 .poster-hashtag { color: #fff; font-weight: 600; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ================= RWD 行動裝置優化 (針對 iPhone 13, 16 等小螢幕) ================= */
+@media screen and (max-width: 430px) {
+    /* 縮小導覽列字體與間距，避免擠壓 */
+    nav { gap: 12px; padding: 25px 5px; }
+    .nav-link { font-size: 0.5rem; letter-spacing: 0.15em; }
+
+    /* 頁面主標題與文字稍微縮小 */
+    .vogue-title { font-size: 1.6rem; }
+    .page-desc { font-size: 0.7rem; padding-left: 12px; }
+
+    /* 頻道列與按鈕適應小寬度 */
+    .channel-bar { padding: 12px 10px; font-size: 0.6rem; flex-direction: column; gap: 10px; text-align: center; }
+    .channel-name { display: block; margin-top: 5px; }
+
+    /* 氣溫按鈕字體縮小 */
+    .temp-btn { font-size: 0.38rem; padding: 12px 5px; letter-spacing: 0.05em; }
+
+    /* 抽出的地點文字縮小，避免地點名字太長斷行 */
+    .loc-display { font-size: 1.8rem; }
+
+    /* 任務面板文字調整 */
+    .m-content { font-size: 0.95rem; line-height: 1.8; }
+    .btn-vogue { font-size: 0.55rem; padding: 15px 0; }
+
+    /* 藏品徽章牆調整，讓兩個字的徽章不會過寬 */
+    .stamp-board-grouped { gap: 8px; }
+    .stamp { min-width: 60px; padding: 6px 10px; font-size: 0.55rem; }
+    .stamp[data-len="2"] { letter-spacing: 0.3em; padding-left: calc(10px + 0.3em); } 
+    .stamp[data-len="3"] { letter-spacing: 0.1em; padding-left: calc(10px + 0.1em); }
+    
+    /* 日誌卡片調整 */
+    .journal-card { padding-left: 18px; }
+    .j-district { font-size: 1.3rem; }
+    .j-index { left: -14px; font-size: 0.55rem; }
+
+    /* IG 海報強制縮放至螢幕寬度內顯示 (防呆保護) */
+    .ig-poster { transform: scale(0.6); transform-origin: top left; }
+}
+
+@media screen and (max-width: 375px) {
+    /* 針對更小的螢幕 (如 iPhone SE, 13 mini) 進一步縮小 */
+    nav { gap: 8px; }
+    .nav-link { font-size: 0.45rem; letter-spacing: 0.1em; }
+    .loc-display { font-size: 1.6rem; }
+    .stamp { min-width: 55px; }
+}
