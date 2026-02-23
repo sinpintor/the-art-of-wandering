@@ -50,10 +50,19 @@
         .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
-        /* 相冊與特輯 */
-        .light-grid { display: grid; grid-template-columns: repeat(16, 1fr); gap: 6px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 45px; width: 100%; box-sizing: border-box; }
-        .dot { width: 6px; height: 6px; background: #1a1a1a; border-radius: 50%; transition: 0.5s; }
-        .dot.active { transform: scale(1.4); filter: brightness(1.2); }
+        /* 相冊地標章 (Stamp Board) 視覺升級 */
+        .stamp-board { display: flex; flex-wrap: wrap; gap: 12px; padding: 25px 20px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 45px; width: 100%; box-sizing: border-box; justify-content: flex-start; }
+        .stamp { 
+            width: auto; padding: 6px 12px; 
+            border: 1px solid #333; color: #333; 
+            font-family: 'Noto Serif TC', serif; font-size: 0.55rem; letter-spacing: 0.1em; 
+            border-radius: 20px; transition: 0.5s; 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .stamp.active { 
+            color: var(--black); font-weight: 600; 
+            border-color: transparent; 
+        }
 
         .journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
         .journal-card { width: 100%; border-left: 1px solid #333; padding-left: 20px; position: relative; }
@@ -113,7 +122,6 @@
         .poster-mission { width: 100%; text-align: left; }
         .pm-item { margin-bottom: 35px; display: flex; flex-direction: column; }
         
-        /* 剛好的 80px 中文等寬標籤 */
         .pm-title { 
             display: inline-block; width: 80px; text-align: center; 
             font-family: 'Noto Serif TC', sans-serif; font-size: 11px; letter-spacing: 0.1em; 
@@ -186,7 +194,7 @@
             </div>
             
             <div class="channel-bar">
-                <span>當前旅行頻段: <span id="current-channel-display" class="channel-name">Wade&Cloudy</span></span>
+                <span>當前旅行電台頻段: <span id="current-channel-display" class="channel-name">Wade&Cloudy</span></span>
                 <button class="btn-switch-channel" onclick="changeChannel()">切換頻段</button>
             </div>
 
@@ -219,9 +227,10 @@
         <div class="content-wrapper">
             <div class="page-title-box">
                 <h1 class="vogue-title" style="color:#fff">Memory Archive</h1>
-                <p class="page-desc">當快門落下，那些我們走過的地方，都成了帶有溫度的美好記憶。</p>
+                <p class="page-desc">當快門落下，那些我們走過的地方，都成了帶有溫度的地標紀念章。</p>
             </div>
-            <div class="light-grid" id="light-grid"></div>
+            <div class="stamp-board" id="stamp-board"></div>
+            
             <div id="journal-list" class="journal-list"></div>
         </div>
     </div>
@@ -258,7 +267,7 @@
                 <div class="changelog-item">
                     <span class="cl-version">v2.5.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">全面升級為雲端相冊系統。調整文案為溫柔白話風格，並將探索範圍從城市擴展至全台灣的戶外與秘境。</span>
+                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，並將相冊視覺重構為地標收集徽章牆。容錯機制強化，穩定讀取各種格式的地點資料。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v2.1.5</span>
@@ -322,19 +331,18 @@
             "HOT": ["滑順的絲緞單品與一點金屬首飾", "涼爽的綢緞裝束與細帶涼鞋", "透氣的亞麻套裝搭配簡單頸鍊", "設計感十足的純白棉質單品", "輕盈的鏤空上衣與舒適的棉麻寬褲", "充滿夏日感的印花單品與草編包", "微露背的設計感背心與丹寧", "通風舒適的連身裝與極簡涼鞋", "有點寬鬆的白襯衫與輕薄短裙", "帶點波西米亞風的罩衫與金屬配飾", "亮色系的平口或細肩帶單品", "輕薄的針織背心與亞麻長裙", "美式復古運動風搭配高腰長裙", "雪紡單品搭配貼身的羅紋背心", "全白亞麻襯衫與亮眼內搭", "一字領上衣與簡單的直筒短褲", "帶點透視感的微涼針織與高腰短裙", "充滿度假感的短袖襯衫與闊腿褲", "短版合身背心與輕柔的絲質長褲", "清爽的洋裝搭配簡單的配件"]
         };
 
-        // 雲端資料庫 API 網址
+        // 雲端 API
         const API_URL = "https://script.google.com/macros/s/AKfycbzPZeJ8BZAXOMakvaL64QnlQf5sfrqsA8qsUnbO3DS2mKPPVbhxObKqiL3LBiYXaPoP/exec";
         let cloudData = [];
         
-        // 預設頻道改為 Public
-        let currentChannel = localStorage.getItem('route19_current_channel') || 'Public';
+        let currentChannel = localStorage.getItem('route19_current_channel') || 'Wade&Cloudy';
         let currentTemp = 'MILD';
         let currentRecord = null;
 
         window.onload = () => { 
             document.getElementById('current-channel-display').innerText = currentChannel;
             initLights(); 
-            loadCloudData(); // 初始化即向雲端抓取資料
+            loadCloudData(); 
         };
 
         function showPage(pId) {
@@ -348,21 +356,19 @@
             }
         }
 
-        // 切換頻道功能：隨時可以切換到任意名稱的頻道
         function changeChannel() {
-            const newChannel = prompt("請輸入旅行頻段代碼 (例如你的名字或團隊名稱) :", currentChannel);
+            const newChannel = prompt("請輸入旅行電台頻段代碼 (例如你的名字或團隊名稱) :", currentChannel);
             if(newChannel && newChannel.trim() !== "") {
                 currentChannel = newChannel.trim();
                 localStorage.setItem('route19_current_channel', currentChannel);
                 document.getElementById('current-channel-display').innerText = currentChannel;
-                loadCloudData(); // 切換頻道後重新向雲端抓取該頻道的資料
+                loadCloudData();
             }
         }
 
-        // 向 GAS 抓取資料 (加入 encodeURIComponent 確保 & 等特殊符號安全傳遞)
         async function loadCloudData() {
-            document.getElementById('journal-list').innerHTML = `<div class="state-message">正在為你尋回 [ ${currentChannel} ] 的相冊記憶...</div>`;
-            document.getElementById('editorial-list').innerHTML = `<div class="state-message">正在編排專屬地圖特輯...</div>`;
+            document.getElementById('journal-list').innerHTML = `<div class="state-message">正在為你調頻至 [ ${currentChannel} ]，尋回相冊記憶...</div>`;
+            document.getElementById('editorial-list').innerHTML = `<div class="state-message">正在為你編排專屬地圖特輯...</div>`;
             
             try {
                 const response = await fetch(`${API_URL}?channel=${encodeURIComponent(currentChannel)}`);
@@ -374,20 +380,53 @@
                 }
             } catch (error) {
                 console.error("同步失敗:", error);
-                document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，暫時無法連接至航線資料庫，請稍後再試。</div>`;
+                document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，暫時無法連接至電台資料庫，請稍後再試。</div>`;
                 document.getElementById('editorial-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，特輯準備中。</div>`;
             }
         }
 
-        // 更新畫面 UI
+        // 初始化「地標章」的空白狀態
+        function initLights() {
+            const board = document.getElementById('stamp-board');
+            if(!board) return;
+            board.innerHTML = '';
+            for(let i=0; i<taiwanData.length; i++) {
+                const stamp = document.createElement('div');
+                stamp.className = 'stamp';
+                stamp.id = `map-stamp-${i}`;
+                // 只顯示縣市，讓徽章小一點
+                stamp.innerText = taiwanData[i].split(' ')[1] || taiwanData[i]; 
+                board.appendChild(stamp);
+            }
+        }
+
+        // 更新畫面 UI (包含容錯機制與地標徽章邏輯)
         function renderView() {
-            document.querySelectorAll('.dot').forEach(d => { d.classList.remove('active'); d.style.background = '#1a1a1a'; d.style.boxShadow = 'none'; });
+            // 1. 重置徽章牆
+            document.querySelectorAll('.stamp').forEach(s => { 
+                s.classList.remove('active'); 
+                s.style.background = 'transparent';
+                s.style.color = '#333';
+            });
+            
+            // 2. 點亮雲端紀錄裡的徽章
             cloudData.forEach(j => {
-                const idx = taiwanData.indexOf(j.name);
-                const dot = document.getElementById(`map-dot-${idx}`);
-                if(dot) { dot.classList.add('active'); dot.style.background = j.color; dot.style.boxShadow = `0 0 10px ${j.color}`; }
+                if (!j.name) return; 
+                
+                // 安全比對：濾除空白
+                const cleanName = j.name.replace(/\s+/g, '');
+                const idx = taiwanData.findIndex(loc => loc.replace(/\s+/g, '') === cleanName);
+                
+                const stamp = document.getElementById(`map-stamp-${idx}`);
+                if (stamp) { 
+                    stamp.classList.add('active'); 
+                    const stampColor = j.color || '#FFD700'; // 容錯顏色
+                    stamp.style.background = stampColor; 
+                    stamp.style.color = '#000'; // 徽章亮起時字體變黑以確保辨識度
+                }
             });
 
+            // 3. 渲染記憶相冊清單
             const listEl = document.getElementById('journal-list');
             listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">頻段 [ ${currentChannel} ] 的相冊還空著，去抽取你的第一個靈感吧。</div>` :
                 [...cloudData].reverse().map((log, i, arr) => `
@@ -395,16 +434,18 @@
                         <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
                         <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${log.date} / ${log.combo}</div>
                         <span class="j-district">${log.name}</span>
-                        <div class="j-row-info"><strong style="color:${log.color}">LOCATION</strong>${log.m_action}</div>
-                        <div class="j-row-info"><strong style="color:${log.color}">TASTE</strong>${log.m_food}</div>
-                        <div class="j-row-info"><strong style="color:${log.color}">STYLING</strong>${log.m_style}</div>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">STYLING</strong>${log.m_style}</div>
                     </div>
                 `).join('');
             
+            // 4. 渲染地圖特輯
             const editEl = document.getElementById('editorial-list');
             const grouped = {};
             cloudData.forEach(log => {
-                const city = log.name.split(' ')[0];
+                if (!log.name) return;
+                const city = log.name.split(' ')[0] || log.name; // 容錯處理
                 if(!grouped[city]) grouped[city] = [];
                 grouped[city].push(log);
             });
@@ -412,7 +453,7 @@
             editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div class="state-message">等你踏出第一步，這裡會為你排版專屬的旅行特輯。</div>` :
                 Object.keys(grouped).map(city => {
                     const logs = grouped[city];
-                    const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color}"></div>`).join('');
+                    const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color || '#FFD700'}"></div>`).join('');
                     
                     return `
                     <div class="ed-project-card" style="margin-bottom:80px; width:100%; border-top:1px solid #1a1a1a; padding-top:35px;">
@@ -422,12 +463,15 @@
                         </div>
                         <div style="width:100%; height:4px; display:flex; margin-bottom:30px; opacity:0.8;">${paletteItems}</div>
                         <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
-                            ${logs.map(l => `
+                            ${logs.map(l => {
+                                const district = l.name.split(' ')[1] || '';
+                                return `
                                 <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:300; letter-spacing:0.02em; border-bottom:1px solid #111; padding-bottom:10px;">
-                                    <span style="color:#ddd; font-family:'Noto Serif TC';">${l.name.split(' ')[1]}</span>
+                                    <span style="color:#ddd; font-family:'Noto Serif TC';">${district}</span>
                                     <span style="color:#666; font-family:'Playfair Display'; font-style:italic; font-size:0.65rem;">${l.combo}</span>
                                 </div>
-                            `).join('')}
+                                `
+                            }).join('')}
                         </div>
                         <div style="margin-top:25px; font-size:0.45rem; color:#444; letter-spacing:0.5em; text-transform:uppercase; font-family:'Montserrat';">
                             MAP VISUAL ARCHIVE / PROJECT NO. ${city.length * logs.length}
@@ -485,7 +529,6 @@
             }, 60);
         }
 
-        // 寫入資料到 GAS 雲端
         async function manualSave() {
             if (!currentRecord) return;
             
@@ -503,8 +546,8 @@
                 
                 const result = await response.json();
                 if (result.status === "success") {
-                    alert(`已將這個瞬間，溫柔地存放至 [ ${currentChannel} ] 的雲端空間。`);
-                    await loadCloudData(); // 重新拉取最新資料更新畫面
+                    alert(`已將這個瞬間，溫柔地存放至 [ ${currentChannel} ] 的雲端電台。`);
+                    await loadCloudData(); 
                 }
             } catch (error) {
                 alert("收藏失敗，請確認你的網路狀態，稍後再試。");
@@ -520,7 +563,6 @@
                 return;
             }
 
-            // 動態計算海報專屬編號：根據雲端資料長度計算
             let isSaved = cloudData.length > 0 && 
                           cloudData[cloudData.length - 1].date === currentRecord.date && 
                           cloudData[cloudData.length - 1].combo === currentRecord.combo;
