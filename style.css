@@ -41,7 +41,16 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
-/* 相冊地標章：縣市分類的極緻排版 */
+/* ================= 進度條樣式 ================= */
+.progress-container { width: 100%; margin-bottom: 35px; }
+.progress-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+.progress-text { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; font-weight: 500; color: var(--white); letter-spacing: 0.15em; }
+.progress-text span { font-family: 'Montserrat', sans-serif; margin-left: 8px; font-size: 0.7rem; color: #888; }
+.progress-percent { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); font-weight: 600; letter-spacing: 0.1em; }
+.progress-bar-bg { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--active-color); width: 0%; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* ================= 相冊地標章：縣市分類與字數視覺平衡 ================= */
 .stamp-group { width: 100%; margin-bottom: 35px; }
 .stamp-county-title { 
     font-family: 'Noto Serif TC', serif; font-size: 1rem; font-weight: 600; 
@@ -54,12 +63,20 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
     justify-content: flex-start;
 }
 .stamp { 
-    width: auto; padding: 6px 14px; 
+    min-width: 68px; /* 給予統一的最小寬度，撐起兩字區域 */
+    box-sizing: border-box;
+    padding: 6px 12px; 
     border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.3); 
-    font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.1em; 
+    font-family: 'Noto Serif TC', serif; font-size: 0.6rem; 
     border-radius: 20px; transition: all 0.4s ease; 
     display: flex; align-items: center; justify-content: center;
+    text-align: center;
 }
+
+/* 針對不同字數設定專屬字距，並用 padding-left 抵銷 letter-spacing 造成的視覺偏移，達成完美置中 */
+.stamp[data-len="2"] { letter-spacing: 0.4em; padding-left: calc(12px + 0.4em); } 
+.stamp[data-len="3"] { letter-spacing: 0.15em; padding-left: calc(12px + 0.15em); }
+.stamp[data-len="4"] { letter-spacing: 0.02em; padding-left: calc(12px + 0.02em); }
 
 /* Timeline 日誌樣式 */
 .journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
