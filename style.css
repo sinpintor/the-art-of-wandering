@@ -1,10 +1,8 @@
 :root {
     --bg-black: #050505;
     --active-color: #F1C40F;
-    /* 升級 1：將純白改為雜誌紙張的珍珠白，視覺更溫柔 */
-    --white: #F4F4F0; 
-    /* 升級 1：更柔和的高級灰 */
-    --gray: #7a7a7a;
+    --white: #ffffff;
+    --gray: #888888;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -24,12 +22,7 @@ body {
 
 nav {
     position: fixed; top: 0; width: 100%; display: flex; justify-content: center;
-    padding: 20px; 
-    /* 升級 2：半透明黑 + 毛玻璃特效 + 極細底線 */
-    background: rgba(5, 5, 5, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    padding: 20px; background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
     z-index: 1000; gap: 20px;
 }
 
@@ -40,19 +33,8 @@ nav {
 
 .nav-link.active, .nav-link:hover { color: var(--white); font-weight: 600; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 
-/* 升級 3：頁面切換加入「重力浮現」的絲滑過場 */
-.page { 
-    display: none; 
-    opacity: 0; 
-    transform: translateY(15px); 
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
-    padding-bottom: 80px; 
-}
-.page.active { 
-    display: block; 
-    opacity: 1; 
-    transform: translateY(0); 
-}
+.page { display: none; opacity: 0; transition: opacity 0.5s ease; padding-bottom: 80px; }
+.page.active { display: block; opacity: 1; }
 
 .content-wrapper { width: 100%; max-width: 600px; margin: 0 auto; padding: 100px 20px 60px; }
 
@@ -93,20 +75,12 @@ nav {
     font-size: 0.7rem; letter-spacing: 0.1em; border: 1px solid rgba(255,255,255,0.15); color: #ccc;
 }
 
-/* 升級 1：按鈕框線變細，升級 3：Hover 撐開字距的呼吸感 */
 .btn-vogue {
-    width: 100%; padding: 18px; background: transparent; 
-    border: 1px solid rgba(244, 244, 240, 0.3); 
+    width: 100%; padding: 18px; background: transparent; border: 1px solid var(--white);
     color: var(--white); font-size: 0.8rem; letter-spacing: 0.3em; cursor: pointer;
-    margin-bottom: 15px; transition: all 0.5s ease; 
-    text-transform: uppercase;
+    margin-bottom: 15px; transition: 0.3s; text-transform: uppercase;
 }
-.btn-vogue:hover { 
-    background: var(--white); 
-    color: #000; 
-    border-color: var(--white);
-    letter-spacing: 0.4em; 
-}
+.btn-vogue:hover { background: var(--white); color: #000; }
 .btn-primary { background: var(--active-color); border-color: var(--active-color); color: #000; font-weight: 700; }
 
 .manual-select-wrapper { text-align: center; margin-top: 10px; margin-bottom: 30px; }
@@ -129,8 +103,7 @@ nav {
 
 #stamp-container { display: flex; flex-direction: column; gap: 30px; }
 .stamp-group { margin-bottom: 20px; }
-/* 升級 1：極細分隔線 */
-.stamp-county-title { font-size: 0.8rem; color: #666; margin-bottom: 10px; letter-spacing: 0.2em; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 5px; }
+.stamp-county-title { font-size: 0.8rem; color: #666; margin-bottom: 10px; letter-spacing: 0.2em; border-bottom: 1px solid #222; padding-bottom: 5px; }
 .stamp-board-grouped { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; }
 .stamp {
     aspect-ratio: 1; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;
@@ -141,8 +114,7 @@ nav {
 
 /* 日記列表排版 (分層設計) */
 .journal-list { display: flex; flex-direction: column; gap: 40px; }
-/* 升級 1：極細分隔線 */
-.journal-card { border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 40px; margin-bottom: 10px; }
+.journal-card { border-bottom: 1px solid #222; padding-bottom: 40px; margin-bottom: 10px; }
 .j-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
 .j-index { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #444; }
 .j-meta { font-size: 0.65rem; letter-spacing: 0.1em; color: #666; text-transform: uppercase; }
@@ -182,22 +154,10 @@ nav {
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 升級 4：相機快門漏光特效 (取代原本的電子當機 Glitch) */
-.glitch-overlay { 
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-    background: radial-gradient(circle at 50% 50%, #ffffff 0%, rgba(255,255,255,0) 70%); 
-    z-index: 10000; opacity: 0; pointer-events: none; mix-blend-mode: overlay;
-}
-.glitch-active { 
-    animation: shutter-flash 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
-}
-@keyframes shutter-flash { 
-    0% { opacity: 0; transform: scale(1); } 
-    20% { opacity: 0.4; transform: scale(1.05); } 
-    100% { opacity: 0; transform: scale(1); } 
-}
+.glitch-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 10000; opacity: 0; pointer-events: none; }
+.glitch-active { animation: static-flash 0.4s ease-out; }
+@keyframes static-flash { 0% { opacity: 0; } 10% { opacity: 0.15; background: #fff; } 20% { opacity: 0; } 30% { opacity: 0.1; background: #ccc; } 50% { opacity: 0.05; } 100% { opacity: 0; } }
 
-/* RWD 手機版優化 */
 @media (max-width: 768px) {
     .vogue-title { font-size: 2.5rem; }
     .loc-display { font-size: 1.8rem; }
@@ -220,3 +180,28 @@ nav {
         background: rgba(255,255,255,0.05);
     }
 }
+
+/* ================= 新增：海報預覽彈窗 (解決手機與 LINE 瀏覽器下載問題) ================= */
+.poster-modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(5, 5, 5, 0.95); z-index: 10001;
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; transition: opacity 0.3s ease;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.poster-modal.active { display: flex; opacity: 1; }
+.poster-modal img {
+    width: 80vw; max-width: 400px; border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.poster-modal p { 
+    color: var(--active-color); font-family: 'Noto Serif TC', serif; 
+    font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 20px; font-weight: 500;
+}
+.btn-close-modal {
+    background: transparent; border: 1px solid #555; color: #aaa;
+    padding: 10px 30px; border-radius: 50px; font-size: 0.75rem; 
+    letter-spacing: 0.2em; cursor: pointer; transition: 0.3s;
+}
+.btn-close-modal:hover { color: #fff; border-color: #fff; }
