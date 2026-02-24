@@ -126,10 +126,10 @@ function toggleManualSelect() {
     const text = document.querySelector('.manual-select-text');
     if(select.style.display === 'none') {
         select.style.display = 'block';
-        text.innerText = '[ Close ]';
+        text.innerText = '[ 收起選單 ]';
     } else {
         select.style.display = 'none';
-        text.innerText = '— Or, define your destination.';
+        text.innerText = '[ 或是，由我指定目的地 ]';
         select.value = ""; 
     }
 }
@@ -146,7 +146,7 @@ function showPage(pId) {
 }
 
 function changeChannel() {
-    const newChannel = prompt("Change Frequency (Enter your channel code):", currentChannel);
+    const newChannel = prompt("調頻至專屬公路頻道（例如你們的代號）：", currentChannel);
     if(newChannel && newChannel.trim() !== "") {
         currentChannel = newChannel.trim();
         localStorage.setItem('route19_current_channel', currentChannel);
@@ -157,7 +157,7 @@ function changeChannel() {
 }
 
 async function loadCloudData() {
-    document.getElementById('journal-list').innerHTML = `<div class="state-message">TUNING INTO FREQUENCY [ ${currentChannel} ]...</div>`;
+    document.getElementById('journal-list').innerHTML = `<div class="state-message">正在調頻至波段 [ ${currentChannel} ]...</div>`;
     try {
         const response = await fetch(`${API_URL}?channel=${encodeURIComponent(currentChannel)}`);
         const result = await response.json();
@@ -166,7 +166,7 @@ async function loadCloudData() {
             renderView();
         }
     } catch (error) {
-        document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">SIGNAL LOST. FAILED TO LOAD DATA.</div>`;
+        document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，翻閱記憶失敗。</div>`;
     }
 }
 
@@ -199,12 +199,11 @@ function initLights() {
     }
 }
 
-// 渲染畫面：使用新版雜誌分層結構
 function renderView() {
     document.querySelectorAll('.stamp').forEach(s => { 
         s.classList.remove('active');
-        s.style.background = 'transparent'; s.style.color = 'rgba(255,255,255,0.3)';
-        s.style.borderColor = 'rgba(255,255,255,0.15)'; s.style.boxShadow = 'none'; s.style.fontWeight = 'normal';
+        s.style.background = 'transparent'; s.style.color = 'rgba(255,255,255,0.25)';
+        s.style.borderColor = 'rgba(255,255,255,0.12)'; s.style.boxShadow = 'none'; s.style.fontWeight = 'normal';
     });
     const collectedIndices = new Set();
     cloudData.forEach(j => {
@@ -215,10 +214,10 @@ function renderView() {
             collectedIndices.add(idx); 
             const stamp = document.getElementById(`map-stamp-${idx}`);
             if (stamp) { 
-                const stampColor = j.color || '#d4af37'; 
+                const stampColor = j.color || '#F1C40F'; 
                 stamp.classList.add('active');
-                stamp.style.background = stampColor; 
-                stamp.style.boxShadow = `0 0 20px ${stampColor}4d`; // 30% opacity for shadow
+                stamp.style.background = stampColor; stamp.style.color = '#000'; stamp.style.fontWeight = '700';
+                stamp.style.borderColor = 'transparent'; stamp.style.boxShadow = `0 0 12px ${stampColor}`;
             }
         }
     });
@@ -234,13 +233,12 @@ function renderView() {
 
     const listEl = document.getElementById('journal-list');
     if (listEl) {
-        listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">JOURNAL IS EMPTY.</div>` :
+        listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">公路日記還是空白的。</div>` :
             [...cloudData].reverse().map((log, i, arr) => `
                 <div class="journal-card">
                     <div class="j-header">
-                        <span class="j-index">No.${String(arr.length - i).padStart(3, '0')}</span>
-                        <span class="j-meta">${formatToDateOnly(log.date)}</span>
-                        <span class="j-meta">${log.combo}</span>
+                        <span class="j-index">VOL.${String(arr.length - i).padStart(3, '0')}</span>
+                        <span class="j-meta">${formatToDateOnly(log.date)} / ${log.combo}</span>
                     </div>
                     
                     <div class="j-body">
@@ -323,34 +321,31 @@ async function manualSave() {
     if (!currentRecord) return;
     const saveBtn = document.getElementById('btn-save').querySelector('.btn-text');
     const originalText = saveBtn.innerText;
-    saveBtn.innerText = "Archiving..."; 
+    saveBtn.innerText = "印上護照章..."; 
     currentRecord.channel = currentChannel;
     try {
         const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(currentRecord) });
         const result = await response.json();
         if (result.status === "success") {
-            alert(`Archived to [ ${currentChannel} ].`);
+            alert(`已存入 [ ${currentChannel} ] 的公路日記中。`);
             await loadCloudData(); 
         }
-    } catch (error) { alert("Archive Failed."); }
+    } catch (error) { alert("收藏失敗。"); }
     finally { saveBtn.innerText = originalText; }
 }
 
-// --- 關閉海報彈窗 ---
 function closePosterModal() {
     const modal = document.getElementById('poster-modal');
     modal.classList.remove('active');
     setTimeout(() => { modal.style.display = 'none'; }, 300);
 }
 
-// --- 升級版：生成海報並顯示預覽，讓使用者長按儲存 ---
 function generateIGStory() {
-    if (!currentRecord) return alert("Please generate inspiration first.");
+    if (!currentRecord) return alert("請先抽取提案。");
     
-    // 按鈕變更狀態，提升 UX
     const btn = document.querySelector('button[onclick="generateIGStory()"]').querySelector('.btn-text');
     const originalText = btn.innerText;
-    btn.innerText = "Processing...";
+    btn.innerText = "海報沖洗中...";
 
     let displayIndex = cloudData.length + 1;
     
@@ -368,20 +363,15 @@ function generateIGStory() {
     
     setTimeout(() => {
         html2canvas(posterTemplate, { scale: 2, useCORS: true, backgroundColor: "#0a0908" }).then(canvas => {
-            // 將 Canvas 轉成真實圖片 URL
             const imgData = canvas.toDataURL('image/jpeg', 0.9); 
             
-            // 把圖片塞入彈窗
             const modal = document.getElementById('poster-modal');
             const img = document.getElementById('generated-poster-img');
             img.src = imgData;
             
-            // 顯示彈窗
             modal.style.display = 'flex';
-            // 延遲一點點加 class 觸發 CSS 淡入動畫
             setTimeout(() => modal.classList.add('active'), 10);
 
-            // 恢復原本的按鈕狀態
             btn.innerText = originalText;
         });
     }, 150);
