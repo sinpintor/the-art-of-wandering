@@ -363,11 +363,27 @@ nav {
     .channel-display { justify-content: center; } 
     .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
     
-    .mission-item-editorial { flex-direction: column; gap: 15px; align-items: center; text-align: center; }
-    .m-body { text-align: center; display: flex; flex-direction: column; align-items: center; }
-    .m-num { font-size: 2.5rem; }
-    .m-header { margin-bottom: 10px; text-align: center; }
-    .m-content { text-align: center; } /* 強制中文字置中 */
+.mission-item-editorial { 
+        flex-direction: column; 
+        gap: 15px; 
+        align-items: flex-start; /* 確保所有元素靠左起頭 */
+        text-align: left; 
+    }
+    .m-body { 
+        text-align: left; 
+        width: 100%; /* 確保內容區塊撐滿，讓文字完美靠左 */
+    }
+    .m-num { 
+        font-size: 3rem; /* 數字維持大氣勢 */
+        margin-bottom: -10px; /* 稍微拉近數字與英文標題的距離，更有排版緊湊感 */
+    }
+    .m-header { 
+        margin-bottom: 10px; 
+        text-align: left; 
+    }
+    .m-content { 
+        text-align: left; 
+    }
 
     .about-columns { flex-direction: column; gap: 25px; }
     .emphasis-text { font-size: 1.2rem; }
