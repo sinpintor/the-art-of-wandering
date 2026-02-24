@@ -131,8 +131,8 @@ nav {
     margin-bottom: 25px; letter-spacing: 0.15em; color: var(--white); line-height: 1.2;
     text-shadow: 0 0 30px rgba(255,255,255,0.1);
 }
-.tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
-.tag-x { font-size: 0.8rem; color: #555; }
+.tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', 'Noto Serif TC', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
+.tag-x { font-size: 0.8rem; color: #555; font-family: sans-serif; }
 
 .action-area { margin-bottom: 50px; text-align: center; }
 .btn-vogue-editorial {
