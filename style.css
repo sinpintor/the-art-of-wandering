@@ -202,7 +202,6 @@ nav {
     font-size: 2rem; font-style: italic; color: var(--white); 
     margin: 0; letter-spacing: 0.1em; text-align: left; 
 }
-/* 矩陣網格目錄 (完美解決 2~4 字的長度差異) */
 .stamp-board-grouped { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); 
@@ -212,8 +211,8 @@ nav {
     padding: 0; border: none; background: transparent; 
     font-size: 0.9rem; color: #444; transition: 0.4s ease; cursor: default;
     font-family: 'Noto Serif TC', serif; letter-spacing: 0.15em;
-    text-align: left; /* 強制靠左對齊，形成完美垂直線 */
-    white-space: nowrap; /* 確保地名絕對不斷行 */
+    text-align: left; 
+    white-space: nowrap; 
 }
 .stamp.active { font-weight: 500; }
 
@@ -235,10 +234,11 @@ nav {
 .j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
 .j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; font-family: 'Noto Serif TC', serif;}
 
+
 /* --- Editorial Note (The Manifesto 總編宣言排版) --- */
 .about-section-manifesto { 
     display: grid; 
-    grid-template-columns: 1fr 1.5fr; /* 完美的不對稱比例 1 : 1.5 */
+    grid-template-columns: 1fr 1.5fr; 
     gap: 60px; 
     margin-bottom: 80px; 
     border-top: 1px solid var(--line-color); 
@@ -253,9 +253,23 @@ nav {
     font-family: 'Noto Serif TC', serif; font-size: 1.8rem; line-height: 1.7; 
     color: var(--white); font-weight: 300; letter-spacing: 0.05em;
 }
-.manifesto-right p { 
+
+/* 內文排版升級：強化對齊與段落呼吸感 */
+.editorial-article p { 
     font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 2.2; 
-    color: #bbb; text-align: justify; margin-bottom: 25px; letter-spacing: 0.05em;
+    color: #bbb; text-align: justify; text-justify: inter-ideograph; 
+    margin-bottom: 25px; letter-spacing: 0.08em;
+}
+
+/* 雜誌總編專屬的斜體金字署名 */
+.editor-signature {
+    font-family: 'Playfair Display', 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    color: var(--active-color) !important;
+    font-style: italic;
+    text-align: right !important;
+    letter-spacing: 0.2em;
+    margin-top: 40px;
 }
 
 /* 經典的「首字放大 (Drop Cap)」特效 */
@@ -263,14 +277,15 @@ nav {
     float: left;
     font-family: 'Playfair Display', 'Noto Serif TC', serif;
     font-size: 4.8rem;
-    line-height: 0.7;
-    padding-top: 10px;
+    line-height: 0.8;
+    padding-top: 8px;
     padding-right: 15px;
     color: var(--active-color);
     font-style: italic;
     font-weight: 400;
 }
 
+/* 版權宣告 */
 .about-footer-editorial { 
     border-top: 1px solid var(--line-color); padding-top: 30px;
     display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif;
@@ -306,7 +321,6 @@ nav {
 .poster-brand-ed { font-size: 1.4rem; letter-spacing: 0.4em; color: var(--gray); font-family: 'Montserrat', sans-serif; }
 .poster-vol-ed { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--active-color); font-style: italic; letter-spacing: 0.1em; }
 
-/* 海報主視覺：地區與牌卡 (完美置中) */
 .poster-hero-ed { 
     margin-top: 100px; 
     display: flex; flex-direction: column; align-items: center; text-align: center; 
@@ -379,7 +393,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 (加入橫向滑動、任務置中靠左、護照網格微調與 Manifesto 堆疊) */
+/* RWD 手機版優化 */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -439,6 +453,9 @@ nav {
     .manifesto-quote { font-size: 1.5rem; }
     .drop-cap { font-size: 4rem; padding-top: 8px; padding-right: 12px; }
 
+    /* 手機版 Footer 版權堆疊，防止文字過長斷行難看 */
+    .about-footer-editorial { flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
     .j-header { text-align: left; padding-right: 0; padding-left: 20px; }
@@ -446,7 +463,6 @@ nav {
     .j-body { padding-left: 20px; }
     .j-district { font-size: 1.6rem; margin-bottom: 25px; }
     
-    /* 手機版護照網格微調 */
     .stamp-board-grouped { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 15px 5px; }
     .stamp { font-size: 0.8rem; }
     .stamp-county-title { text-align: center; }
