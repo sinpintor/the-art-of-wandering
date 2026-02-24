@@ -177,32 +177,36 @@ nav {
 }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: var(--white); font-weight: 300; }
 
+/* --- Passport Editorial (全新字體散文索引排版) --- */
 .progress-container-editorial { margin-bottom: 60px; text-align: center; }
 .progress-bar-bg-thin { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
 .progress-bar-fill-thin { height: 100%; background: var(--active-color); width: 0%; transition: width 1s ease; }
 .progress-info-editorial { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #888; letter-spacing: 0.2em; display: flex; justify-content: space-between;}
 
-.stamp-container-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
-.county-block { border: 1px solid var(--line-color); padding: 25px; background: rgba(255,255,255,0.02); }
-.county-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; border-bottom: 1px solid var(--line-color); padding-bottom: 15px; }
-.county-title { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; font-weight: 600; color: var(--white); margin: 0; letter-spacing: 0.1em; text-align: left; }
-.county-vol { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; }
-
-.stamp-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; justify-content: flex-start; }
+.stamp-container-editorial { display: flex; flex-direction: column; gap: 40px; }
+.stamp-group { 
+    border: none; padding: 0 0 30px 0; background: transparent; 
+    border-bottom: 1px solid var(--line-color);
+    display: flex; flex-direction: column; gap: 20px;
+}
+.stamp-county-title { 
+    font-family: 'Playfair Display', 'Noto Serif TC', serif; 
+    font-size: 2rem; font-style: italic; color: var(--white); 
+    margin: 0; letter-spacing: 0.1em; text-align: left; 
+}
+.stamp-board-grouped { 
+    display: flex; flex-wrap: wrap; gap: 8px 12px; justify-content: flex-start; 
+    line-height: 1.8;
+}
 .stamp {
-    padding: 6px 14px; border: 1px solid rgba(255,255,255,0.15); 
-    font-size: 0.75rem; color: rgba(255,255,255,0.3); transition: 0.4s; cursor: default;
-    font-family: 'Noto Serif TC', serif; border-radius: 2px;
+    padding: 0; border: none; background: transparent; 
+    font-size: 0.95rem; color: #444; transition: 0.4s ease; cursor: default;
+    font-family: 'Noto Serif TC', serif; letter-spacing: 0.1em;
 }
-.stamp.active { 
-    background: var(--active-color); color: var(--bg-black); font-weight: 600; 
-    border-color: transparent; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
-
-.county-records { display: flex; flex-direction: column; gap: 12px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 20px; }
-.record-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 300; }
-.record-district { color: #eee; font-family: 'Noto Serif TC', serif; }
-.record-combo { color: #888; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; }
+.stamp::after { content: '，'; color: #333; margin-left: 2px; }
+.stamp:last-child::after { content: ''; }
+.stamp.active { font-weight: 400; }
+.stamp.active::after { color: #444; text-shadow: none; } 
 
 .journal-list-editorial { border-top: 1px solid var(--line-color); }
 .journal-card { 
@@ -264,15 +268,20 @@ nav {
 .poster-brand-ed { font-size: 1.4rem; letter-spacing: 0.4em; color: var(--gray); font-family: 'Montserrat', sans-serif; }
 .poster-vol-ed { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--active-color); font-style: italic; letter-spacing: 0.1em; }
 
-.poster-hero-ed { margin-top: 100px; text-align: left; }
+/* 海報主視覺：地區與牌卡 (完美置中) */
+.poster-hero-ed { 
+    margin-top: 100px; 
+    display: flex; flex-direction: column; align-items: center; text-align: center; 
+}
 .poster-loc-ed { 
     font-family: 'Noto Serif TC', serif; font-size: 7rem; font-weight: 700; 
     line-height: 1.2; letter-spacing: 0.1em; color: var(--white); margin-bottom: 30px;
-    text-shadow: 0 0 40px rgba(255,255,255,0.05);
+    text-shadow: 0 0 40px rgba(255,255,255,0.05); text-align: center;
 }
 .poster-combo-ed { 
     font-family: 'Playfair Display', 'Noto Serif TC', serif; font-style: italic; 
     font-size: 2.5rem; color: var(--active-color); letter-spacing: 0.1em;
+    display: flex; align-items: center; justify-content: center;
 }
 .poster-x-ed { font-family: sans-serif; font-size: 1.8rem; color: #666; margin: 0 25px; font-style: normal; }
 
@@ -300,7 +309,6 @@ nav {
 .poster-date-ed { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: #777; letter-spacing: 0.3em;}
 .poster-ig-ed { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; letter-spacing: 0.1em; color: var(--active-color); }
 
-/* 快門特效與彈窗 */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 .glitch-overlay { 
@@ -333,7 +341,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 (加入橫向滑動與保留頻道區塊底線) */
+/* RWD 手機版優化 */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -354,7 +362,7 @@ nav {
     .vogue-title { font-size: 3.2rem; }
     .loc-display-large { 
         font-size: 2.2rem; 
-        white-space: nowrap; /* 強制文字與標點符號待在同一行 */
+        white-space: nowrap; 
     }
     .tag-row-editorial { font-size: 1rem; }
     
@@ -363,16 +371,16 @@ nav {
     .channel-display { justify-content: center; } 
     .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
     
-.mission-item-editorial { 
+    .mission-item-editorial { 
         flex-direction: column; 
         gap: 10px; 
-        align-items: center; /* 讓外層的數字置中 */
+        align-items: center; 
     }
     .m-body { 
         width: 100%; 
         display: flex; 
         flex-direction: column; 
-        align-items: center; /* 讓內層的英文標題置中 */
+        align-items: center; 
     }
     .m-num { 
         font-size: 3rem; 
@@ -384,7 +392,7 @@ nav {
         text-align: center; 
     }
     .m-content { 
-        text-align: left; /* 確保下方的中文任務內容維持靠左對齊 */
+        text-align: left; 
         width: 100%;
     }
 
@@ -397,7 +405,4 @@ nav {
     .j-index { font-size: 1.5rem; }
     .j-body { padding-left: 20px; }
     .j-district { font-size: 1.6rem; margin-bottom: 25px; }
-    
-    .stamp-container-editorial { grid-template-columns: 1fr; }
-    .county-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
