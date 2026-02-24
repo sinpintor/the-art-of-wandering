@@ -17,12 +17,14 @@ body {
     font-weight: 300;
 }
 
+/* VOGUE 級別的 SVG 躁點 */
 .noise-filter {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9998; opacity: 0.35; 
     pointer-events: none; mix-blend-mode: overlay;
 }
 
+/* 復古暗角效果 */
 .vignette-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9999; pointer-events: none;
@@ -82,7 +84,7 @@ nav {
 .center-align .separator-line { margin-left: auto; margin-right: auto; }
 .center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
 
-/* --- 頻道排版 (加入 :active 支援手機觸控回饋) --- */
+/* --- 頻道排版 (全襯線體統一版) --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
 .channel-wrapper { 
     display: flex; flex-direction: column; align-items: flex-start; 
@@ -92,7 +94,8 @@ nav {
     display: flex; align-items: center; gap: 8px; margin-bottom: 6px; 
 }
 .meta-en { 
-    font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--active-color); 
+    /* 統一改用 Playfair 襯線體，更具古典氣息 */
+    font-family: 'Playfair Display', 'Noto Serif TC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--active-color); 
 }
 .meta-zh { 
     font-family: 'Noto Serif TC', serif; font-size: 0.65rem; letter-spacing: 0.1em; color: #666; 
@@ -102,12 +105,12 @@ nav {
     border-bottom: 1px solid var(--line-color); padding-bottom: 5px; transition: 0.4s ease;
 }
 .channel-name { 
-    font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--white); transition: 0.4s ease;
+    /* 補上 Noto Serif TC 作為中文後備，確保中文字也能完美呈現襯線感 */
+    font-family: 'Playfair Display', 'Noto Serif TC', serif; font-style: italic; font-size: 1.3rem; color: var(--white); transition: 0.4s ease;
 }
 .tune-action { 
     font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: #555; transition: 0.4s ease;
 }
-/* 同時支援電腦 hover 與手機 active 點擊 */
 .channel-wrapper:hover .channel-display, .channel-wrapper:active .channel-display { border-bottom-color: var(--active-color); }
 .channel-wrapper:hover .channel-name, .channel-wrapper:active .channel-name { color: var(--active-color); }
 .channel-wrapper:hover .tune-action, .channel-wrapper:active .tune-action { color: var(--white); }
@@ -131,7 +134,6 @@ nav {
 .tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
 .tag-x { font-size: 0.8rem; color: #555; }
 
-/* --- 按鈕 (加入 :active 支援手機觸控) --- */
 .action-area { margin-bottom: 50px; text-align: center; }
 .btn-vogue-editorial {
     background: transparent; border: none; cursor: pointer; 
@@ -293,7 +295,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 (加入橫向滑動與保留頻道區塊底線) */
+/* RWD 手機版優化 */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -317,7 +319,8 @@ nav {
     
     .control-panel { flex-direction: column; align-items: center; gap: 25px; text-align: center; }
     .channel-wrapper { align-items: center; text-align: center; }
-    .channel-display { justify-content: center; } /* 修正：保留了手機版的底線 */
+    .channel-display { justify-content: center; } 
+    .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
     
     .mission-item-editorial { flex-direction: column; gap: 15px; text-align: center; }
     .m-num { font-size: 2.5rem; }
@@ -326,7 +329,6 @@ nav {
     .about-columns { flex-direction: column; gap: 25px; }
     .emphasis-text { font-size: 1.2rem; }
 
-    /* 手機版 Journal 調整 */
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
     .j-header { text-align: left; padding-right: 0; padding-left: 20px; }
