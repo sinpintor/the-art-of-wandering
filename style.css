@@ -20,7 +20,7 @@ body {
 /* VOGUE 級別的 SVG 躁點 */
 .noise-filter {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 9998; opacity: 0.35; /* 調整透明度來控制躁點強度 */
+    z-index: 9998; opacity: 0.35; 
     pointer-events: none; mix-blend-mode: overlay;
 }
 
@@ -85,21 +85,21 @@ nav {
 }
 .separator-line { width: 40px; height: 1px; background: var(--active-color); margin-top: 25px; }
 .center-align .separator-line { margin-left: auto; margin-right: auto; }
-.center-align .page-desc { margin-left: auto; margin-right: auto; }
+.center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* --- Control Panel --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
 .channel-wrapper { text-align: left; }
 .channel-label { display: block; font-size: 0.6rem; letter-spacing: 0.2em; color: #666; margin-bottom: 5px; }
-.channel-name { font-family: 'Playfair Display'; font-style: italic; font-size: 1.1rem; color: var(--white); }
-.btn-text-only { background: none; border: none; color: var(--gray); font-size: 0.6rem; letter-spacing: 0.2em; cursor: pointer; margin-left: 10px; transition: 0.3s; }
+.channel-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--white); }
+.btn-text-only { background: none; border: none; color: var(--gray); font-size: 0.6rem; letter-spacing: 0.2em; cursor: pointer; margin-left: 10px; transition: 0.3s; font-family: 'Noto Serif TC', serif;}
 .btn-text-only:hover { color: var(--active-color); }
 
 .temp-selector { display: flex; gap: 15px; }
 .temp-btn {
     background: transparent; border: none; color: #666; padding: 5px 0;
     font-size: 0.75rem; cursor: pointer; transition: 0.4s; letter-spacing: 0.1em;
-    position: relative; font-family: 'Montserrat';
+    position: relative; font-family: 'Noto Serif TC', serif;
 }
 .temp-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px; background: var(--active-color); transition: 0.4s; }
 .temp-btn.active { color: var(--white); }
@@ -112,7 +112,7 @@ nav {
     margin-bottom: 25px; letter-spacing: 0.15em; color: var(--white); line-height: 1.2;
     text-shadow: 0 0 30px rgba(255,255,255,0.1);
 }
-.tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display'; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
+.tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
 .tag-x { font-size: 0.8rem; color: #555; }
 
 /* --- Editorial Buttons --- */
@@ -120,15 +120,14 @@ nav {
 .btn-vogue-editorial {
     background: transparent; border: none; cursor: pointer; 
     display: inline-flex; flex-direction: column; align-items: center;
-    group; transition: 0.5s;
-}
-.btn-text { 
-    font-family: 'Montserrat'; font-size: 0.8rem; letter-spacing: 0.4em; 
-    color: var(--white); text-transform: uppercase; margin-bottom: 10px;
     transition: 0.5s;
 }
+.btn-text { 
+    font-family: 'Noto Serif TC', serif; font-size: 0.85rem; letter-spacing: 0.3em; 
+    color: var(--white); margin-bottom: 10px; transition: 0.5s; font-weight: 400;
+}
 .btn-line { width: 100%; height: 1px; background: var(--white); transition: 0.5s; transform-origin: center; }
-.btn-vogue-editorial:hover .btn-text { letter-spacing: 0.5em; color: var(--active-color); }
+.btn-vogue-editorial:hover .btn-text { letter-spacing: 0.4em; color: var(--active-color); }
 .btn-vogue-editorial:hover .btn-line { background: var(--active-color); transform: scaleX(1.2); }
 .btn-primary-editorial .btn-text { color: var(--active-color); }
 .btn-primary-editorial .btn-line { background: var(--active-color); }
@@ -136,14 +135,15 @@ nav {
 .btn-group-vertical { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; align-items: center; }
 
 .manual-select-wrapper { text-align: center; margin-top: 25px; }
-.manual-select-text { font-family: 'Montserrat'; font-size: 0.65rem; color: #666; cursor: pointer; letter-spacing: 0.2em; transition:0.3s; }
+.manual-select-text { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; color: #666; cursor: pointer; letter-spacing: 0.2em; transition:0.3s; }
 .manual-select-text:hover { color: var(--white); }
 .manual-loc-select {
     width: 100%; max-width: 300px; padding: 10px; margin-top: 15px; 
     background: transparent; color: var(--white); text-align: center;
     border: 1px solid var(--line-color); font-size: 0.9rem; outline: none;
-    font-family: 'Noto Serif TC';
+    font-family: 'Noto Serif TC', serif;
 }
+.manual-loc-select option { background: var(--bg-black); color: var(--white); }
 
 /* --- Mission Panel Editorial --- */
 .mission-panel-editorial { display: none; margin-top: 60px; animation: fadeIn 1s ease; }
@@ -157,7 +157,7 @@ nav {
 }
 .m-body { flex: 1; }
 .m-header { 
-    display: block; font-family: 'Montserrat'; font-size: 0.7rem; color: #888; 
+    display: block; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #888; 
     letter-spacing: 0.3em; margin-bottom: 15px; text-transform: uppercase; 
 }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: var(--white); font-weight: 300; }
@@ -166,26 +166,30 @@ nav {
 .progress-container-editorial { margin-bottom: 60px; text-align: center; }
 .progress-bar-bg-thin { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
 .progress-bar-fill-thin { height: 100%; background: var(--active-color); width: 0%; transition: width 1s ease; }
-.progress-info-editorial { font-family: 'Montserrat'; font-size: 0.7rem; color: #888; letter-spacing: 0.2em; display: flex; justify-content: space-between;}
+.progress-info-editorial { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #888; letter-spacing: 0.2em; display: flex; justify-content: space-between;}
 
 .stamp-container-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
-.stamp-group { border: 1px solid var(--line-color); padding: 25px; background: rgba(255,255,255,0.02); }
-.stamp-county-title { 
-    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); 
-    margin-bottom: 20px; letter-spacing: 0.1em; text-align: center;
-}
-.stamp-board-grouped { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.county-block { border: 1px solid var(--line-color); padding: 25px; background: rgba(255,255,255,0.02); }
+.county-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; border-bottom: 1px solid var(--line-color); padding-bottom: 15px; }
+.county-title { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; font-weight: 600; color: var(--white); margin: 0; letter-spacing: 0.1em; text-align: left; }
+.county-vol { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; }
+
+.stamp-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; justify-content: flex-start; }
 .stamp {
     padding: 6px 14px; border: 1px solid rgba(255,255,255,0.15); 
     font-size: 0.75rem; color: rgba(255,255,255,0.3); transition: 0.4s; cursor: default;
-    font-family: 'Noto Serif TC'; border-radius: 2px;
+    font-family: 'Noto Serif TC', serif; border-radius: 2px;
 }
 /* 墨水暈染效果 */
 .stamp.active { 
     background: var(--active-color); color: var(--bg-black); font-weight: 600; 
     border-color: transparent; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-    mix-blend-mode: screen; /* 讓金色有透光感 */
 }
+
+.county-records { display: flex; flex-direction: column; gap: 12px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 20px; }
+.record-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 300; }
+.record-district { color: #eee; font-family: 'Noto Serif TC', serif; }
+.record-combo { color: #888; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; }
 
 /* --- Journal Editorial --- */
 .journal-list-editorial { border-top: 1px solid var(--line-color); }
@@ -198,30 +202,30 @@ nav {
     content: ''; position: absolute; left: 25%; top: 0; height: 100%; width: 1px; background: var(--line-color);
 }
 .j-header { text-align: right; padding-right: 30px; }
-.j-index { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--active-color); font-style: italic; display: block; }
-.j-meta { font-family: 'Montserrat'; font-size: 0.6rem; letter-spacing: 0.1em; color: #666; text-transform: uppercase; display: block; margin-top: 10px;}
+.j-index { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--active-color); display: block; letter-spacing: 0.1em; }
+.j-meta { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; color: #666; text-transform: uppercase; display: block; margin-top: 10px;}
 
 .j-body { padding-left: 30px; }
-.j-district { font-size: 2rem; font-weight: 700; display: block; margin-bottom: 35px; color: var(--white); letter-spacing: 0.1em; }
+.j-district { font-size: 2rem; font-weight: 700; display: block; margin-bottom: 35px; color: var(--white); letter-spacing: 0.1em; font-family: 'Noto Serif TC', serif;}
 .j-item { margin-bottom: 25px; }
 .j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
-.j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; }
+.j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; font-family: 'Noto Serif TC', serif;}
 
 /* --- About Editorial --- */
 .about-section-editorial { margin-bottom: 80px; }
 .emphasis-text { 
-    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; color: var(--white); 
-    text-align: center; line-height: 1.6; margin-bottom: 50px; padding: 0 20px;
+    font-family: 'Noto Serif TC', serif; font-size: 1.4rem; color: var(--white); 
+    text-align: center; line-height: 1.8; margin-bottom: 50px; padding: 0 20px; font-weight: 400;
 }
 .about-columns { display: flex; gap: 40px; }
-.about-col { flex: 1; font-size: 0.9rem; line-height: 2.2; color: #bbb; text-align: justify; }
+.about-col { flex: 1; font-size: 0.9rem; line-height: 2.2; color: #bbb; text-align: justify; font-family: 'Noto Serif TC', serif;}
 .about-footer-editorial { 
     border-top: 1px solid var(--line-color); padding-top: 30px;
-    display: flex; justify-content: space-between; font-family: 'Montserrat';
+    display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif;
     font-size: 0.6rem; letter-spacing: 0.2em; color: #666;
 }
 
-.state-message { text-align: center; color: #666; font-size: 0.9rem; padding: 60px 0; letter-spacing: 0.2em; font-family: 'Montserrat'; text-transform: uppercase; }
+.state-message { text-align: center; color: #666; font-size: 0.9rem; padding: 60px 0; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; }
 
 /* --- IG Poster (維持原樣，但配合新變數) --- */
 .ig-poster {
@@ -232,25 +236,25 @@ nav {
 .poster-frame { height: 100%; border: 3px solid rgba(255,255,255,0.1); padding: 60px; display: flex; flex-direction: column; position: relative; z-index: 1;}
 .poster-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 40px; margin-bottom: 0; flex-shrink: 0; }
 .poster-vol { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--active-color); font-style: italic; }
-.poster-brand { font-size: 1.2rem; letter-spacing: 0.5em; text-transform: uppercase; }
+.poster-brand { font-size: 1.2rem; letter-spacing: 0.5em; text-transform: uppercase; font-family: 'Montserrat', sans-serif;}
 .poster-body { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 80px; }
 .poster-top-section { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.poster-combo-box { display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 50px; color: #888; font-size: 1.5rem; letter-spacing: 0.2em; width: 100%; font-family: 'Playfair Display'; font-style: italic; }
-.poster-combo-cross { color: var(--active-color); font-size: 1.5rem; }
+.poster-combo-box { display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 50px; color: #888; font-size: 1.5rem; letter-spacing: 0.2em; width: 100%; font-family: 'Playfair Display', serif; font-style: italic; }
+.poster-combo-cross { color: var(--active-color); font-size: 1.5rem; font-family: sans-serif;}
 .poster-loc { font-size: 5.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 60px; letter-spacing: 0.1em; font-family: 'Noto Serif TC', serif; text-align: center; text-shadow: 0 0 30px rgba(255,255,255,0.1); }
 .poster-divider { width: 80px; height: 2px; background: var(--active-color); margin: 0 auto; }
 .poster-mission { display: flex; flex-direction: column; gap: 60px; padding: 0 20px; }
 .pm-item { margin-bottom: 0; display: flex; align-items: baseline; gap: 20px;}
-.pm-title { display: block; font-size: 1rem; color: #666; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap; }
+.pm-title { display: block; font-size: 1rem; color: #666; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; white-space: nowrap; }
 .pm-num { color: var(--active-color); font-family: 'Playfair Display', serif; margin-right: 10px; font-style: italic; font-size: 1.2rem; }
-.pm-desc { font-size: 1.6rem; line-height: 1.6; color: var(--white); font-weight: 300; }
+.pm-desc { font-size: 1.6rem; line-height: 1.6; color: var(--white); font-weight: 300; font-family: 'Noto Serif TC', serif;}
 .poster-footer { border-top: 2px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
 .poster-date { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #888; font-style: italic; }
-.poster-ig { font-size: 1.4rem; letter-spacing: 0.2em; }
+.poster-ig { font-size: 1.4rem; letter-spacing: 0.2em; font-family: 'Montserrat', sans-serif;}
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 快門漏光特效 (維持) */
+/* 快門漏光特效 */
 .glitch-overlay { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
     background: radial-gradient(circle at 50% 50%, #ffffff 0%, rgba(255,255,255,0) 60%); 
@@ -263,23 +267,23 @@ nav {
 .poster-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(10, 9, 8, 0.97); z-index: 10001;
-    display: none; justify-content: center; align-items: center;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
     opacity: 0; transition: opacity 0.4s ease;
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
 .poster-modal.active { display: flex; opacity: 1; }
-.modal-content { text-align: center; }
+.modal-content { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .poster-modal p { 
-    color: var(--active-color); font-family: 'Montserrat', sans-serif; text-transform: uppercase;
-    font-size: 0.7rem; letter-spacing: 0.3em; margin-bottom: 30px; 
+    color: var(--active-color); font-family: 'Noto Serif TC', serif;
+    font-size: 0.85rem; letter-spacing: 0.2em; margin-bottom: 25px; font-weight: 400;
 }
 .img-frame-editorial {
-    padding: 20px; border: 1px solid rgba(255,255,255,0.1);
+    padding: 15px; border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.02); margin-bottom: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 4px;
 }
-.poster-modal img { width: auto; height: 70vh; max-width: 90vw; display: block; }
-.close-btn { font-size: 0.8rem; margin-left: 0; }
+.poster-modal img { width: auto; height: 65vh; max-height: 700px; max-width: 85vw; display: block; object-fit: contain;}
+.close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif;}
 
 /* RWD 手機版優化 */
 @media (max-width: 768px) {
@@ -289,21 +293,23 @@ nav {
     
     .control-panel { flex-direction: column; align-items: center; gap: 25px; }
     .channel-wrapper { text-align: center; }
+    .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
     
     .mission-item-editorial { flex-direction: column; gap: 15px; text-align: center; }
     .m-num { font-size: 2.5rem; }
     .m-header { margin-bottom: 10px; }
 
     .about-columns { flex-direction: column; gap: 25px; }
-    .emphasis-text { font-size: 1.3rem; }
+    .emphasis-text { font-size: 1.2rem; }
 
     /* 手機版 Journal 調整 */
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
-    .j-header { text-align: left; padding-left: 30px; }
+    .j-header { text-align: left; padding-right: 0; padding-left: 20px; }
     .j-index { font-size: 1.5rem; }
-    .j-body { padding-left: 30px; }
+    .j-body { padding-left: 20px; }
     .j-district { font-size: 1.6rem; margin-bottom: 25px; }
     
     .stamp-container-editorial { grid-template-columns: 1fr; }
+    .county-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
