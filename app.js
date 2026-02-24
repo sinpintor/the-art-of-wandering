@@ -200,11 +200,13 @@ function initLights() {
 }
 
 function renderView() {
+    // 重置所有文字狀態
     document.querySelectorAll('.stamp').forEach(s => { 
         s.classList.remove('active');
-        s.style.background = 'transparent'; s.style.color = 'rgba(255,255,255,0.25)';
-        s.style.borderColor = 'rgba(255,255,255,0.12)'; s.style.boxShadow = 'none'; s.style.fontWeight = 'normal';
+        s.style.color = '#444'; // 未收集時的暗灰色
+        s.style.textShadow = 'none';
     });
+    
     const collectedIndices = new Set();
     cloudData.forEach(j => {
         if (!j.name) return; 
@@ -214,13 +216,15 @@ function renderView() {
             collectedIndices.add(idx); 
             const stamp = document.getElementById(`map-stamp-${idx}`);
             if (stamp) { 
-                const stampColor = j.color || '#d4af37'; 
                 stamp.classList.add('active');
-                stamp.style.background = stampColor; stamp.style.color = '#0a0908'; stamp.style.fontWeight = '700';
-                stamp.style.borderColor = 'transparent'; stamp.style.boxShadow = `0 0 12px ${stampColor}`;
+                // 收集到時，讓文字染上專屬顏色並發光
+                const stampColor = j.color || '#d4af37'; 
+                stamp.style.color = stampColor; 
+                stamp.style.textShadow = `0 0 15px ${stampColor}66`;
             }
         }
     });
+
     const totalStamps = taiwanData.length;
     const uniqueCount = collectedIndices.size;
     const percent = totalStamps > 0 ? ((uniqueCount / totalStamps) * 100).toFixed(1) : 0;
