@@ -1,6 +1,6 @@
 /**
  * Route19 Official Core Script
- * Version: 1.4.0 (Clean Journal Layout)
+ * Version: 2.0.0 (VOGUE Editorial Edition)
  */
 
 const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 茄萣區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
@@ -126,10 +126,10 @@ function toggleManualSelect() {
     const text = document.querySelector('.manual-select-text');
     if(select.style.display === 'none') {
         select.style.display = 'block';
-        text.innerText = '[ 收起選單 ]';
+        text.innerText = '[ Close ]';
     } else {
         select.style.display = 'none';
-        text.innerText = '[ 或是，由我指定目的地 ]';
+        text.innerText = '— Or, define your destination.';
         select.value = ""; 
     }
 }
@@ -146,7 +146,7 @@ function showPage(pId) {
 }
 
 function changeChannel() {
-    const newChannel = prompt("調頻至專屬公路頻道（例如你們的代號）：", currentChannel);
+    const newChannel = prompt("Change Frequency (Enter your channel code):", currentChannel);
     if(newChannel && newChannel.trim() !== "") {
         currentChannel = newChannel.trim();
         localStorage.setItem('route19_current_channel', currentChannel);
@@ -157,7 +157,7 @@ function changeChannel() {
 }
 
 async function loadCloudData() {
-    document.getElementById('journal-list').innerHTML = `<div class="state-message">正在調頻至波段 [ ${currentChannel} ]...</div>`;
+    document.getElementById('journal-list').innerHTML = `<div class="state-message">TUNING INTO FREQUENCY [ ${currentChannel} ]...</div>`;
     try {
         const response = await fetch(`${API_URL}?channel=${encodeURIComponent(currentChannel)}`);
         const result = await response.json();
@@ -166,7 +166,7 @@ async function loadCloudData() {
             renderView();
         }
     } catch (error) {
-        document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，翻閱記憶失敗。</div>`;
+        document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">SIGNAL LOST. FAILED TO LOAD DATA.</div>`;
     }
 }
 
@@ -199,11 +199,12 @@ function initLights() {
     }
 }
 
-// 渲染畫面：使用新版分層結構
+// 渲染畫面：使用新版雜誌分層結構
 function renderView() {
     document.querySelectorAll('.stamp').forEach(s => { 
-        s.style.background = 'transparent'; s.style.color = 'rgba(255,255,255,0.25)';
-        s.style.borderColor = 'rgba(255,255,255,0.12)'; s.style.boxShadow = 'none'; s.style.fontWeight = 'normal';
+        s.classList.remove('active');
+        s.style.background = 'transparent'; s.style.color = 'rgba(255,255,255,0.3)';
+        s.style.borderColor = 'rgba(255,255,255,0.15)'; s.style.boxShadow = 'none'; s.style.fontWeight = 'normal';
     });
     const collectedIndices = new Set();
     cloudData.forEach(j => {
@@ -214,9 +215,10 @@ function renderView() {
             collectedIndices.add(idx); 
             const stamp = document.getElementById(`map-stamp-${idx}`);
             if (stamp) { 
-                const stampColor = j.color || '#F1C40F'; 
-                stamp.style.background = stampColor; stamp.style.color = '#000'; stamp.style.fontWeight = '700';
-                stamp.style.borderColor = 'transparent'; stamp.style.boxShadow = `0 0 12px ${stampColor}`;
+                const stampColor = j.color || '#d4af37'; 
+                stamp.classList.add('active');
+                stamp.style.background = stampColor; 
+                stamp.style.boxShadow = `0 0 20px ${stampColor}4d`; // 30% opacity for shadow
             }
         }
     });
@@ -232,29 +234,32 @@ function renderView() {
 
     const listEl = document.getElementById('journal-list');
     if (listEl) {
-        listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">公路日記還是空白的。</div>` :
+        listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">JOURNAL IS EMPTY.</div>` :
             [...cloudData].reverse().map((log, i, arr) => `
                 <div class="journal-card">
                     <div class="j-header">
-                        <span class="j-index">VOL.${String(arr.length - i).padStart(3, '0')}</span>
-                        <span class="j-meta">${formatToDateOnly(log.date)} / ${log.combo}</span>
+                        <span class="j-index">No.${String(arr.length - i).padStart(3, '0')}</span>
+                        <span class="j-meta">${formatToDateOnly(log.date)}</span>
+                        <span class="j-meta">${log.combo}</span>
                     </div>
                     
-                    <span class="j-district">${log.name}</span>
-                    
-                    <div class="j-item">
-                        <span class="j-label">WHERE TO LOOK</span>
-                        <span class="j-text">${log.m_action}</span>
-                    </div>
-                    
-                    <div class="j-item">
-                        <span class="j-label">WHAT TO TASTE</span>
-                        <span class="j-text">${log.m_food}</span>
-                    </div>
-                    
-                    <div class="j-item">
-                        <span class="j-label">OUTFIT OF THE DAY</span>
-                        <span class="j-text">${log.m_style}</span>
+                    <div class="j-body">
+                        <span class="j-district">${log.name}</span>
+                        
+                        <div class="j-item">
+                            <span class="j-label">WHERE TO LOOK</span>
+                            <span class="j-text">${log.m_action}</span>
+                        </div>
+                        
+                        <div class="j-item">
+                            <span class="j-label">WHAT TO TASTE</span>
+                            <span class="j-text">${log.m_food}</span>
+                        </div>
+                        
+                        <div class="j-item">
+                            <span class="j-label">OUTFIT OF THE DAY</span>
+                            <span class="j-text">${log.m_style}</span>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -278,11 +283,12 @@ function drawFate(manualLoc = null) {
     let i = 0;
     const timer = setInterval(() => {
         locEl.innerText = taiwanData[Math.floor(Math.random() * taiwanData.length)];
-        locEl.style.color = "var(--white)"; 
+        locEl.style.color = "rgba(255,255,255,0.5)"; 
         i++;
         if (i > 25) {
             clearInterval(timer);
             const finalLoc = manualLoc || taiwanData[Math.floor(Math.random() * taiwanData.length)];
+            locEl.style.color = "var(--white)";
             const id1 = Math.floor(Math.random() * 36) + 1;
             let id2 = Math.floor(Math.random() * 36) + 1;
             while (id2 === id1) { id2 = Math.floor(Math.random() * 36) + 1; }
@@ -315,18 +321,19 @@ function drawFate(manualLoc = null) {
 
 async function manualSave() {
     if (!currentRecord) return;
-    const saveBtn = document.getElementById('btn-save');
-    saveBtn.innerText = "印上護照章..."; saveBtn.disabled = true;
+    const saveBtn = document.getElementById('btn-save').querySelector('.btn-text');
+    const originalText = saveBtn.innerText;
+    saveBtn.innerText = "Archiving..."; 
     currentRecord.channel = currentChannel;
     try {
         const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(currentRecord) });
         const result = await response.json();
         if (result.status === "success") {
-            alert(`已存入 [ ${currentChannel} ] 的公路日記中。`);
+            alert(`Archived to [ ${currentChannel} ].`);
             await loadCloudData(); 
         }
-    } catch (error) { alert("收藏失敗。"); }
-    finally { saveBtn.innerText = "把這趟旅程收進護照"; saveBtn.disabled = false; }
+    } catch (error) { alert("Archive Failed."); }
+    finally { saveBtn.innerText = originalText; }
 }
 
 // --- 關閉海報彈窗 ---
@@ -338,13 +345,12 @@ function closePosterModal() {
 
 // --- 升級版：生成海報並顯示預覽，讓使用者長按儲存 ---
 function generateIGStory() {
-    if (!currentRecord) return alert("請先抽取提案。");
+    if (!currentRecord) return alert("Please generate inspiration first.");
     
     // 按鈕變更狀態，提升 UX
-    const btn = document.querySelector('button[onclick="generateIGStory()"]');
+    const btn = document.querySelector('button[onclick="generateIGStory()"]').querySelector('.btn-text');
     const originalText = btn.innerText;
-    btn.innerText = "海報沖洗中...";
-    btn.disabled = true;
+    btn.innerText = "Processing...";
 
     let displayIndex = cloudData.length + 1;
     
@@ -361,7 +367,7 @@ function generateIGStory() {
     posterTemplate.style.setProperty('--active-color', currentRecord.color);
     
     setTimeout(() => {
-        html2canvas(posterTemplate, { scale: 2, useCORS: true, backgroundColor: "#050505" }).then(canvas => {
+        html2canvas(posterTemplate, { scale: 2, useCORS: true, backgroundColor: "#0a0908" }).then(canvas => {
             // 將 Canvas 轉成真實圖片 URL
             const imgData = canvas.toDataURL('image/jpeg', 0.9); 
             
@@ -377,7 +383,6 @@ function generateIGStory() {
 
             // 恢復原本的按鈕狀態
             btn.innerText = originalText;
-            btn.disabled = false;
         });
     }, 150);
 }
