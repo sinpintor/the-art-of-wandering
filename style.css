@@ -287,6 +287,26 @@ nav {
 
 /* RWD 手機版優化 */
 @media (max-width: 768px) {
+    /* --- 新增：手機版導覽列改為橫向滑動 --- */
+    nav {
+        justify-content: flex-start; /* 靠左排列，方便滑動 */
+        overflow-x: auto; /* 開啟橫向滑動 */
+        -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更絲滑 */
+        padding-left: 25px; 
+        padding-right: 25px;
+        gap: 25px;
+    }
+    nav::-webkit-scrollbar { 
+        display: none; /* 隱藏醜醜的滾動條 */
+    }
+    .nav-link {
+        white-space: nowrap; /* 絕對不換行 */
+        flex-shrink: 0; /* 防止文字被硬擠壓變形 */
+        font-size: 0.55rem; /* 稍微縮小適應螢幕 */
+        letter-spacing: 0.2em;
+    }
+    /* ------------------------------------- */
+
     .vogue-title { font-size: 3.2rem; }
     .loc-display-large { font-size: 2.5rem; }
     .tag-row-editorial { font-size: 1rem; }
