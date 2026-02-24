@@ -62,8 +62,11 @@ nav {
 
 .content-wrapper { width: 100%; max-width: 700px; margin: 0 auto; padding: 120px 25px 60px; }
 
-.page-header { margin-bottom: 40px; }
-.center-align { text-align: center; }
+/* --- 頁面共同標題區塊 (標題置中、引言置左) --- */
+.page-header { 
+    margin-bottom: 40px; 
+    text-align: center; 
+}
 
 .vogue-subtitle {
     font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.4em;
@@ -75,14 +78,19 @@ nav {
     font-weight: 700; line-height: 1; color: var(--white); letter-spacing: -0.02em;
 }
 
-.editorial-intro { margin-bottom: 50px; }
+.editorial-intro { 
+    margin-bottom: 50px; 
+    text-align: left; 
+}
+
 .page-desc {
     font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #ccc;
-    text-align: left; line-height: 2; letter-spacing: 0.05em; max-width: 90%;
+    text-align: left; line-height: 2; letter-spacing: 0.05em; 
 }
-.separator-line { width: 40px; height: 1px; background: var(--active-color); margin-top: 25px; }
-.center-align .separator-line { margin-left: auto; margin-right: auto; }
-.center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
+
+.separator-line { 
+    width: 40px; height: 1px; background: var(--active-color); margin-top: 25px; 
+}
 
 /* --- 頻道排版 (全襯線體統一版 + 手機觸控支援) --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
@@ -194,7 +202,6 @@ nav {
     font-size: 2rem; font-style: italic; color: var(--white); 
     margin: 0; letter-spacing: 0.1em; text-align: left; 
 }
-
 /* 矩陣網格目錄 (完美解決 2~4 字的長度差異) */
 .stamp-board-grouped { 
     display: grid; 
@@ -228,13 +235,42 @@ nav {
 .j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
 .j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; font-family: 'Noto Serif TC', serif;}
 
-.about-section-editorial { margin-bottom: 80px; }
-.emphasis-text { 
-    font-family: 'Noto Serif TC', serif; font-size: 1.4rem; color: var(--white); 
-    text-align: center; line-height: 1.8; margin-bottom: 50px; padding: 0 20px; font-weight: 400;
+/* --- Editorial Note (The Manifesto 總編宣言排版) --- */
+.about-section-manifesto { 
+    display: grid; 
+    grid-template-columns: 1fr 1.5fr; /* 完美的不對稱比例 1 : 1.5 */
+    gap: 60px; 
+    margin-bottom: 80px; 
+    border-top: 1px solid var(--line-color); 
+    padding-top: 50px;
 }
-.about-columns { display: flex; gap: 40px; }
-.about-col { flex: 1; font-size: 0.9rem; line-height: 2.2; color: #bbb; text-align: justify; font-family: 'Noto Serif TC', serif;}
+.manifesto-left { position: relative; }
+.manifesto-label { 
+    font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em; 
+    color: var(--active-color); text-transform: uppercase; display: block; margin-bottom: 25px;
+}
+.manifesto-quote { 
+    font-family: 'Noto Serif TC', serif; font-size: 1.8rem; line-height: 1.7; 
+    color: var(--white); font-weight: 300; letter-spacing: 0.05em;
+}
+.manifesto-right p { 
+    font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 2.2; 
+    color: #bbb; text-align: justify; margin-bottom: 25px; letter-spacing: 0.05em;
+}
+
+/* 經典的「首字放大 (Drop Cap)」特效 */
+.drop-cap {
+    float: left;
+    font-family: 'Playfair Display', 'Noto Serif TC', serif;
+    font-size: 4.8rem;
+    line-height: 0.7;
+    padding-top: 10px;
+    padding-right: 15px;
+    color: var(--active-color);
+    font-style: italic;
+    font-weight: 400;
+}
+
 .about-footer-editorial { 
     border-top: 1px solid var(--line-color); padding-top: 30px;
     display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif;
@@ -343,7 +379,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 (加入橫向滑動、任務置中靠左與護照網格微調) */
+/* RWD 手機版優化 (加入橫向滑動、任務置中靠左、護照網格微調與 Manifesto 堆疊) */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -364,7 +400,7 @@ nav {
     .vogue-title { font-size: 3.2rem; }
     .loc-display-large { 
         font-size: 2.2rem; 
-        white-space: nowrap; /* 強制文字與標點符號待在同一行 */
+        white-space: nowrap; 
     }
     .tag-row-editorial { font-size: 1rem; }
     
@@ -376,13 +412,13 @@ nav {
     .mission-item-editorial { 
         flex-direction: column; 
         gap: 10px; 
-        align-items: center; /* 讓外層的數字置中 */
+        align-items: center; 
     }
     .m-body { 
         width: 100%; 
         display: flex; 
         flex-direction: column; 
-        align-items: center; /* 讓內層的英文標題置中 */
+        align-items: center; 
     }
     .m-num { 
         font-size: 3rem; 
@@ -394,12 +430,14 @@ nav {
         text-align: center; 
     }
     .m-content { 
-        text-align: left; /* 確保下方的中文任務內容維持靠左對齊 */
+        text-align: left; 
         width: 100%;
     }
 
-    .about-columns { flex-direction: column; gap: 25px; }
-    .emphasis-text { font-size: 1.2rem; }
+    /* 手機版紀事排版 (變成上下堆疊) */
+    .about-section-manifesto { grid-template-columns: 1fr; gap: 40px; padding-top: 30px; }
+    .manifesto-quote { font-size: 1.5rem; }
+    .drop-cap { font-size: 4rem; padding-top: 8px; padding-right: 12px; }
 
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
