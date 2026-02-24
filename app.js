@@ -329,8 +329,23 @@ async function manualSave() {
     finally { saveBtn.innerText = "把這趟旅程收進護照"; saveBtn.disabled = false; }
 }
 
+// --- 關閉海報彈窗 ---
+function closePosterModal() {
+    const modal = document.getElementById('poster-modal');
+    modal.classList.remove('active');
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
+}
+
+// --- 升級版：生成海報並顯示預覽，讓使用者長按儲存 ---
 function generateIGStory() {
     if (!currentRecord) return alert("請先抽取提案。");
+    
+    // 按鈕變更狀態，提升 UX
+    const btn = document.querySelector('button[onclick="generateIGStory()"]');
+    const originalText = btn.innerText;
+    btn.innerText = "海報沖洗中...";
+    btn.disabled = true;
+
     let displayIndex = cloudData.length + 1;
     
     document.getElementById('poster-vol').innerText = `VOL.${String(displayIndex).padStart(3, '0')}`;
@@ -347,10 +362,22 @@ function generateIGStory() {
     
     setTimeout(() => {
         html2canvas(posterTemplate, { scale: 2, useCORS: true, backgroundColor: "#050505" }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `Route19_${currentRecord.name.replace(' ', '_')}.jpg`;
-            link.href = canvas.toDataURL('image/jpeg', 0.9); 
-            link.click();
+            // 將 Canvas 轉成真實圖片 URL
+            const imgData = canvas.toDataURL('image/jpeg', 0.9); 
+            
+            // 把圖片塞入彈窗
+            const modal = document.getElementById('poster-modal');
+            const img = document.getElementById('generated-poster-img');
+            img.src = imgData;
+            
+            // 顯示彈窗
+            modal.style.display = 'flex';
+            // 延遲一點點加 class 觸發 CSS 淡入動畫
+            setTimeout(() => modal.classList.add('active'), 10);
+
+            // 恢復原本的按鈕狀態
+            btn.innerText = originalText;
+            btn.disabled = false;
         });
     }, 150);
 }
